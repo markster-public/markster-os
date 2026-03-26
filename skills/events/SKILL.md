@@ -18,6 +18,8 @@ Before relying on generic answers, look for:
 If these files exist, use them as the primary source of truth.
 If they are missing or empty, tell the user to fill them in or provide the missing context directly.
 
+If you update canonical workspace files such as `company-context/` or promoted learning-loop files, remind the user to run `markster-os validate .` before commit, and prefer validating before claiming the update is complete.
+
 ## Before starting
 
 Ask the user:

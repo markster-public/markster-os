@@ -388,6 +388,8 @@ def cmd_status(args: argparse.Namespace) -> int:
             print(f"Uncommitted changes: {'yes' if status else 'no'}")
         else:
             print("Git: not initialized")
+            print("Hint: run `git init -b main` or recreate the workspace with `markster-os init --git --path ...`")
+            print("Hint: after Git init, run `markster-os install-hooks .`")
     return 0
 
 
@@ -591,6 +593,32 @@ def cmd_paths(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_start(args: argparse.Namespace) -> int:
+    cwd = Path(args.path).expanduser().resolve() if args.path else Path.cwd()
+    metadata = load_workspace_metadata(cwd)
+    if metadata is None:
+        die("not inside a Markster OS workspace. Run this from a workspace or pass --path.")
+
+    print("Markster OS Start")
+    print(f"Workspace: {cwd}")
+    print("")
+    print("Recommended next steps:")
+    print("  1. Run `markster-os sync` if this is a shared repo")
+    print("  2. Check `company-context/` and fill any missing canon")
+    print("  3. Keep raw notes in `learning-loop/inbox/`")
+    print("  4. Run your AI tool from this directory")
+    print("  5. Before commit: `markster-os validate .`")
+    print("  6. Then: `markster-os commit -m \"Update workspace\"` and `markster-os push`")
+    if not (cwd / ".git").exists():
+        print("")
+        print("This workspace is not a Git repo yet.")
+        print("Recommended:")
+        print("  - initialize Git")
+        print("  - attach a remote")
+        print("  - install hooks with `markster-os install-hooks .`")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="markster-os")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -669,6 +697,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     paths_parser = sub.add_parser("paths", help="Show managed Markster OS paths")
     paths_parser.set_defaults(func=cmd_paths)
+
+    start_parser = sub.add_parser("start", help="Show the recommended next steps for a workspace")
+    start_parser.add_argument("--path", help="Workspace path; defaults to current directory")
+    start_parser.set_defaults(func=cmd_start)
 
     return parser
 
