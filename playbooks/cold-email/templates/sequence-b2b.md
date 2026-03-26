@@ -1,94 +1,180 @@
 # B2B Cold Email Sequence Template
 
-A 3-touch cold email sequence. Edit to match your F1 ICP and F3 message before sending.
+A 5-touch cold email sequence for B2B service firm outreach. Each email has one job.
+Replace all bracketed variables before sending. Read aloud before scheduling -- if it sounds like a template, it still is.
 
-Variables to replace before using:
-- `[FIRST_NAME]` - prospect's first name
-- `[COMPANY]` - prospect's company name
-- `[OBSERVED_SIGNAL]` - a specific thing you noticed about them (recent hire, LinkedIn post, job posting, news mention)
-- `[ICP_SITUATION]` - the situation from F1 that defines their buying trigger
-- `[OUTCOME]` - your F2 outcome statement (short version)
-- `[PROOF_DETAIL]` - your F3 proof point (specific company type + result + timeframe)
+Variables to replace:
+- `[COMPANY]` - prospect company name
+- `[ICP_TYPE]` - their business category (accounting firm, IT firm, consulting firm, etc.)
+- `[CITY]` - city or metro area relevant to you
+- `[PAIN_OBSERVATION]` - one specific thing you observed about their pipeline or marketing situation
+- `[DATA_POINT]` - a specific number relevant to their situation (cost, ratio, benchmark)
+- `[PROOF_DETAIL]` - a brief result from a client in a similar situation (company type + outcome)
 - `[YOUR_NAME]` - your name
-- `[COMPANY_NAME]` - your company name
-- `[CALENDAR_LINK]` - your booking link
 
 ---
 
-## Email 1 - Cold Intro
+## Research-Backed Rules Applied
 
-**Subject:** [3-5 words tied to their situation - NOT "Quick question" or "Following up"]
-
-Examples:
-- `[COMPANY] pipeline question`
-- `referral-dependent growth`
-- `saw your [recent activity]`
-
----
-
-Hi [FIRST_NAME],
-
-[OBSERVED_SIGNAL - one specific sentence. Example: "Saw you recently hired a new account manager." or "Noticed [COMPANY] just launched your advisory practice."]
-
-Most [ICP type] I talk to say the same thing when it comes to new client acquisition: [ICP_SITUATION in their words - pull directly from your F1 and F3 research].
-
-We help [ICP type] [OUTCOME in one sentence]. [PROOF_DETAIL - specific result, company type, timeframe].
-
-Worth a 15-minute call to see if there's a fit?
-
-[YOUR_NAME]
-[COMPANY_NAME]
+| Rule | Why |
+|------|-----|
+| Subject lines: 2-4 words, lowercase | Short subjects read like human correspondence, not marketing |
+| Under 110 words per email | Longer emails get lower reply rates in cold outbound |
+| Plain text only | HTML formatting signals mass email to spam filters and recipients |
+| Soft CTA | Permission to decline increases reply rate more than pressure |
+| One idea per email | Multiple points dilute focus and invite partial reads |
+| Colleague test | Read it aloud -- if it sounds like a template, rewrite it |
+| Follow-ups thread | "re:" prefix keeps replies in one conversation thread |
 
 ---
 
-## Email 2 - Follow-Up 1 (send day 4-5 after Email 1)
+## E1 - Day 0: Soft Opener
 
-**Subject:** Re: [same thread]
+**Subject:** new in [CITY]
 
----
+**Body:**
 
-[FIRST_NAME],
+[Opening sentence specific to them: "Found [COMPANY] on Google while researching [ICP_TYPE]s in the area" or similar honest, verifiable observation.]
 
-Different angle on why I reached out:
+I just relocated to [CITY] after spending years helping service businesses build pipeline. Now I'm trying to understand how [ICP_TYPE]s here actually grow -- most places I've talked to say new clients still come primarily through referrals.
 
-[One specific observation about what they are missing or what their situation costs them - frame from the buyer's perspective, not yours. Example: "When 80% of new business comes from referrals, your growth ceiling is whoever your current clients know."]
+I'm in the middle of a funding round and genuinely want to understand the local perspective. Happy to share what I've seen work across similar firms in exchange.
 
-If that resonates, [OUTCOME - brief version].
-
-[PROOF_DETAIL - same or different proof point].
-
-Still worth 15 minutes?
+No agenda -- if you're up for a coffee or a quick call, let me know.
 
 [YOUR_NAME]
 
+**Notes:**
+- No company name, no offer, no pitch. The goal is a reply, not a yes.
+- The "funding round" framing positions you as a builder, not a vendor.
+- Honest personalization only. If you say "found you on Google," that should be true.
+- Customize the opening sentence to make it specific to this firm.
+
 ---
 
-## Email 3 - Follow-Up 2 / Breakup (send day 9-10 after Email 1)
+## E2 - Day 4: Insight or Asset
 
-**Subject:** Re: [same thread]
+**Subject:** re: new in [CITY]
 
----
+**Body:**
 
-[FIRST_NAME],
+One pattern I keep seeing with [ICP_TYPE]s out here -- most are spending $10-15K/month between contractors, tools, and whatever marketing person is doing five jobs.
 
-Going to leave this here since I haven't heard back.
+And [PAIN_OBSERVATION]. Pipeline still comes down to who you know.
 
-If new client acquisition is not a priority right now, no problem - I'll stop reaching out.
+I spent years figuring out how to break that dependency. Eventually built it into a system with a clear methodology. Now I need people like you to tell me where I'm wrong.
 
-If the timing isn't right but might change, let me know when to follow up.
-
-Either way, feel free to reach out if [ICP_SITUATION] becomes relevant later.
+Would you be willing to share 20 minutes of your perspective? I'll bring something useful in exchange.
 
 [YOUR_NAME]
 
+**Notes:**
+- The insight should come from real observation, not be invented. Pull from what your research tells you about this segment.
+- "Would you be willing to help us?" flips the dynamic -- you're asking for their input, not selling them something.
+- If you have a scorecard, framework, or benchmark document, offer it here: "Happy to share [asset] if that's useful."
+- Keep the data point ([PAIN_OBSERVATION]) specific and honest.
+
 ---
 
-## Writing notes
+## E3 - Day 8: First Mention of Offer
 
-**On personalization:** The first line of Email 1 must be specific. "I came across your profile" is not personalized. "Noticed you recently posted about the challenge of building pipeline outside your referral network" is specific.
+**Subject:** re: new in [CITY]
 
-**On length:** Email 1 under 100 words. Emails 2 and 3 under 60 words. Longer emails get lower reply rates in cold outbound.
+**Body:**
 
-**On the CTA:** "Worth a 15-minute call?" converts better than "Would you be open to a call?" or "Do you have time for a chat?" One question, low commitment.
+Did some math on what it costs to build a real marketing function from scratch:
 
-**On tone:** Write as if you are sending this to a specific person, not a category. Read it out loud. If it sounds like a template, it is still a template.
+A marketing manager runs $120-150K. An SDR is $80-100K. A content writer adds $70K. Tools add another $25K. That's $300K/year minimum for a team that still might not understand [ICP_TYPE] sales.
+
+[PROOF_DETAIL -- one sentence: "An [ICP type] I worked with went from [situation] to [result] without building a full team."]
+
+I figured out how to get the same output for roughly a third of that. Worth 20 minutes if you're curious. Zero strings.
+
+[YOUR_NAME]
+
+**Notes:**
+- This is the first time you mention a concrete alternative to the status quo. Keep it brief.
+- The cost comparison is the proof of concept -- they already know the internal hire math.
+- [PROOF_DETAIL] should be a real result from your own work or a documented case study. Do not invent numbers.
+- "Zero strings" signals no commitment required. Reduces friction.
+- Customize salary ranges to your target metro. The numbers above are general benchmarks; verify against current local data before using.
+
+---
+
+## E4 - Day 12: Conversation Starter
+
+**Subject:** re: new in [CITY]
+
+**Body:**
+
+Different angle -- I'm curious what you've already tried on the marketing side.
+
+Most [ICP_TYPE] owners I talk to have done at least one of three things: hired an agency that didn't understand the business, tried to build content in-house and ran out of time, or bought leads that converted at single digits.
+
+None of those are wrong decisions -- they're just incomplete.
+
+If any of that sounds familiar, I think there's a conversation here. If not, totally fine.
+
+[YOUR_NAME]
+
+**Notes:**
+- This email is a mirror. You are reflecting back their likely experience, not pitching.
+- The "three things" framing uses what you know about common failed attempts in this segment. Customize to match what your specific ICP has told you.
+- This creates a low-stakes opening for them to reply with their own experience.
+- Do not add a direct link or ask for a meeting yet. The goal is to get them talking.
+
+---
+
+## E5 - Day 16: Breakup
+
+**Subject:** re: new in [CITY]
+
+**Body:**
+
+Last one from me -- I don't want to be pushy.
+
+If the timing isn't right, I completely get it. I'll stop reaching out.
+
+If pipeline ever becomes a more pressing problem, you can always reach me at [email]. I'll know the context.
+
+[YOUR_NAME]
+
+**Notes:**
+- Keep this under 50 words. It works because of its brevity.
+- "I'll know the context" signals you are organized and professional -- not starting over if they come back later.
+- Do not apologize for reaching out. "I don't want to be pushy" is sufficient.
+- Some replies come from E5 because it removes all pressure and gives them an easy out to respond.
+
+---
+
+## Sequence Notes
+
+### Timing
+| Email | Day | Goal |
+|-------|-----|------|
+| E1 | 0 | Introduce yourself, get a reply |
+| E2 | 4 | Add an insight, ask for their perspective |
+| E3 | 8 | First mention of alternative approach, reference a result |
+| E4 | 12 | Reflect their experience back, invite them to talk |
+| E5 | 16 | Clean exit with door open |
+
+### What to Customize Per Segment
+- The cost observation in E2 (agencies spend more, professional services spend less on marketing)
+- The salary benchmarks in E3 (verify against your target metro)
+- The "three things they've tried" in E4 (pull from your own discovery calls with this segment)
+- The proof detail in E3 (use a result from the same or closest adjacent vertical)
+
+### What to Test
+- Subject line: "new in [CITY]" vs "quick question" vs "[ICP_TYPE] question"
+- E1 opener: direct observation vs indirect ("came across [COMPANY] while...")
+- E3 format: bullet list of cost breakdown vs prose paragraph
+- E5 length: current version vs one sentence only
+- Timing: Day 0/4/8/12/16 vs Day 0/3/7/11/15
+
+### What Does Not Belong in Cold Email
+- Any internal system names or jargon the prospect would not recognize
+- Specific pricing before discovery
+- Multiple asks in one email
+- "I'd love to connect" or "Let's hop on a call" (passive and imprecise)
+- HTML formatting, logos, or tracked images
+- Fake personalization ("I've been following your company closely")
