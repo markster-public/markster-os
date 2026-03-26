@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "company_name": "Your Company",
+  "category": "Replace with your category",
+  "primary_audience": "Replace with your primary buyer",
+  "core_offer": "Replace with your main offer",
+  "default_tone": "clear, direct, specific",
+  "default_perspective": "first_person_plural",
+  "reading_level": "7-9",
+  "required_files": [
+    "README.md",
+    "identity.md",
+    "audience.md",
+    "offer.md",
+    "messaging.md",
+    "voice.md",
+    "proof.md",
+    "channels.md",
+    "themes.md",
+    "style-corrections.md",
+    "truth-rules.md",
+    "quality-checklist.md"
+  ]
+}

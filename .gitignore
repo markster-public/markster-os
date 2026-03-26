@@ -31,6 +31,8 @@ venv/
 scratch/
 _local/
 *.local.md
+learning-loop/inbox/*
+!learning-loop/inbox/README.md
 
 # Generated outputs (do not commit campaign outputs)
 outputs/

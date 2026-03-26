@@ -21,13 +21,34 @@ When you type `/cold-email` in Claude Code, Codex, or Gemini, the skill loads th
 
 ## Installation methods
 
-### Method 1: Install script (recommended)
+### Method 1: Install the Markster OS CLI (recommended)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
 ```
 
-Detects your AI environment and installs all skills automatically.
+Then install skills with:
+
+```bash
+markster-os install-skills
+```
+
+Then create a workspace with:
+
+```bash
+markster-os init your-company
+```
+
+Useful maintenance commands:
+
+```bash
+markster-os status
+markster-os doctor
+markster-os upgrade-workspace ~/.markster-os/workspaces/your-company
+markster-os update
+```
+
+Run your AI tool from inside the workspace so the skills can resolve the local docs and templates correctly.
 
 ### Method 2: Install individual skill via curl
 
@@ -73,7 +94,13 @@ Each skill file contains:
 2. Instructions for the AI on how to execute the playbook
 3. References to the specific playbook files and templates
 
-The skill does not contain the full playbook - it references it. This means updating a playbook automatically updates what the skill does when it runs.
+The skill does not contain the full playbook. It references the local Markster OS workspace files.
+
+That means:
+
+- installing skills alone is not enough for full usage
+- you should run your AI tool from inside a Markster OS workspace
+- the workspace contains the methodology, playbooks, company context, learning loop, and validators the skills expect
 
 ---
 

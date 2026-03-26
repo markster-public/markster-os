@@ -1,16 +1,28 @@
 #!/usr/bin/env bash
-# Markster OS - Install Script
-# Installs skills to the correct location for your AI environment.
-# Supports: Claude Code, Codex, Gemini CLI
+# Markster OS - Bootstrap Installer
+#
+# Installs the managed `markster-os` CLI into the user's home directory.
+# The CLI manages:
+# - a stable launcher at ~/bin/markster-os
+# - a managed distribution at ~/.markster-os/dist/current
+# - customer workspaces at ~/.markster-os/workspaces/<slug>
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
 #   OR: bash install.sh (from cloned repo)
+#   OR: bash install.sh --managed-update
 
 set -euo pipefail
 
 REPO_URL="https://raw.githubusercontent.com/markster-public/markster-os/main"
-SKILLS=("cold-email" "events" "content" "sales" "fundraising" "research")
+ARCHIVE_URL="https://github.com/markster-public/markster-os/archive/refs/heads/main.tar.gz"
+MARKSTER_HOME="$HOME/.markster-os"
+DIST_DIR="$MARKSTER_HOME/dist/current"
+TMP_DIR="$MARKSTER_HOME/tmp"
+BIN_DIR="$HOME/bin"
+LAUNCHER_PATH="$BIN_DIR/markster-os"
+CONFIG_PATH="$MARKSTER_HOME/config.json"
+MANAGED_UPDATE=false
 
 # Colors
 RED='\033[0;31m'
@@ -26,170 +38,139 @@ log_warn()    { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error()   { echo -e "${RED}[ERROR]${NC} $1"; }
 log_header()  { echo -e "\n${BOLD}$1${NC}"; }
 
+for arg in "$@"; do
+    case "$arg" in
+        --managed-update)
+            MANAGED_UPDATE=true
+            ;;
+        *)
+            log_error "Unknown argument: $arg"
+            exit 1
+            ;;
+    esac
+done
+
 # ─── Detect Source Location ─────────────────────────────────────────────────
 # Determine if we're running from a cloned repo or via curl
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-/dev/stdin}")" 2>/dev/null && pwd || echo "")"
-if [[ -d "$SCRIPT_DIR/skills" ]]; then
+if [[ "$MANAGED_UPDATE" == false && -d "$SCRIPT_DIR/skills" ]]; then
     SOURCE_MODE="local"
     log_info "Installing from local repo: $SCRIPT_DIR"
 else
     SOURCE_MODE="remote"
-    log_info "Installing from remote: $REPO_URL"
+    log_info "Installing managed distribution from remote archive"
 fi
 
-# ─── Detect AI Environment ──────────────────────────────────────────────────
-log_header "Detecting AI environment..."
+ensure_path_setup() {
+    mkdir -p "$BIN_DIR"
+    local line='export PATH="$HOME/bin:$PATH"'
+    local shell_name
+    shell_name="$(basename "${SHELL:-zsh}")"
+    local rc_file
+    case "$shell_name" in
+        zsh) rc_file="$HOME/.zshrc" ;;
+        bash) rc_file="$HOME/.bashrc" ;;
+        *) rc_file="$HOME/.profile" ;;
+    esac
 
-CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
-CODEX_SKILLS_DIR="$HOME/.codex/skills"
-GEMINI_SKILLS_DIR="$HOME/.gemini/skills"
-
-has_claude=false
-has_codex=false
-has_gemini=false
-
-if command -v claude &>/dev/null || [[ -d "$HOME/.claude" ]]; then
-    has_claude=true
-    log_success "Claude Code detected"
-fi
-
-if command -v codex &>/dev/null || [[ -d "$HOME/.codex" ]]; then
-    has_codex=true
-    log_success "Codex detected"
-fi
-
-if command -v gemini &>/dev/null || [[ -d "$HOME/.gemini" ]]; then
-    has_gemini=true
-    log_success "Gemini CLI detected"
-fi
-
-if [[ "$has_claude" == false && "$has_codex" == false && "$has_gemini" == false ]]; then
-    log_warn "No AI environment detected. Installing to ~/.claude/skills/ by default."
-    log_warn "Manually copy skills to your AI tool's skills directory if needed."
-    has_claude=true
-fi
-
-# ─── Install Function ────────────────────────────────────────────────────────
-install_skill() {
-    local skill="$1"
-    local target_dir="$2"
-
-    mkdir -p "$target_dir/$skill"
-
-    if [[ "$SOURCE_MODE" == "local" ]]; then
-        if [[ -f "$SCRIPT_DIR/skills/$skill/SKILL.md" ]]; then
-            cp "$SCRIPT_DIR/skills/$skill/SKILL.md" "$target_dir/$skill/SKILL.md"
-        else
-            log_warn "Local skill not found: $skill (skipping)"
-            return
-        fi
+    touch "$rc_file"
+    if ! grep -Fq "$line" "$rc_file"; then
+        {
+            echo ""
+            echo "# Added by Markster OS"
+            echo "$line"
+        } >> "$rc_file"
+        log_success "Added $HOME/bin to PATH in $rc_file"
     else
-        curl -fsSL "$REPO_URL/skills/$skill/SKILL.md" -o "$target_dir/$skill/SKILL.md" 2>/dev/null || {
-            log_warn "Could not download skill: $skill (skipping)"
-            return
-        }
+        log_success "$HOME/bin already configured in PATH via $rc_file"
     fi
-
-    log_success "Installed: $skill -> $target_dir/$skill/SKILL.md"
 }
 
-# ─── Install to Claude Code ──────────────────────────────────────────────────
-if [[ "$has_claude" == true ]]; then
-    log_header "Installing skills for Claude Code..."
-    mkdir -p "$CLAUDE_SKILLS_DIR"
-    for skill in "${SKILLS[@]}"; do
-        install_skill "$skill" "$CLAUDE_SKILLS_DIR"
-    done
-fi
+install_distribution_local() {
+    mkdir -p "$DIST_DIR" "$TMP_DIR"
+    rm -rf "$DIST_DIR"
+    mkdir -p "$DIST_DIR"
+    tar -C "$SCRIPT_DIR" --exclude='.git' --exclude='__pycache__' -cf - . | tar -C "$DIST_DIR" -xf -
+}
 
-# ─── Install to Codex ───────────────────────────────────────────────────────
-if [[ "$has_codex" == true ]]; then
-    log_header "Installing skills for Codex..."
-    mkdir -p "$CODEX_SKILLS_DIR"
-
-    # If Claude skills dir exists, symlink to it rather than duplicating
-    if [[ "$has_claude" == true && -d "$CLAUDE_SKILLS_DIR" ]]; then
-        for skill in "${SKILLS[@]}"; do
-            if [[ -d "$CLAUDE_SKILLS_DIR/$skill" ]]; then
-                if [[ ! -L "$CODEX_SKILLS_DIR/$skill" ]]; then
-                    ln -sf "$CLAUDE_SKILLS_DIR/$skill" "$CODEX_SKILLS_DIR/$skill"
-                    log_success "Linked: $skill -> $CODEX_SKILLS_DIR/$skill (symlink to Claude)"
-                else
-                    log_success "Already linked: $skill"
-                fi
-            else
-                install_skill "$skill" "$CODEX_SKILLS_DIR"
-            fi
-        done
-    else
-        for skill in "${SKILLS[@]}"; do
-            install_skill "$skill" "$CODEX_SKILLS_DIR"
-        done
+install_distribution_remote() {
+    mkdir -p "$MARKSTER_HOME" "$TMP_DIR"
+    local extract_dir="$TMP_DIR/extract"
+    rm -rf "$extract_dir" "$DIST_DIR"
+    mkdir -p "$extract_dir"
+    curl -fsSL "$ARCHIVE_URL" | tar -xz -C "$extract_dir"
+    local src_dir
+    src_dir="$(find "$extract_dir" -maxdepth 1 -type d -name 'markster-os-*' | head -n 1)"
+    if [[ -z "$src_dir" ]]; then
+        log_error "Could not find extracted Markster OS archive"
+        exit 1
     fi
-fi
+    mkdir -p "$DIST_DIR"
+    tar -C "$src_dir" --exclude='.git' --exclude='__pycache__' -cf - . | tar -C "$DIST_DIR" -xf -
+}
 
-# ─── Install to Gemini CLI ───────────────────────────────────────────────────
-if [[ "$has_gemini" == true ]]; then
-    log_header "Installing skills for Gemini CLI..."
-    if [[ -d "$GEMINI_SKILLS_DIR" ]]; then
-        for skill in "${SKILLS[@]}"; do
-            install_skill "$skill" "$GEMINI_SKILLS_DIR"
-        done
-    else
-        log_warn "Gemini skills directory not found at $GEMINI_SKILLS_DIR"
-        log_warn "Create the directory and re-run, or manually copy files from skills/"
+write_launcher() {
+    mkdir -p "$BIN_DIR"
+    cat > "$LAUNCHER_PATH" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+exec python3 "$HOME/.markster-os/dist/current/tools/markster_os_cli.py" "$@"
+EOF
+    chmod +x "$LAUNCHER_PATH"
+    log_success "Installed launcher: $LAUNCHER_PATH"
+}
+
+write_config() {
+    mkdir -p "$MARKSTER_HOME"
+    cat > "$CONFIG_PATH" <<EOF
+{
+  "version": 1,
+  "distribution": "$DIST_DIR",
+  "launcher": "$LAUNCHER_PATH",
+  "source_mode": "$SOURCE_MODE",
+  "repo_url": "$REPO_URL",
+  "archive_url": "$ARCHIVE_URL"
+}
+EOF
+    log_success "Wrote config: $CONFIG_PATH"
+}
+
+verify_distribution() {
+    if [[ ! -f "$DIST_DIR/tools/markster_os_cli.py" ]]; then
+        log_error "Managed distribution is missing tools/markster_os_cli.py"
+        exit 1
     fi
-fi
-
-# ─── Optional: Configure MCP and Plugins ────────────────────────────────────
-log_header "Checking optional configuration..."
-
-# claude-mem MCP (memory persistence for Claude)
-CLAUDE_MCP_CONFIG="$HOME/.claude/mcp.json"
-if [[ -f "$CLAUDE_MCP_CONFIG" ]]; then
-    if ! grep -q "claude-mem" "$CLAUDE_MCP_CONFIG" 2>/dev/null; then
-        log_info "claude-mem MCP not found in mcp.json. To add memory persistence:"
-        log_info "  See: https://github.com/markster-public/markster-os/blob/main/integrations/README.md"
-    else
-        log_success "claude-mem MCP already configured"
+    if [[ ! -f "$DIST_DIR/install.sh" ]]; then
+        log_error "Managed distribution is missing install.sh"
+        exit 1
     fi
-fi
+}
 
-# Check for addon keys
-log_header "Checking add-on keys..."
-addon_count=0
+log_header "Installing Markster OS CLI..."
 
-if [[ -n "${AOE_GRADER_KEY:-}" ]]; then
-    log_success "AOE Grader key found"
-    addon_count=$((addon_count + 1))
+if [[ "$SOURCE_MODE" == "local" ]]; then
+    install_distribution_local
 else
-    log_info "AOE_GRADER_KEY not set. Get a key at markster.ai/addons/aoe-grader"
+    install_distribution_remote
 fi
 
-if [[ -n "${EVENT_SCOUT_KEY:-}" ]]; then
-    log_success "Event Scout key found"
-    addon_count=$((addon_count + 1))
-else
-    log_info "EVENT_SCOUT_KEY not set. Get a key at markster.ai/addons/event-scout"
-fi
-
-if [[ -n "${LEAD_PACKS_KEY:-}" ]]; then
-    log_success "Lead Packs key found"
-    addon_count=$((addon_count + 1))
-else
-    log_info "LEAD_PACKS_KEY not set. Get a key at markster.ai/addons/lead-packs"
-fi
+verify_distribution
+write_launcher
+write_config
+ensure_path_setup
 
 # ─── Done ───────────────────────────────────────────────────────────────────
 log_header "Installation complete."
 echo ""
-echo -e "${BOLD}Installed skills:${NC} ${SKILLS[*]}"
-echo -e "${BOLD}Active add-ons:${NC} $addon_count / 3"
+echo -e "${BOLD}CLI launcher:${NC} $LAUNCHER_PATH"
+echo -e "${BOLD}Managed distribution:${NC} $DIST_DIR"
+echo -e "${BOLD}Workspace root:${NC} $MARKSTER_HOME/workspaces"
 echo ""
 echo -e "${BOLD}Next steps:${NC}"
-echo "  1. Open methodology/assessment/scorecard.md and score yourself"
-echo "  2. Complete F1-F4 in methodology/foundation/ (in order)"
-echo "  3. Activate a playbook in your AI environment: /cold-email, /sales, /content, etc."
+echo "  1. Open a new shell or run: export PATH=\"\$HOME/bin:\$PATH\""
+echo "  2. Create a workspace: markster-os init your-company"
+echo "  3. Install skills if needed: markster-os install-skills"
+echo "  4. Validate a workspace: markster-os validate ~/.markster-os/workspaces/your-company"
 echo ""
 echo -e "${BOLD}Need help?${NC} https://markster.ai | hello@markster.ai"
 echo ""
