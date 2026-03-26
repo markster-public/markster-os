@@ -6,211 +6,232 @@ A systematic cold email program: from zero to a running sequence in one week.
 
 ## Prerequisites
 
-Before starting this playbook, confirm:
-- [ ] F1 complete: ICP documented with buying trigger
-- [ ] F2 complete: Outcome statement and pricing defined
-- [ ] F3 complete: Problem statement in buyer's language, proof point ready
+- [ ] ICP documented with buying trigger (who you are targeting, what makes them a fit)
+- [ ] Outcome statement defined: what the buyer gets, expressed in their language
+- [ ] Problem statement written in buyer language, not internal language
+- [ ] One proof point ready (a result, a case study, or a specific metric)
+- [ ] Sending domain registered (separate from your primary domain)
 
-If any of these are missing, complete them first. A cold email sequence without F1-F3 will generate low reply rates regardless of volume.
+If any of these are missing, complete them first. A cold email sequence without a clear ICP and message will generate low reply rates regardless of volume.
 
 ---
 
-## What this playbook produces
+## What this produces
 
 - A verified contact list of 200-500 ICP-matched prospects
-- A 3-touch email sequence (email 1, follow-up 1, follow-up 2)
+- A 5-touch email sequence (email 1, follow-up 1-3, breakup email)
 - An inbox infrastructure setup that avoids spam folders
 - A send schedule (volume per day, timing, pause rules)
 - A tracking template for reply rate, meeting rate, and iteration decisions
-- An iteration log that tells you what to change after the first 100 sends
+- An iteration log documenting what changed and why after the first 100 sends
 
 ---
 
-## Step 1: Research
+## Steps
+
+### Step 1: Research (60-90 minutes)
 
 Before building a list or writing a word, run the research prompts.
 
-**Run:**
-- [competitive-intelligence.md](../../research/prompts/competitive-intelligence.md) - understand what the buyer sees from your competitors
-- [buyer-jtbd.md](../../research/prompts/buyer-jtbd.md) - surface the jobs-to-be-done language your buyer uses
-- [objection-research.md](../../research/prompts/objection-research.md) - identify the objections you will encounter in replies
+**What to surface:**
+- 5-10 competitor positioning claims (so you can differentiate)
+- 10-20 verbatim phrases your buyer uses to describe their situation (forums, reviews, LinkedIn comments)
+- The top 3 objections you will encounter in replies
+- The buying trigger: the specific event or condition that makes them ready to act now
 
-**Outputs from Step 1:**
-- A list of 5-10 competitor positioning claims (so you can differentiate)
-- 10-20 verbatim phrases your buyer uses to describe their situation
-- The top 3 objections you will need to address in the sequence
+**Where to find buyer language:**
+- G2, Trustpilot, or Capterra reviews for tools in their category
+- Reddit and LinkedIn comments in their industry communities
+- Sales call recordings if you have them
+- Job postings (what they are hiring for reveals what they are struggling with)
 
-**Time:** 60-90 minutes
+The goal of this step is not research for its own sake. You are building a vocabulary list that goes directly into your email copy.
 
 ---
 
-## Step 2: Segment
+### Step 2: Segment (2-4 hours)
 
 Build and verify the list before writing the sequence.
 
 **2a: Define your filter criteria**
 
-Pull directly from F1 (ICP):
-- Industry: [from F1]
-- Revenue range: [from F1]
-- Headcount range: [from F1]
-- Geography: [from F1]
-- Decision-maker title: [from F1]
-- Buying trigger signals: [what to look for in company activity]
+Pull directly from your ICP definition:
+- Industry: specific vertical, not broad category
+- Revenue range: use headcount as a proxy if revenue is unavailable
+- Headcount range: small enough to have a single decision-maker, large enough to afford the engagement
+- Geography: if relevant to your offering
+- Decision-maker title: use "owner" as the default for small B2B service firms; it covers solo practitioners, partners, and founders
+- Buying trigger signals: recent funding, hiring activity, job change, new office, technology adoption signals
 
 **2b: Build the list**
 
-Sources to use (in order of reliability):
-1. Apollo.io, LinkedIn Sales Navigator, Hunter.io - filtered by F1 criteria
-2. Event attendee lists (from recent industry events)
-3. LinkedIn search with Boolean filters
-4. Industry directories and association member lists
+Sources to use in order of reliability:
+1. Apollo.io, LinkedIn Sales Navigator, or Hunter.io filtered by ICP criteria
+2. Event attendee lists from recent industry events
+3. LinkedIn Boolean search
+4. Industry association directories and member lists
 
-Target: 200-500 contacts for the first run. Do not start smaller - you need volume to see patterns.
+Target: 200-500 contacts for the first run. Do not start smaller. You need volume to see patterns.
 
 **2c: Verify emails**
 
-Run all emails through a verification tool (Reoon, ZeroBounce, or NeverBounce) before loading into your sending tool. Target: under 3% bounce rate on send.
+Run all emails through a verification tool (Reoon, ZeroBounce, or NeverBounce) before loading into your sending tool.
+
+Target: under 3% bounce rate on send.
 
 Remove:
-- Generic emails (info@, contact@, hello@)
-- Role-based emails unless the role IS the decision-maker
-- Anyone you already have an existing relationship with (move them to warm outreach)
+- Generic emails (info@, contact@, hello@) unless the role is the decision-maker
+- Anyone you already have an active relationship with (move them to warm outreach)
+- Contacts flagged as risky or unverifiable
 
 **Outputs from Step 2:**
 - Verified list of 200-500 contacts in CSV format
 - Bounce rate confirmed below 3%
-- Segmented by sub-segment if applicable (e.g., CPA firms vs. MSP firms)
-
-**Time:** 2-4 hours
+- Segmented by sub-segment if applicable
 
 ---
 
-## Step 3: Write
+### Step 3: Write the Sequence (2-3 hours)
 
-Write the sequence using the templates as starting points.
+Write a 5-touch sequence where each email has a different reason to reply.
 
-**Sequence structure: 3 touches**
+**Sequence structure:**
 
-- Email 1: The main value proposition (cold intro). Short, one ask.
-- Follow-up 1 (3-5 days later): Different angle, same offer. Not "just checking in."
-- Follow-up 2 (5-7 days after FU1): Pattern interrupt or breakup frame. Short.
+| Touch | Timing | Channel | Purpose |
+|-------|--------|---------|---------|
+| Email 1 | Day 0 | Email | Value-first intro -- pain + proof, no offer yet |
+| Email 2 | Day 4 | Email | Different angle -- data point or insight |
+| LinkedIn | Day 2-3 | LinkedIn | Connection request with context |
+| Email 3 | Day 8 | Email | First mention of diagnostic or offer -- earned by now |
+| Email 4 | Day 12 | Email | Conversation starter, not a pitch |
+| Email 5 | Day 16 | Email | Breakup -- "should I stop reaching out?" |
+
+**Writing rules:**
+- Email 1 subject line: 3-5 words, no question marks, no "Quick question"
+- Email 1 opening: personalized first line referencing their company, role, or recent activity
+- Problem statement: use buyer verbatims from Step 1, not a paraphrase
+- CTA: one low-friction ask (15-minute call, or a yes/no question)
+- Total length: Email 1 under 100 words. Follow-ups under 60 words.
+- No marketing jargon in any email: no "pipeline," "GTM," "ICP," "funnel," "orchestration"
+- Do not name specific tools in the offer (say "CRM," not a brand name)
+
+**Each email needs a different angle:**
+- E1: soft question, no offer
+- E2: different asset or insight
+- E3: first diagnostic mention
+- E4: conversation starter
+- E5: breakup
+
+The diagnostic appears maximum 2 times across the entire sequence.
+
+**Test before sending:**
+- Read each email out loud. Does it sound like a human wrote it?
+- Send yourself a test email. Open it on mobile.
+- Ask: would someone in this industry think a peer sent this?
 
 **Templates to use:**
 - [sequence-b2b.md](templates/sequence-b2b.md)
 - [follow-up.md](templates/follow-up.md)
 
-**Writing rules:**
-- Email 1 subject line: 3-5 words, no question marks, no "Quick question"
-- Email 1 opening: personalized first line (reference their company, role, or recent activity)
-- Problem statement: use your F3 language verbatim, not a paraphrase
-- CTA: one low-friction ask (15-minute call, or reply with a yes/no question)
-- Total length: Email 1 under 100 words. Follow-ups under 60 words.
-
-**Test before sending:**
-
-Read each email out loud. Ask: would a human at this company think a human wrote this? If it sounds automated or generic, rewrite it.
-
-Send yourself a test email. Open it on mobile. Does it look right?
-
-**Outputs from Step 3:**
-- Complete 3-touch sequence written and reviewed
-- Subject lines tested (minimum 2 variations for Email 1)
-
-**Time:** 2-3 hours
-
 ---
 
-## Step 4: Send
-
-Set up the infrastructure before hitting send.
+### Step 4: Infrastructure Setup (2-3 hours setup, then automated)
 
 **4a: Inbox setup**
-
-- Use a separate domain for cold outreach (not your primary domain). Example: if your domain is `company.com`, register `company-hq.com` or `trycompany.com` for cold email.
+- Use a separate domain for cold outreach. If your domain is `company.com`, register `company-hq.com` or `trycompany.com` for cold email.
 - Set up SPF, DKIM, and DMARC records on the sending domain.
-- Warm up the inbox for 2-4 weeks before sending (use a warmup tool like Lemwarm, Mailreach, or Instantly's warmup).
+- Warm up the inbox for 2-4 weeks before sending (tools: Lemwarm, Mailreach, or Instantly warmup).
 - Configure your sending tool (Instantly, Smartlead, Reply.io, or equivalent).
 
 **4b: Volume rules**
-
-- Maximum 30-50 emails per inbox per day (while warming).
+- Maximum 30-50 emails per inbox per day while warming.
 - After warmup is complete (4+ weeks): 50-100 per inbox per day maximum.
 - Spread sends across business hours. Do not send at exactly 9:00am.
-- Pause sending if reply rate drops below 1% for 3 consecutive days (troubleshoot message, not volume).
+- Pause sending if reply rate drops below 1% for 3 consecutive days. The problem is the message, not the volume.
 
 **4c: Load the sequence**
-
 - Import verified list into sending tool
-- Load sequence with day delays: Email 1 -> day 0, FU1 -> day 4, FU2 -> day 9
+- Load sequence with day delays: Email 1 day 0, FU1 day 4, FU2 day 8, FU3 day 12, breakup day 16
 - Set reply detection to pause sequence on reply (standard in all major tools)
 - Set unsubscribe detection to remove contacts permanently
 
-**Outputs from Step 4:**
-- Sending domain configured with SPF/DKIM/DMARC
-- Inbox warming active
-- Sequence loaded in tool with correct delays
-- First batch sending
-
-**Time:** 2-3 hours setup, then automated
-
 ---
 
-## Step 5: Follow-up (manual replies)
+### Step 5: Manage Replies (ongoing)
 
-When you get a reply, respond within 4 hours during business hours.
-
-**Reply types and responses:**
+Respond to all replies within 4 hours during business hours.
 
 **Positive reply ("interested," "tell me more," "let's talk"):**
 - Confirm the meeting immediately. Do not negotiate scope in email. Get them on a call.
-- Send calendar link or 2-3 specific time options.
-- Confirm what you will cover on the call (reference their specific situation from the reply).
+- Send a calendar link or 2-3 specific time options.
+- Reference their specific situation from the reply.
 
 **Soft no ("not right now," "maybe later," "we're in a contract"):**
 - Acknowledge without pressure. Ask for a specific future date to follow up.
-- Add to a quarterly follow-up sequence with a calendar reminder.
-- Reply example: "Totally understand. When would be a better time to revisit - Q2, or closer to fall?"
+- Add to a quarterly follow-up cadence with a calendar reminder.
+- Example: "Totally understand. When would be a better time to revisit -- Q3, or closer to the end of the year?"
 
 **Hard no ("not interested," "remove me"):**
 - Remove immediately. Do not reply with a counter-pitch.
-- Mark in CRM as disqualified with reason.
+- Log as disqualified with reason.
 
 **Out of office:**
 - Set a task to follow up 2-3 days after their return date.
 
 **Objection reply:**
-- See [objection research](../../research/prompts/objection-research.md) for response frameworks.
-- Rule: acknowledge the objection before responding to it. Never argue.
-
-**Outputs from Step 5:**
-- Reply log maintained
-- Meeting booked or follow-up dated for every positive and soft-no reply
+- Acknowledge the objection before responding to it. Never argue.
+- Map the objection to your pre-built objection responses from Step 1 research.
 
 ---
 
-## Step 6: Iterate
+### Step 6: Iterate After 100 Sends
 
-After 100 sends, evaluate before scaling.
+After 100 sends, evaluate before scaling. Change one variable at a time.
 
-**Metrics to track:**
+**Diagnosis logic:**
+- Open rate low (under 20%): deliverability problem. Check spam folder, review inbox warming, fix subject line.
+- Open rate high but reply rate low: message problem. Subject line works; body does not. Rewrite Email 1 using buyer verbatims.
+- Reply rate decent but meetings not booking: CTA problem or wrong ICP. Simplify the CTA first.
 
-| Metric | Baseline target | Good | Excellent |
-|--------|----------------|------|-----------|
+Always change one variable at a time. Changing everything at once makes it impossible to know what worked.
+
+---
+
+## Templates
+
+- [sequence-b2b.md](templates/sequence-b2b.md) -- Full 5-touch sequence structure with placeholder copy
+- [follow-up.md](templates/follow-up.md) -- Follow-up variants by scenario (soft no, went dark, post-meeting)
+
+---
+
+## Benchmarks
+
+| Metric | Baseline | Good | Excellent |
+|--------|----------|------|-----------|
 | Open rate | 30%+ | 45%+ | 60%+ |
 | Reply rate | 1%+ | 3%+ | 5%+ |
 | Positive reply rate | 0.5%+ | 1.5%+ | 3%+ |
 | Meeting rate | 0.25%+ | 0.75%+ | 1.5%+ |
+| Bounce rate | Under 5% | Under 3% | Under 1% |
 
-**If open rate is low (under 20%):** Deliverability problem. Check spam folder, review inbox warming, fix subject line.
+Pause and diagnose if reply rate drops below 1% for 3 consecutive days. Do not scale a broken message.
 
-**If open rate is high but reply rate is low:** Message problem. The subject line works; the body does not. Rewrite Email 1 body using buyer verbatims from Step 1.
+---
 
-**If reply rate is decent but meetings are not booking:** CTA problem or wrong ICP. Either the ask is too big, or you are reaching the wrong people. Simplify the CTA first.
+## Common Mistakes
 
-**What to change first:** Always change one variable at a time. Subject line test, then body copy test, then CTA test. Changing everything at once makes it impossible to know what worked.
+**Sending from your primary domain.** This puts your main email infrastructure at risk. Always use a separate cold email domain.
 
-**Outputs from Step 6:**
-- Metrics dashboard updated
-- One specific change identified and implemented
-- Iteration log documenting what changed and why
+**Skipping email verification.** Bounce rates above 5% damage deliverability. Verify every list before loading it.
+
+**Writing the same CTA five times.** Each email must give the reader a different reason to reply. "Just checking in" is not a reason.
+
+**Using marketing jargon in prospect-facing emails.** Words like "pipeline," "GTM," "ICP," and "funnel" signal that you wrote this for yourself, not for them. Use their industry vocabulary.
+
+**Changing too many variables at once.** When testing, change one thing at a time: subject line first, then body copy, then CTA. Otherwise you cannot tell what worked.
+
+**Scaling before validating.** Run 100 sends and hit 1%+ reply rate before scaling volume. Scaling a broken message just sends more emails nobody responds to.
+
+**Starting too small.** Lists under 100 contacts do not give you enough signal to know what is working. Start with 200-500.
+
+**Generic first lines.** "I came across your company and was impressed" reads as automation. Reference something specific: a recent post, a hire, a product change, or a relevant industry event they likely attended.
