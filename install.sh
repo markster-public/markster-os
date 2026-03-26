@@ -14,8 +14,10 @@
 
 set -euo pipefail
 
-REPO_URL="https://raw.githubusercontent.com/markster-public/markster-os/main"
-ARCHIVE_URL="https://github.com/markster-public/markster-os/archive/refs/heads/main.tar.gz"
+DEFAULT_REPO_URL="https://raw.githubusercontent.com/markster-public/markster-os/main"
+DEFAULT_ARCHIVE_URL="https://github.com/markster-public/markster-os/archive/refs/heads/main.tar.gz"
+REPO_URL="$DEFAULT_REPO_URL"
+ARCHIVE_URL="$DEFAULT_ARCHIVE_URL"
 MARKSTER_HOME="$HOME/.markster-os"
 DIST_DIR="$MARKSTER_HOME/dist/current"
 TMP_DIR="$MARKSTER_HOME/tmp"
@@ -53,12 +55,85 @@ done
 # ─── Detect Source Location ─────────────────────────────────────────────────
 # Determine if we're running from a cloned repo or via curl
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-/dev/stdin}")" 2>/dev/null && pwd || echo "")"
-if [[ "$MANAGED_UPDATE" == false && -d "$SCRIPT_DIR/skills" ]]; then
+if [[ -d "$SCRIPT_DIR/skills" ]]; then
     SOURCE_MODE="local"
-    log_info "Installing from local repo: $SCRIPT_DIR"
+    if [[ "$MANAGED_UPDATE" == true ]]; then
+        log_info "Updating from local repo: $SCRIPT_DIR"
+    else
+        log_info "Installing from local repo: $SCRIPT_DIR"
+    fi
 else
     SOURCE_MODE="remote"
     log_info "Installing managed distribution from remote archive"
+fi
+
+github_urls_from_remote() {
+    local remote_url="$1"
+    local slug=""
+    if [[ "$remote_url" =~ ^git@github\.com:(.+)\.git$ ]]; then
+        slug="${BASH_REMATCH[1]}"
+    elif [[ "$remote_url" =~ ^https://github\.com/(.+)\.git$ ]]; then
+        slug="${BASH_REMATCH[1]}"
+    elif [[ "$remote_url" =~ ^https://github\.com/(.+)$ ]]; then
+        slug="${BASH_REMATCH[1]}"
+    fi
+
+    if [[ -n "$slug" ]]; then
+        REPO_URL="https://raw.githubusercontent.com/$slug/main"
+        ARCHIVE_URL="https://github.com/$slug/archive/refs/heads/main.tar.gz"
+    fi
+}
+
+set_urls_from_local_origin_if_available() {
+    if [[ ! -d "$SCRIPT_DIR/.git" ]]; then
+        return
+    fi
+    local remote_url=""
+    remote_url="$(git -C "$SCRIPT_DIR" remote get-url origin 2>/dev/null || true)"
+    if [[ -n "$remote_url" ]]; then
+        github_urls_from_remote "$remote_url"
+    fi
+}
+
+set_urls_from_config_if_available() {
+    if [[ ! -f "$CONFIG_PATH" ]]; then
+        return
+    fi
+    local config_repo_url=""
+    local config_archive_url=""
+    config_repo_url="$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d.get("repo_url",""))' "$CONFIG_PATH" 2>/dev/null || true)"
+    config_archive_url="$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d.get("archive_url",""))' "$CONFIG_PATH" 2>/dev/null || true)"
+    if [[ -n "$config_repo_url" ]]; then
+        REPO_URL="$config_repo_url"
+    fi
+    if [[ -n "$config_archive_url" ]]; then
+        ARCHIVE_URL="$config_archive_url"
+    fi
+}
+
+set_local_source_from_config_if_available() {
+    if [[ ! -f "$CONFIG_PATH" ]]; then
+        return
+    fi
+    local config_source_mode=""
+    local config_source_path=""
+    config_source_mode="$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d.get("source_mode",""))' "$CONFIG_PATH" 2>/dev/null || true)"
+    config_source_path="$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d.get("source_path",""))' "$CONFIG_PATH" 2>/dev/null || true)"
+    if [[ "$config_source_mode" == "local" && -n "$config_source_path" && -d "$config_source_path/skills" ]]; then
+        SCRIPT_DIR="$config_source_path"
+        SOURCE_MODE="local"
+        log_info "Updating from original local repo: $SCRIPT_DIR"
+    fi
+}
+
+if [[ "$SOURCE_MODE" == "local" ]]; then
+    set_urls_from_local_origin_if_available
+elif [[ "$MANAGED_UPDATE" == true ]]; then
+    set_local_source_from_config_if_available
+    set_urls_from_config_if_available
+    if [[ "$SOURCE_MODE" == "local" ]]; then
+        set_urls_from_local_origin_if_available
+    fi
 fi
 
 ensure_path_setup() {
@@ -128,6 +203,7 @@ write_config() {
   "distribution": "$DIST_DIR",
   "launcher": "$LAUNCHER_PATH",
   "source_mode": "$SOURCE_MODE",
+  "source_path": "$SCRIPT_DIR",
   "repo_url": "$REPO_URL",
   "archive_url": "$ARCHIVE_URL"
 }

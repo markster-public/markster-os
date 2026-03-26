@@ -46,6 +46,16 @@ PRE_COMMIT_HOOK = """#!/usr/bin/env bash
 set -euo pipefail
 markster-os validate .
 """
+PLACEHOLDER_MARKERS = (
+    "Your Company",
+    "Replace with your",
+    "Write one plain-language sentence",
+    "Write approved phrases the buyer actually uses.",
+    "One sentence.",
+    "Two to three sentences.",
+    "list the main active channels",
+    "offer name",
+)
 
 
 def die(message: str) -> None:
@@ -252,6 +262,94 @@ def git_output(path: Path, args: list[str]) -> str | None:
     return result.stdout.strip()
 
 
+def is_git_workspace(path: Path) -> bool:
+    return (path / ".git").exists()
+
+
+def has_pre_commit_hook(path: Path) -> bool:
+    hook = path / ".git" / "hooks" / "pre-commit"
+    return hook.exists()
+
+
+def company_context_placeholder_hits(path: Path) -> list[str]:
+    hits: list[str] = []
+    manifest_path = path / "company-context" / "manifest.json"
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            hits.append("company-context/manifest.json is not valid JSON")
+        else:
+            manifest_values = [
+                str(manifest.get("company_name", "")),
+                str(manifest.get("category", "")),
+                str(manifest.get("primary_audience", "")),
+                str(manifest.get("core_offer", "")),
+            ]
+            if any("Your Company" in value or "Replace with" in value for value in manifest_values):
+                hits.append("company-context/manifest.json still contains template values")
+
+    files_to_check = [
+        "identity.md",
+        "audience.md",
+        "offer.md",
+        "messaging.md",
+        "channels.md",
+        "style-corrections.md",
+        "themes.md",
+        "voice.md",
+    ]
+    for relative_name in files_to_check:
+        file_path = path / "company-context" / relative_name
+        if not file_path.exists():
+            continue
+        content = file_path.read_text(encoding="utf-8")
+        for marker in PLACEHOLDER_MARKERS:
+            if marker in content:
+                hits.append(f"company-context/{relative_name} still includes template text")
+                break
+    return hits
+
+
+def workspace_readiness(path: Path) -> list[tuple[str, bool, str]]:
+    checks: list[tuple[str, bool, str]] = []
+    git_enabled = is_git_workspace(path)
+    checks.append(
+        (
+            "Git repository",
+            git_enabled,
+            "initialize Git or recreate with `markster-os init --git --path ...`",
+        )
+    )
+
+    remote = git_output(path, ["remote", "get-url", "origin"]) if git_enabled else None
+    checks.append(
+        (
+            "Git remote",
+            bool(remote),
+            "attach a remote with `markster-os attach-remote <url>`",
+        )
+    )
+
+    checks.append(
+        (
+            "Pre-commit hook",
+            git_enabled and has_pre_commit_hook(path),
+            "install hooks with `markster-os install-hooks .`",
+        )
+    )
+
+    placeholder_hits = company_context_placeholder_hits(path)
+    checks.append(
+        (
+            "Company context filled",
+            not placeholder_hits,
+            "replace the remaining template text in `company-context/`",
+        )
+    )
+    return checks
+
+
 def cmd_init(args: argparse.Namespace) -> int:
     ensure_distribution()
     slug = args.slug.strip()
@@ -378,7 +476,7 @@ def cmd_status(args: argparse.Namespace) -> int:
         print("")
         print("Active workspace")
         print(f"Path: {cwd}")
-        if (cwd / ".git").exists():
+        if is_git_workspace(cwd):
             branch = git_output(cwd, ["branch", "--show-current"]) or "unknown"
             remote = git_output(cwd, ["remote", "get-url", "origin"])
             status = git_output(cwd, ["status", "--short"]) or ""
@@ -386,10 +484,13 @@ def cmd_status(args: argparse.Namespace) -> int:
             print(f"Branch: {branch}")
             print(f"Origin: {remote or 'not set'}")
             print(f"Uncommitted changes: {'yes' if status else 'no'}")
+            print(f"Pre-commit hook: {'installed' if has_pre_commit_hook(cwd) else 'missing'}")
         else:
             print("Git: not initialized")
             print("Hint: run `git init -b main` or recreate the workspace with `markster-os init --git --path ...`")
             print("Hint: after Git init, run `markster-os install-hooks .`")
+        placeholder_hits = company_context_placeholder_hits(cwd)
+        print(f"Company context: {'ready' if not placeholder_hits else 'template values remain'}")
     return 0
 
 
@@ -602,20 +703,28 @@ def cmd_start(args: argparse.Namespace) -> int:
     print("Markster OS Start")
     print(f"Workspace: {cwd}")
     print("")
-    print("Recommended next steps:")
-    print("  1. Run `markster-os sync` if this is a shared repo")
-    print("  2. Check `company-context/` and fill any missing canon")
-    print("  3. Keep raw notes in `learning-loop/inbox/`")
-    print("  4. Run your AI tool from this directory")
-    print("  5. Before commit: `markster-os validate .`")
-    print("  6. Then: `markster-os commit -m \"Update workspace\"` and `markster-os push`")
-    if not (cwd / ".git").exists():
+    checks = workspace_readiness(cwd)
+    print("Readiness checklist:")
+    for label, ok, next_step in checks:
+        marker = "ok" if ok else "needs work"
+        print(f"  - {label}: {marker}")
+        if not ok:
+            print(f"    next: {next_step}")
+
+    placeholder_hits = company_context_placeholder_hits(cwd)
+    if placeholder_hits:
         print("")
-        print("This workspace is not a Git repo yet.")
-        print("Recommended:")
-        print("  - initialize Git")
-        print("  - attach a remote")
-        print("  - install hooks with `markster-os install-hooks .`")
+        print("Company context gaps:")
+        for hit in placeholder_hits:
+            print(f"  - {hit}")
+
+    print("")
+    print("Recommended workflow:")
+    print("  1. Run `markster-os sync` if this is a shared repo")
+    print("  2. Keep raw notes in `learning-loop/inbox/`")
+    print("  3. Run your AI tool from this directory")
+    print("  4. Before commit: `markster-os validate .`")
+    print("  5. Then: `markster-os commit -m \"Update workspace\"` and `markster-os push`")
     return 0
 
 
