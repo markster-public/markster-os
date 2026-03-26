@@ -186,6 +186,13 @@ def run_git(path: Path, args: list[str]) -> subprocess.CompletedProcess:
     )
 
 
+def git_output(path: Path, args: list[str]) -> str | None:
+    result = run_git(path, args)
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip()
+
+
 def cmd_init(args: argparse.Namespace) -> int:
     ensure_distribution()
     slug = args.slug.strip()
@@ -304,6 +311,23 @@ def cmd_status(args: argparse.Namespace) -> int:
             print(f"    {workspace['path']}")
     else:
         print("  - none")
+
+    cwd = Path.cwd().resolve()
+    metadata = load_workspace_metadata(cwd)
+    if metadata is not None:
+        print("")
+        print("Active workspace")
+        print(f"Path: {cwd}")
+        if (cwd / ".git").exists():
+            branch = git_output(cwd, ["branch", "--show-current"]) or "unknown"
+            remote = git_output(cwd, ["remote", "get-url", "origin"])
+            status = git_output(cwd, ["status", "--short"]) or ""
+            print(f"Git: enabled")
+            print(f"Branch: {branch}")
+            print(f"Origin: {remote or 'not set'}")
+            print(f"Uncommitted changes: {'yes' if status else 'no'}")
+        else:
+            print("Git: not initialized")
     return 0
 
 
@@ -364,6 +388,7 @@ def cmd_upgrade_workspace(args: argparse.Namespace) -> int:
     copy_tree(DIST_ROOT, workspace)
     slug = metadata.get("slug", workspace.name) if metadata else workspace.name
     write_workspace_metadata(workspace, slug)
+    write_workspace_files(workspace, slug)
     print(f"Upgraded workspace from managed distribution: {workspace}")
     return 0
 
