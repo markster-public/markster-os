@@ -34,6 +34,12 @@ markster-os install-skills
 markster-os validate [path]
 markster-os update
 markster-os upgrade-workspace [path]
+markster-os attach-remote <url>
+markster-os sync
+markster-os commit -m "message"
+markster-os push
+markster-os backup-workspace [path]
+markster-os export-workspace [path]
 markster-os status
 markster-os doctor
 ```
@@ -100,15 +106,29 @@ curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/in
 **Step 2: Create a workspace**
 
 ```bash
-markster-os init your-company
-cd ~/.markster-os/workspaces/your-company
+markster-os init your-company --git --path ./your-company-os
+cd ./your-company-os
 ```
 
-**Step 3: Run the scorecard**
+For real teams, the recommended production setup is to keep the workspace in your own Git repository. The home-directory workspace is fine for solo evaluation, but team use should default to customer-owned version control.
+
+**Step 3: Attach your GitHub repository**
+
+```bash
+markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
+```
+
+Then push it with normal Git:
+
+```bash
+git push -u origin main
+```
+
+**Step 4: Run the scorecard**
 
 Open [methodology/assessment/scorecard.md](methodology/assessment/scorecard.md). Score yourself honestly across F1-F4 and the GOD Engine bricks. The scoring tells you exactly which playbook to run first.
 
-**Step 4: Lock F1-F4, then activate a playbook**
+**Step 5: Lock F1-F4, then activate a playbook**
 
 Work through [methodology/foundation/](methodology/foundation/) in order. Once F1-F4 is complete, activate a playbook in your AI environment:
 
@@ -121,7 +141,7 @@ Work through [methodology/foundation/](methodology/foundation/) in order. Once F
 /research
 ```
 
-**Step 5: Fill in your company context**
+**Step 6: Fill in your company context**
 
 Copy the files in [company-context/](company-context/) and define:
 
@@ -131,9 +151,38 @@ Copy the files in [company-context/](company-context/) and define:
 - how you sound
 - what proof you can actually claim
 
-**Step 6: Use the learning loop**
+**Step 7: Use the learning loop**
 
 Use [learning-loop/](learning-loop/) to turn real conversations, notes, and edits into approved updates to your business context. Raw notes stay out of canon until reviewed.
+
+**Step 8: Validate, commit, and push**
+
+```bash
+markster-os validate .
+markster-os commit -m "Update company context"
+markster-os push
+```
+
+**Step 9: Back up or share the workspace**
+
+```bash
+markster-os backup-workspace ~/.markster-os/workspaces/your-company
+markster-os export-workspace ~/.markster-os/workspaces/your-company
+```
+
+By default, `export-workspace` excludes `learning-loop/inbox/` so teams can share a cleaner copy without raw notes.
+
+## Very Simple Open-Source Workflow
+
+If you are using Markster OS for your company, do this:
+
+1. install the CLI
+2. create a workspace in a new Git repo
+3. run your AI tool from inside that workspace
+4. keep your real company context in `company-context/`
+5. keep raw notes in `learning-loop/inbox/`
+6. run `markster-os validate` before merging
+7. commit and push approved changes like a normal repo
 
 ---
 
@@ -167,9 +216,11 @@ See [skills/README.md](skills/README.md) for individual install instructions.
 
 The recommended flow is:
 
-1. create a Markster OS workspace with `markster-os init`
+1. create a Markster OS workspace with `markster-os init --git --path ...`
+2. attach it to the company GitHub repo with `markster-os attach-remote`
 2. install slash-command skills with `markster-os install-skills`
 3. run your AI tool from inside the workspace so the skills can resolve the local methodology, playbooks, company context, and learning loop files
+4. validate, commit, and push workspace changes through the company repo
 
 ---
 
@@ -199,6 +250,51 @@ It separates:
 - approved canon
 
 This lets you improve the system over time without letting an LLM rewrite the business context arbitrarily.
+
+---
+
+## Workspace Model
+
+The installed skills are lightweight entry points.
+
+The actual working system lives in a Markster OS workspace, usually under:
+
+- `~/.markster-os/workspaces/<slug>/`
+
+Run your AI tool from inside that workspace so the skills can read:
+
+- methodology
+- playbooks
+- company context
+- learning loop
+- validation rules
+
+The upstream repo is the distribution and template source.
+The workspace is the customer-owned operating system.
+
+---
+
+## Backup And Sharing
+
+Recommended default:
+
+- use `markster-os backup-workspace` for private backups
+- use `markster-os export-workspace` for a shareable copy
+
+`export-workspace` excludes `learning-loop/inbox/` by default so raw notes and transcripts do not get shared accidentally.
+
+For teams, the stronger default is to keep the workspace in its own Git repo and use backup/export as secondary safety nets.
+
+## Collaboration
+
+Recommended team model:
+
+- one workspace repo per company
+- employees collaborate in that repo
+- raw inbox material stays out of Git by default
+- approved canon changes are committed and pushed
+- use `markster-os sync` to fetch and pull --rebase before working
+- use `markster-os commit` and `markster-os push` if you want the CLI to handle the common Git steps
 
 ---
 

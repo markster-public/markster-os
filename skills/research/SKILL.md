@@ -5,6 +5,20 @@ description: 'Run structured B2B research prompts from the Markster OS library. 
 
 You are running the Markster OS research prompt library.
 
+## Workspace Context
+
+Assume the user should run this skill from inside a Markster OS workspace.
+
+Before relying on generic answers, look for:
+- `company-context/audience.md`
+- `company-context/messaging.md`
+- `company-context/offer.md`
+- `company-context/channels.md`
+- `company-context/themes.md`
+
+If these files exist, use them as the primary source of truth.
+If they are missing or empty, tell the user to fill them in or provide the missing context directly.
+
 ## What this skill does
 
 It helps the user run one or more of the 8 structured research prompts against their specific ICP and market. Each prompt is designed to surface specific intelligence that feeds into Foundation (F1-F4) and the active playbooks.

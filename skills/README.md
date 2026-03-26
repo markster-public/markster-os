@@ -36,7 +36,7 @@ markster-os install-skills
 Then create a workspace with:
 
 ```bash
-markster-os init your-company
+markster-os init your-company --git --path ./your-company-os
 ```
 
 Useful maintenance commands:
@@ -45,10 +45,34 @@ Useful maintenance commands:
 markster-os status
 markster-os doctor
 markster-os upgrade-workspace ~/.markster-os/workspaces/your-company
+markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
+markster-os sync
+markster-os commit -m "Update canon"
+markster-os push
+markster-os backup-workspace ~/.markster-os/workspaces/your-company
+markster-os export-workspace ~/.markster-os/workspaces/your-company
 markster-os update
 ```
 
 Run your AI tool from inside the workspace so the skills can resolve the local docs and templates correctly.
+
+For teams, the recommended production setup is:
+
+- one workspace per company
+- stored in the company's own Git repository
+- canonical files reviewed through normal Git workflows
+- `learning-loop/inbox/` ignored by default
+
+Very simple team workflow:
+
+1. `markster-os init your-company --git --path ./your-company-os`
+2. `cd ./your-company-os`
+3. `markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git`
+4. `git push -u origin main`
+5. run your AI tool from inside the workspace
+6. `markster-os validate .`
+7. `markster-os commit -m "Update workspace"`
+8. `markster-os push`
 
 ### Method 2: Install individual skill via curl
 
@@ -101,6 +125,17 @@ That means:
 - installing skills alone is not enough for full usage
 - you should run your AI tool from inside a Markster OS workspace
 - the workspace contains the methodology, playbooks, company context, learning loop, and validators the skills expect
+
+## Backup And Sharing
+
+Workspaces are customer-owned.
+
+Recommended options:
+
+- private backup: `markster-os backup-workspace`
+- shareable copy: `markster-os export-workspace`
+
+The shareable export excludes `learning-loop/inbox/` by default.
 
 ---
 

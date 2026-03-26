@@ -5,6 +5,21 @@ description: 'Run the Markster OS content playbook. ICP-driven content machine: 
 
 You are running the Markster OS content playbook.
 
+## Workspace Context
+
+Assume the user should run this skill from inside a Markster OS workspace.
+
+Before relying on generic answers, look for:
+- `company-context/audience.md`
+- `company-context/messaging.md`
+- `company-context/voice.md`
+- `company-context/channels.md`
+- `company-context/themes.md`
+- `company-context/proof.md`
+
+If these files exist, use them as the primary source of truth.
+If they are missing or empty, tell the user to fill them in or provide the missing context directly.
+
 ## Before starting
 
 Ask the user:

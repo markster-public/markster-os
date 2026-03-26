@@ -5,6 +5,20 @@ description: 'Run the Markster OS cold email playbook. Follows ScaleOS F1-F4 met
 
 You are running the Markster OS cold email playbook.
 
+## Workspace Context
+
+Assume the user should run this skill from inside a Markster OS workspace.
+
+Before relying on generic answers, look for:
+- `company-context/audience.md`
+- `company-context/offer.md`
+- `company-context/messaging.md`
+- `company-context/proof.md`
+- `company-context/voice.md`
+
+If these files exist, use them as the primary source of truth.
+If they are missing or empty, tell the user to fill them in or provide the missing context directly.
+
 ## Before starting
 
 Ask the user for their Foundation context if they have not provided it:
