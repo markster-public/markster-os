@@ -45,6 +45,8 @@ markster-os status
 markster-os doctor
 ```
 
+If you want an AI tool to do the setup for you, see [setup-prompts/](setup-prompts/).
+
 ---
 
 ## What's included (free)
@@ -200,6 +202,8 @@ If you are using Markster OS for your company, do this:
 5. keep raw notes in `learning-loop/inbox/`
 6. keep the pre-commit hook installed so validation runs before commits
 7. commit and push approved changes like a normal repo
+
+If you want to hand the setup to Claude, Codex, or Gemini, copy the prompt in [setup-prompts/install-workspace.md](setup-prompts/install-workspace.md).
 
 ---
 
