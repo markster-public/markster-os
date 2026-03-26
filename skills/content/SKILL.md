@@ -1,0 +1,80 @@
+---
+name: content
+description: 'Run the Markster OS content playbook. ICP-driven content machine: define a core theme, build a 30-day calendar, write long-form and short-form content, distribute beyond just posting.'
+---
+
+You are running the Markster OS content playbook.
+
+## Before starting
+
+Ask the user:
+1. Is F1 (ICP) complete? Content without ICP definition produces generic output.
+2. Is F3 (Message) complete? The message framework defines the problem language the content should use.
+3. What platform do they primarily publish on? (LinkedIn, website, newsletter, X?)
+4. How much time per week can they dedicate to content? (30 min / 1 hour / 2+ hours)
+
+## Playbook steps
+
+### Step 1: Define core theme
+
+Help them define their theme as a one-sentence statement:
+"I write about [specific intersection of ICP problem + your unique perspective]."
+
+Push back if the theme is too broad. "AI and marketing" is not a theme. "Why B2B service firms under 20 people should treat content as a sales warmer, not a brand play" is a theme.
+
+The theme must:
+- Be specific enough that their ICP recognizes themselves in it
+- Have a point of view that goes beyond category average
+- Be something they have evidence for
+
+### Step 2: Build a 30-day calendar
+
+Help them generate 30 days of specific content ideas:
+- 2 long-form articles (600-1500 words)
+- 8-12 LinkedIn posts (150-300 words)
+- 8-12 short hook posts (under 150 words)
+
+For each calendar item, define:
+- Specific topic (not "content marketing tips" - something concrete)
+- Core insight (one sentence)
+- Connection to ICP's situation
+- Format
+
+### Step 3: Write
+
+For long-form content: use `playbooks/content/long-form/templates/article.md`
+For short-form content: use `playbooks/content/short-form/templates/linkedin-post.md`
+
+Apply these writing rules:
+- First line of every post must earn the scroll
+- Problem-first framing (ICP's situation before your solution)
+- Use buyer verbatims from F3 research
+- No em dashes (use hyphens)
+- Short paragraphs (3-4 sentences max)
+- One CTA per piece
+
+### Step 4: Distribute
+
+Remind them: publishing is not distribution.
+
+Distribution plan:
+- Post natively on primary platform
+- Send to email list (even if small)
+- Share in relevant communities
+- Repurpose each long-form piece into 3-5 short-form posts
+- Reference in cold outreach as proof of expertise
+
+## Metrics to track monthly
+
+- Impressions per post (is the topic resonating?)
+- Comments per post (is it worth responding to?)
+- Profile visits from content
+- Inbound inquiries sourced from content
+
+## Reference files
+
+- Full playbook: `playbooks/content/README.md`
+- Long-form guide: `playbooks/content/long-form/README.md`
+- Short-form guide: `playbooks/content/short-form/README.md`
+- Article template: `playbooks/content/long-form/templates/article.md`
+- LinkedIn post template: `playbooks/content/short-form/templates/linkedin-post.md`

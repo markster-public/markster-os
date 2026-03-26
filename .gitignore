@@ -1,0 +1,42 @@
+# Environment and secrets
+.env
+.env.*
+*.key
+*.secret
+addon-keys.sh
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if any tooling is added)
+node_modules/
+package-lock.json
+
+# Python (if any tooling is added)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Local state and scratch
+scratch/
+_local/
+*.local.md
+
+# Generated outputs (do not commit campaign outputs)
+outputs/
+exports/
+*.csv
+*.xlsx
+
+# Install artifacts
+.install-state
