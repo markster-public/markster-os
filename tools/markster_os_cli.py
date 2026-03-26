@@ -17,7 +17,7 @@ DIST_ROOT = MARKSTER_HOME / "dist" / "current"
 WORKSPACES_ROOT = MARKSTER_HOME / "workspaces"
 CONFIG_PATH = MARKSTER_HOME / "config.json"
 LAUNCHER_PATH = Path.home() / "bin" / "markster-os"
-SKILLS = ["cold-email", "events", "content", "sales", "fundraising", "research"]
+CORE_SKILLS = ["markster-os", "cold-email", "events", "content", "sales", "fundraising", "research"]
 IGNORE_NAMES = {".git", "__pycache__", ".DS_Store"}
 WORKSPACE_GITIGNORE = """# Markster OS workspace
 learning-loop/inbox/*
@@ -91,6 +91,75 @@ def copy_tree(src: Path, dst: Path) -> None:
             shutil.copytree(item, target, dirs_exist_ok=True)
         else:
             shutil.copy2(item, target)
+
+
+def available_skill_names() -> list[str]:
+    ensure_distribution()
+    skills_root = DIST_ROOT / "skills"
+    names = []
+    for path in sorted(skills_root.iterdir()):
+        if path.is_dir() and (path / "SKILL.md").exists():
+            names.append(path.name)
+    return names
+
+
+def parse_skill_metadata(skill: str) -> dict[str, str]:
+    skill_path = DIST_ROOT / "skills" / skill / "SKILL.md"
+    metadata: dict[str, str] = {"name": skill, "description": ""}
+    if not skill_path.exists():
+        return metadata
+    text = skill_path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        return metadata
+    _, frontmatter, _ = text.split("---", 2)
+    multiline_key: str | None = None
+    multiline_lines: list[str] = []
+    for raw_line in frontmatter.splitlines():
+        if multiline_key is not None:
+            if raw_line.startswith("  "):
+                multiline_lines.append(raw_line.strip())
+                continue
+            metadata[multiline_key] = " ".join(multiline_lines).strip()
+            multiline_key = None
+            multiline_lines = []
+
+        line = raw_line.strip()
+        if not line or ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        value = value.strip()
+        if value in {">", "|"}:
+            multiline_key = key.strip()
+            multiline_lines = []
+            continue
+        metadata[key.strip()] = value.strip("'").strip('"')
+    if multiline_key is not None:
+        metadata[multiline_key] = " ".join(multiline_lines).strip()
+    return metadata
+
+
+def resolve_skills_to_install(args: argparse.Namespace) -> list[str]:
+    available = available_skill_names()
+    if args.skill:
+        requested = []
+        unknown = []
+        for skill in args.skill:
+            if skill in available:
+                requested.append(skill)
+            else:
+                unknown.append(skill)
+        if unknown:
+            die(
+                "unknown skills requested: "
+                + ", ".join(sorted(unknown))
+                + ". Run `markster-os list-skills` to see available skill names."
+            )
+        return requested
+    if args.all_skills:
+        return available
+    if args.extended:
+        return [skill for skill in available if skill not in CORE_SKILLS]
+    return [skill for skill in CORE_SKILLS if skill in available]
 
 
 def should_skip_export_path(path: Path, include_inbox: bool) -> bool:
@@ -400,6 +469,28 @@ def cmd_validate(args: argparse.Namespace) -> int:
     return result.returncode
 
 
+def cmd_list_skills(args: argparse.Namespace) -> int:
+    skills = available_skill_names()
+    print("Markster OS Skills")
+    print(f"Total available: {len(skills)}")
+    print(f"Core installed by default: {len([s for s in skills if s in CORE_SKILLS])}")
+    print("")
+    for skill in skills:
+        metadata = parse_skill_metadata(skill)
+        label = "core" if skill in CORE_SKILLS else "extended"
+        description = metadata.get("description", "").replace("\n", " ").strip()
+        print(f"- {skill} ({label})")
+        if description:
+            print(f"  {description}")
+    print("")
+    print("Install examples:")
+    print("  markster-os install-skills")
+    print("  markster-os install-skills --skill website-copywriter --skill vc-review")
+    print("  markster-os install-skills --extended")
+    print("  markster-os install-skills --all-skills --all")
+    return 0
+
+
 def install_skill_to_dir(skill: str, target_root: Path) -> None:
     src = DIST_ROOT / "skills" / skill / "SKILL.md"
     if not src.exists():
@@ -412,6 +503,7 @@ def install_skill_to_dir(skill: str, target_root: Path) -> None:
 
 def cmd_install_skills(args: argparse.Namespace) -> int:
     ensure_distribution()
+    selected_skills = resolve_skills_to_install(args)
     homes = []
     if args.claude or args.all:
         homes.append(Path.home() / ".claude" / "skills")
@@ -421,12 +513,14 @@ def cmd_install_skills(args: argparse.Namespace) -> int:
         homes.append(Path.home() / ".gemini" / "skills")
     if not homes:
         homes = [Path.home() / ".claude" / "skills", Path.home() / ".codex" / "skills"]
+    homes = list(dict.fromkeys(homes))
 
     for root in homes:
         root.mkdir(parents=True, exist_ok=True)
-        for skill in SKILLS:
+        for skill in selected_skills:
             install_skill_to_dir(skill, root)
 
+    print(f"Installed {len(selected_skills)} skill(s): {', '.join(selected_skills)}")
     print("Run your AI from inside a Markster OS workspace so the skills can resolve repo-relative docs.")
     return 0
 
@@ -743,11 +837,17 @@ def build_parser() -> argparse.ArgumentParser:
     validate_parser.add_argument("path", nargs="?", help="Workspace path; defaults to current directory")
     validate_parser.set_defaults(func=cmd_validate)
 
+    list_skills_parser = sub.add_parser("list-skills", help="List public Markster OS skills available in the distribution")
+    list_skills_parser.set_defaults(func=cmd_list_skills)
+
     install_skills_parser = sub.add_parser("install-skills", help="Install Markster OS slash-command skills")
     install_skills_parser.add_argument("--claude", action="store_true", help="Install for Claude Code")
     install_skills_parser.add_argument("--codex", action="store_true", help="Install for Codex")
     install_skills_parser.add_argument("--gemini", action="store_true", help="Install for Gemini CLI")
     install_skills_parser.add_argument("--all", action="store_true", help="Install for all supported environments")
+    install_skills_parser.add_argument("--skill", action="append", help="Install a specific skill by name; repeat for multiple skills")
+    install_skills_parser.add_argument("--extended", action="store_true", help="Install all public skills except the default core set")
+    install_skills_parser.add_argument("--all-skills", action="store_true", help="Install every public skill in the distribution")
     install_skills_parser.set_defaults(func=cmd_install_skills)
 
     update_parser = sub.add_parser("update", help="Update the managed Markster OS distribution")

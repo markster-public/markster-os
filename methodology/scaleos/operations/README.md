@@ -95,16 +95,16 @@ operations/
 └── coordination/                          - Multi-session protocol
 ```
 
-### The Skill: /scaleos-block-writer
+### The Tool: Block Writer
 
-A Claude Code skill with 4 modes:
+A workspace tool with 4 modes:
 
 | Mode | Command | What It Does |
 |------|---------|-------------|
-| write | `/scaleos-block-writer write G2.3` | Generate one block from description, validate, present |
-| validate | `/scaleos-block-writer validate G2` | Check all blocks in a brick file |
-| assemble | `/scaleos-block-writer assemble G1` | Combine approved blocks into a brick file |
-| status | `/scaleos-block-writer status` | Progress dashboard |
+| write | `block-writer write G2.3` | Generate one block from description, validate, present |
+| validate | `block-writer validate G2` | Check all blocks in a brick file |
+| assemble | `block-writer assemble G1` | Combine approved blocks into a brick file |
+| status | `block-writer status` | Progress dashboard |
 
 ### Reference Files
 
@@ -132,7 +132,7 @@ A Claude Code skill with 4 modes:
 
 ### Session Resilience
 
-All state in files. New session runs `/scaleos-block-writer status` to see progress and continue.
+All state in files. New session runs `block-writer status` to see progress and continue.
 
 ### Current Status
 
@@ -143,12 +143,12 @@ All state in files. New session runs `/scaleos-block-writer status` to see progr
   - `schema.md` - 8 fields, block template, FAIL/WARN validation rules
   - `dictionary.md` - canonical entries across 6 categories (Systems, Agents, Skills, Repos, Roles, Platforms)
   - `registry.md` - 84 blocks mapped across 13 bricks with upstream/downstream wiring, 0 orphans
-- Skill: `/scaleos-block-writer` - live with 4 modes (write, validate, assemble, status)
+- Tool: block writer - designed with 4 modes (write, validate, assemble, status)
 - Test block: G2.7 (Blog Publishing) - generated, validated, approved
 - Blocks approved: 1 of 84
 - Bricks assembled: 0 of 13
 
-**Next:** Describe blocks starting with G2 (current constraint). Run `/scaleos-block-writer write G2.1` to begin.
+**Next:** Describe blocks starting with G2 (current constraint). Run `block-writer write G2.1` to begin.
 
 ---
 
@@ -232,10 +232,10 @@ operations/
 ### Block Writer Workflow
 
 All brick files will be regenerated through the block writer system:
-1. Describe a block -> `/scaleos-block-writer write G2.1`
+1. Describe a block -> `block-writer write G2.1`
 2. System generates + validates -> review -> approve/revise/reject
 3. Approved blocks saved to `.meta/blocks/`
-4. When all blocks in a brick are approved -> `/scaleos-block-writer assemble G2`
+4. When all blocks in a brick are approved -> `block-writer assemble G2`
 5. Assembled brick file replaces draft file
 
 ---

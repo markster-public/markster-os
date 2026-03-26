@@ -132,7 +132,7 @@
 - Auto-classify replies (positive/negative/question/OOO)
 - Positive replies trigger alert + draft response
 - OOO auto-pauses sequence and reschedules
-- Negative auto-marks and updates contact database
+- Negative auto-marks and updates the prospect database
 
 ---
 

@@ -1,7 +1,7 @@
 # Master Block Registry
 
 > Complete inventory of all ScaleOS process blocks with metadata and wiring.
-> The `/scaleos-block-writer` skill reads this file to validate cross-references.
+> The block writer tool reads this file to validate cross-references.
 > The Founder must approve this registry before block generation begins.
 
 ---
@@ -77,22 +77,22 @@
 
 | ID | Name | Trigger | Freq | Owner | Executor | Upstream | Downstream |
 |----|------|---------|------|-------|----------|----------|------------|
-| G1.1 | ICP List Building | Campaign launch decision | Per-event | Founder | Founder via /contactdb + Contact Database | F1.1 | G1.2, G3.1 |
+| G1.1 | ICP List Building | Campaign launch decision | Per-event | Founder | Founder via Prospect List Builder + Prospect Database | F1.1 | G1.2, G3.1 |
 | G1.2 | Data Enrichment Pipeline | New contacts added to list | Per-event | Founder | Enrichment Engine - fully automated | G1.1, G1.8 | G1.3 |
 | G1.3 | Lead Scoring | Enrichment complete | Per-event | Founder | manual -> target: Qualifier | G1.2 | G1.6, G3.2 |
 | G1.4 | Intent Signal Monitoring | Continuous scan | Continuous | Founder | manual -> target: Event Scout | - | G1.1, G3.1 |
 | G1.5 | Database Hygiene | Monthly cadence | Monthly | Founder | Deduplication Engine (semi-automated) | - | G1.1 |
 | G1.6 | Prospect Research | Prospect enrolled in campaign | Per-event | Founder | Research Squad - fully automated | G1.3, G3.2 | G3.3 |
-| G1.7 | ICP Segment Performance Review | Monday (weekly) | Weekly | Founder | /weekly-pulse + manual | G3.8, O3.2 | G1.1, F1.1 |
-| G1.8 | External Source Import | Per-campaign | Per-event | Founder | /enrich-apollo + /leadsgorilla | - | G1.2 |
+| G1.7 | ICP Segment Performance Review | Monday (weekly) | Weekly | Founder | Weekly Review Tool + manual | G3.8, O3.2 | G1.1, F1.1 |
+| G1.8 | External Source Import | Per-campaign | Per-event | Founder | CSV Importer + Local Lead Importer | - | G1.2 |
 
 ### Growth - G2: Warm
 
 | ID | Name | Trigger | Freq | Owner | Executor | Upstream | Downstream |
 |----|------|---------|------|-------|----------|----------|------------|
-| G2.1 | Weekly Content Calendar Generation | Friday afternoon | Weekly | Founder | /content-calendar -> target: Content Planner API | F1.3, F1.6 | G2.2 |
+| G2.1 | Weekly Content Calendar Generation | Friday afternoon | Weekly | Founder | Content Planner -> target: Content Planner API | F1.3, F1.6 | G2.2 |
 | G2.2 | Social Content Brief Creation | Calendar approved | Per-event | Founder | manual -> target: Content Planner API | G2.1 | G2.3 |
-| G2.3 | Social Content Generation | Brief ready | Per-event | Founder | /content -> target: Content Gen API | G2.2 | G2.5 |
+| G2.3 | Social Content Generation | Brief ready | Per-event | Founder | Content Generator -> target: Content Gen API | G2.2 | G2.5 |
 | G2.4 | Blog Content Generation | SEO topic selected | Per-event | Founder | Blog Publisher (semi-automated) | G2.9, G2.1 | G2.5 |
 | G2.5 | Content QC & Approval | Content generated | Per-event | Founder | manual -> target: Content Approval UI | G2.3, G2.4 | G2.6, G2.7 |
 | G2.6 | Social Publishing | Content approved | Per-event | Founder | manual -> target: Social Publisher API | G2.5 | G2.8, G2.12 |
@@ -107,7 +107,7 @@
 
 | ID | Name | Trigger | Freq | Owner | Executor | Upstream | Downstream |
 |----|------|---------|------|-------|----------|----------|------------|
-| G3.1 | Campaign Launch | Business decision to target segment | Per-event | Founder | Founder via /campaign-launcher | F1.4, G1.1, G1.4 | G3.2 |
+| G3.1 | Campaign Launch | Business decision to target segment | Per-event | Founder | Founder via Campaign Launcher | F1.4, G1.1, G1.4 | G3.2 |
 | G3.2 | Prospect Enrollment | Campaign created and activated | Continuous | Founder | Campaign Enrollment Worker - fully automated | G3.1, G1.3 | G1.6, G3.3 |
 | G3.3 | Pitch Strategy Generation | Research complete for prospect | Per-event | Founder | Pitch Strategist (semi-automated) | G1.6, G3.2 | G3.4 |
 | G3.4 | Pitch Review & Approval | Pitch generated and queued | Daily | Founder | Founder via Review UI | G3.3 | G3.5 |
@@ -127,7 +127,7 @@
 | O1.3 | Repo Health Check | Weekly cadence | Weekly | CTO | health check tool (semi-automated) | O1.1 | O2.5 |
 | O1.4 | Contracts Sync | Contract file edited | Per-event | CTO | deploy tool - fully automated | O1.1 | O1.3 |
 | O1.5 | Capability Registry Update | New project or agent added | Per-event | CTO | manual -> target: capabilities automation | F3.3, O2.1 | O1.3 |
-| O1.6 | State File Maintenance | Session end | Per-event | Founder | /prepexit (semi-automated) | F3.5 | - |
+| O1.6 | State File Maintenance | Session end | Per-event | Founder | Session Wrap-Up Tool (semi-automated) | F3.5 | - |
 | O1.7 | Knowledge Base Curation | Monthly cadence | Monthly | Founder | knowledge-base channel monitoring (semi-automated) | - | G2.10 |
 
 ### Operations - O2: Automate
@@ -146,7 +146,7 @@
 | ID | Name | Trigger | Freq | Owner | Executor | Upstream | Downstream |
 |----|------|---------|------|-------|----------|----------|------------|
 | O3.1 | Weekly Scorecard Review | Monday | Weekly | Founder | manual -> target: Content Platform | - | O3.2 |
-| O3.2 | Pipeline Value Tracking | Daily cadence | Daily | Founder | CRM + /weekly-pulse (semi-automated) | G3.7, G3.8 | F4.5, O3.1 |
+| O3.2 | Pipeline Value Tracking | Daily cadence | Daily | Founder | CRM + Weekly Review Tool (semi-automated) | G3.7, G3.8 | F4.5, O3.1 |
 | O3.3 | Content Attribution | Weekly cadence | Weekly | Founder | manual -> target: Content Analytics | G2.12 | O3.1 |
 | O3.4 | Campaign ROI Calculation | Campaign end or monthly | Monthly | Founder | manual | G3.8 | O3.1, G3.1 |
 | O3.5 | MRR Tracking | Month-end | Monthly | Founder | finance-tracker + CRM (semi-automated) | D1.3 | F4.1, O3.1 |
@@ -171,7 +171,7 @@
 |----|------|---------|------|-------|----------|----------|------------|
 | D2.1 | Results Documentation | Month-end per client | Monthly | Founder | manual -> target: agent-drafted | D1.3, D1.6 | D2.2 |
 | D2.2 | ROI Calculation | Quarterly per client | Monthly | Founder | manual | D2.1 | F2.1, F2.2, F4.2 |
-| D2.3 | Case Study Creation | Significant result achieved | Per-event | Founder | manual -> target: /case-study-builder | D2.1, D2.2 | D2.5, G2.4 |
+| D2.3 | Case Study Creation | Significant result achieved | Per-event | Founder | manual -> target: Case Study Builder | D2.1, D2.2 | D2.5, G2.4 |
 | D2.4 | Testimonial Collection | 90-day milestone | Per-event | Founder | manual | D2.1 | D2.5, G2.3 |
 | D2.5 | Proof Asset Distribution | Case study or testimonial complete | Per-event | Founder | manual -> target: Content Engine | D2.3, D2.4 | G2.1, G2.3 |
 

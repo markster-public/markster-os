@@ -13,6 +13,8 @@ tags: [scaleos, documentation]
 
 This directory contains design documents and implementation plans for the ScaleOS Operational Blueprint system.
 
+These are methodology design artifacts, not shipped product commands. If a plan mentions a future tool or automation, treat it as a conceptual component unless it also exists elsewhere in this public repo.
+
 ---
 
 ## Contents

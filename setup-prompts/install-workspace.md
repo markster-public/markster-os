@@ -14,6 +14,11 @@ Requirements:
 - Move into that workspace.
 - Install Markster OS skills if useful with:
   markster-os install-skills
+- If I need an extra public skill later, list and install it with:
+  markster-os list-skills
+  markster-os install-skills --skill <skill-name>
+- Check the workspace readiness with:
+  markster-os start
 - Validate the workspace with:
   markster-os validate .
 

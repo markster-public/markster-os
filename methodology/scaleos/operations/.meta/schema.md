@@ -1,7 +1,7 @@
 # Block Schema
 
 > Every process block in the ScaleOS Operational Blueprint MUST follow this exact structure.
-> The `/scaleos-block-writer` skill enforces these rules automatically.
+> The block writer tool enforces these rules automatically.
 
 ---
 
@@ -67,7 +67,7 @@ Copy this template exactly when generating a new block:
 
 ---
 
-## Validation Rules (for /scaleos-block-writer skill)
+## Validation Rules (for block writer tool)
 
 ### FAIL - Must fix before review
 

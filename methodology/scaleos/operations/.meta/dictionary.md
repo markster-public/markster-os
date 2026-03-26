@@ -2,7 +2,7 @@
 
 > Every system, agent, skill, repo, role, and platform name in a process block MUST match an entry here.
 > If a term is not in this dictionary, it cannot appear in a block. Add it here first.
-> The `/scaleos-block-writer` skill validates against this file automatically.
+> The block writer tool validates against this file automatically.
 
 ---
 
@@ -12,7 +12,7 @@ External tools, databases, and infrastructure services.
 
 | Canonical Name | Also Known As (DO NOT USE) | What It Is |
 |---|---|---|
-| **Contact Database** | contact DB, CDB | Proprietary contact database with enrichment, deduplication, and list management |
+| **Prospect Database** | contact DB, CDB | Prospect and company database with enrichment, deduplication, and list management |
 | **CRM** | CRM platform | Customer relationship management system for contacts, companies, deals, email campaigns |
 | **Email Sequencer** | email outreach platform | Email outreach platform for sequence execution and campaign management |
 | **Deployment Platform** | backend deployment | Infrastructure-as-code deployment platform for hosted services |
@@ -70,25 +70,25 @@ AI agents, squads, and automated workers.
 | **Content Approval UI** | approval interface | Planned web UI for content QC and approval with AI pre-check |
 | **Content Analytics** | analytics dashboard | Planned analytics dashboard for content performance tracking |
 
-## 3. Skills
+## 3. Tools
 
-Claude Code skills (invoked with `/` prefix).
+Workspace tools and reusable automations.
 
 | Canonical Name | Also Known As (DO NOT USE) | What It Is |
 |---|---|---|
-| **/content** | social media generator | Generates social content (LinkedIn, Facebook, X) from briefs in founder's voice |
-| **/content-calendar** | calendar generator | Generates weekly content calendars with topic seeds from channel profiles |
-| **/contactdb** | contact search | Searches, imports, and enriches contacts in contact database |
-| **/campaign-launcher** | campaign creator | Creates outreach campaigns from contact lists |
-| **/enrich-apollo** | Apollo importer | Imports Apollo CSV exports and triggers enrichment |
-| **/leadsgorilla** | local business search | Local business prospecting integration |
-| **/weekly-pulse** | weekly metrics | Generates weekly performance metrics across campaigns and pipeline |
-| **/clickup** | task management | Accesses task manager for task operations |
-| **/prepexit** | session cleanup | Logs session state and ensures standards before ending session |
-| **/prepstart** | session start | Loads context and checks active plans at session start |
-| **/hubspot-content** | blog publishing | Publishes blog content to CMS |
-| **/hubspot-sales** | deal management | Creates contacts, deals, logs activities in CRM |
-| **/scaleos-block-writer** | block writer | Generates, validates, and assembles ScaleOS process blocks (this system) |
+| **Content Generator** | social media generator | Generates social content (LinkedIn, Facebook, X) from briefs in founder's voice |
+| **Content Planner** | calendar generator | Generates weekly content calendars with topic seeds from channel profiles |
+| **Prospect List Builder** | contact search | Searches, imports, and enriches contacts in the prospect database |
+| **Campaign Launcher** | campaign creator | Creates outreach campaigns from contact lists |
+| **CSV Importer** | Apollo importer | Imports CSV exports and triggers enrichment |
+| **Local Lead Importer** | local business search | Local business prospecting integration |
+| **Weekly Review Tool** | weekly metrics | Generates weekly performance metrics across campaigns and pipeline |
+| **Task Router** | task management | Accesses the task manager for task operations |
+| **Session Wrap-Up Tool** | session cleanup | Logs session state and ensures standards before ending session |
+| **Session Start Tool** | session start | Loads context and checks active plans at session start |
+| **CMS Publisher** | blog publishing | Publishes blog content to a CMS |
+| **CRM Assistant** | deal management | Creates contacts, deals, and logs activities in the CRM |
+| **Block Writer Tool** | block writer | Generates, validates, and assembles ScaleOS process blocks (this system) |
 
 ## 4. Repos
 
@@ -97,7 +97,7 @@ Repository types and their purposes.
 | Canonical Name | Also Known As (DO NOT USE) | What It Is |
 |---|---|---|
 | **content-production** | social content execution | Execution layer - social media content generation |
-| **autoblog** | blog execution | Execution layer - blog content generation and multi-platform publishing |
+| **publishing-engine** | blog execution | Execution layer - blog content generation and multi-platform publishing |
 | **outreach-agent** | growth execution, CampaignOS | Execution layer - outreach; SDR, Engage, Research squads |
 | **task-manager** | coordinator backend | Prioritization layer - Chief of Staff queue, approval workflow, dispatch |
 | **knowledge-base** | business KB | Research library; sourced videos and claims |

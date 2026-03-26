@@ -6,16 +6,30 @@ When you type `/cold-email` in Claude Code, Codex, or Gemini, the skill loads th
 
 ---
 
-## Available skills
+## Default-installed skills
 
 | Skill | Command | Activates |
 |-------|---------|-----------|
+| Markster OS | `/markster-os` | Workspace guide, router, and CLI-aware operator |
 | Cold Email | `/cold-email` | Cold email playbook (research -> segment -> write -> send -> iterate) |
 | Events | `/events` | Events playbook (pre/during/post system) |
 | Content | `/content` | Content machine (theme -> calendar -> publish -> distribute) |
 | Sales | `/sales` | Sales playbook (discovery -> proposal -> close) |
 | Fundraising | `/fundraising` | Fundraising playbook (pipeline -> pitch -> follow-up) |
 | Research | `/research` | Research prompt library (8 structured prompts) |
+
+These 7 are installed by default when you run `markster-os install-skills`.
+
+## Extended public skill library
+
+The repo also contains additional public skills for specialized work. Current inventory:
+
+- strategy and advisory: `business-advisor`, `marketing-strategist`, `sales-strategist`, `product-owner`, `startup-coach`
+- writing and messaging: `blog-post-writer`, `case-study-builder`, `cold-email-copywriter`, `direct-response`, `linkedin-post`, `partnership-pitch`, `vc-comms`, `website-copywriter`
+- prep, review, and execution support: `debrief`, `event-prep`, `event-strategist`, `follow-up`, `funnel-builder`, `prospect-brief`, `vc-review`, `youtube-watcher`
+- style references and voice lenses: `hormozi`, `karpathy`
+
+That brings the current public repo inventory to 30 skill directories in total. The CLI installs the 7 default skills because they cover the main operating workflows plus workspace routing.
 
 ---
 
@@ -31,6 +45,9 @@ Then install skills with:
 
 ```bash
 markster-os install-skills
+markster-os list-skills
+markster-os install-skills --skill website-copywriter --skill vc-review
+markster-os install-skills --extended
 ```
 
 Then create a workspace with:
@@ -43,6 +60,7 @@ Useful maintenance commands:
 
 ```bash
 markster-os status
+markster-os start
 markster-os doctor
 markster-os upgrade-workspace ~/.markster-os/workspaces/your-company
 markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
@@ -71,10 +89,11 @@ Very simple team workflow:
 3. `markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git`
 4. `git push -u origin main`
 5. `markster-os install-hooks`
-6. run your AI tool from inside the workspace
-7. `markster-os validate .`
-8. `markster-os commit -m "Update workspace"`
-9. `markster-os push`
+6. `markster-os start`
+7. run your AI tool from inside the workspace
+8. `markster-os validate .`
+9. `markster-os commit -m "Update workspace"`
+10. `markster-os push`
 
 ### Method 2: Install individual skill via curl
 

@@ -18,7 +18,7 @@
 
 **Steps:**
 1. Define segment from ICP doc (strategic decision)
-2. Search existing contact database for matches
+2. Search existing prospect database for matches
 3. If gap, source from prospecting tools with ICP filters
 4. Import and enrich new contacts
 5. Create campaign list
@@ -42,7 +42,7 @@
 3. Email verification
 4. Company data enrichment
 5. Social profile discovery when triggered
-6. Results stored in contact database
+6. Results stored in prospect database
 
 ---
 
@@ -96,7 +96,7 @@
 |-------|-------|
 | **Trigger** | Monthly cadence + pre-campaign check |
 | **Frequency** | Monthly |
-| **Input** | Full contact database |
+| **Input** | Full prospect database |
 | **Output** | Clean database: duplicates merged, bounced emails removed, stale contacts flagged |
 | **Test** | Bounce rate below 3% on next campaign; zero duplicate sends |
 

@@ -85,13 +85,13 @@ END:     Meeting booked OR prospect exhausted
               sequence_timing: int[] (e.g. [1,3,7,14]),
               hook_type: enum(timeline | problem | mutual | trigger)
             }
-    Tool:   /campaign-launcher, /campaign-builder skills
+    Tool:   campaign launcher, campaign builder
 
 --- LANE: Automation (Contact Database) ---
 
 [2] Build prospect list                                <- G1.1
     Input:  Campaign brief -> ICP criteria
-            Existing contact database records
+            Existing prospect database records
             External sources if needed
     Output: Raw prospect list [{
               name: string,
@@ -99,9 +99,9 @@ END:     Meeting booked OR prospect exhausted
               title: string,
               email: string?,
               linkedin_url: string?,
-              source: enum(internal | apollo | leadsgorilla)
+              source: enum(internal | csv_import | local_data_source)
             }]
-    Tool:   /contactdb skill, /enrich-apollo, /leadsgorilla
+    Tool:   prospect list builder, CSV import, local lead importer
 
     GATEWAY: List size >= cohort_size?
       NO  -> expand criteria or add external sources -> loop [2]
@@ -354,7 +354,7 @@ END:     Pre-event brief delivered + post-event contacts captured
               context: string (how we met),
               follow_up_action: string
             }]
-    Tool:   Manual -> contact database
+    Tool:   Manual -> prospect database
 
     GATEWAY: Follow-up type?
       WARM LEAD (showed interest) -> CALL P1 (Outbound Campaign, warm variant)
@@ -473,7 +473,7 @@ END:     Content published + performance tracked + corrections extracted
               published_at: datetime,
               url: string
             }
-    Tool:   autoblog (automated publishing)
+    Tool:   publishing engine (automated publishing)
 
 --- LANE: Automation ---
 
@@ -538,10 +538,10 @@ END:     Lead enrolled in campaign OR parked in nurture
     Output: Lead record
     Tool:   Manual identification (currently)
 
-[2] Add to contact database
+[2] Add to prospect database
     Input:  Lead record
     Output: Contact record {contact_id: int, status: "new"}
-    Tool:   /contactdb skill
+    Tool:   prospect list builder
 
 --- LANE: Automation ---
 
@@ -763,7 +763,7 @@ END:     Client pipelines active, ready for monthly delivery
 [3b] Outreach Engine Setup
     Input:  Client config (their ICP, messaging, exclusions)
     Steps:
-      1. Build initial prospect list via contact database (semi-auto)
+      1. Build initial prospect list via prospect database (semi-auto)
       2. Configure campaign parameters (manual)
       3. Set up email sequencer account/sequences (manual)
       4. Create approval workflow
@@ -1188,7 +1188,7 @@ OUTPUT:  Scored contact with tier
     Checks:
       - Already active in CRM?
       - Competitor? (exclusion list)
-      - Previously rejected/unsubscribed? (contact database history)
+      - Previously rejected or unsubscribed? (prospect database history)
       - On do-not-contact list?
       - Already in active campaign?
     Output: {
@@ -1629,7 +1629,7 @@ END:     All systems healthy OR issues escalated
                        state_file_fresh, uncommitted_changes}],
               issues: string[]
             }
-    Tool:   /ivansys-health skill
+    Tool:   repository health check
 
 END: Systems healthy, issues resolved
 ```
@@ -1653,7 +1653,7 @@ END:     Business pulse known, priorities set for week
               client_health_scores: {client: score}[],
               north_star_per_brick: {brick: metric_value}[]
             }
-    Tool:   Manual + /weekly-pulse skill
+    Tool:   Manual + weekly review tool
 
 [2] Pipeline review                                    <- O3.2
     Input:  CRM deals + campaign data

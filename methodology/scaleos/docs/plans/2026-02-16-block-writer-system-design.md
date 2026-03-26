@@ -44,7 +44,7 @@ operations/
 └── coordination/
 ```
 
-Skill lives at: `skills/scaleos-block-writer/SKILL.md`
+The block writer tool should live in the project workspace and be version-controlled with the methodology.
 
 ---
 
@@ -81,10 +81,10 @@ Defines the exact structure every block MUST follow.
 Every system, agent, skill, role, and repo has ONE canonical name.
 
 **Categories:**
-- Systems (contact database, email sequencer, CRM, etc.)
+- Systems (prospect database, email sequencer, CRM, etc.)
 - Agents (Research Squad, Pitch Strategist, Email Executor, etc.)
-- Skills (/content-calendar, /content, /contactdb, etc.)
-- Repos (content-production, autoblog, outreach-agent, etc.)
+- Tools (content planner, content generator, prospect list builder, etc.)
+- Repos (content-production, publishing engine, outreach-agent, etc.)
 - Roles (Founder, CTO)
 - Platforms (LinkedIn, Facebook, X, HubSpot CMS, WordPress, Medium, Substack)
 
@@ -100,7 +100,7 @@ All ~84 blocks with metadata. Columns:
 
 ---
 
-## Skill Design: /scaleos-block-writer
+## Block Writer Tool Design
 
 ### Mode 1: `write <block-id>`
 
@@ -153,7 +153,7 @@ Progress dashboard:
 ### Phase 0: Build the System (one-time)
 
 1. Create reference files (schema, dictionary, registry)
-2. Build the skill
+2. Build the tool
 3. Draft registry with all ~84 blocks
 4. **Gate:** Founder approves registry
 
@@ -167,7 +167,7 @@ Progress dashboard:
 ### Phase 2: Block Generation + QA (per block)
 
 ```
-Describe -> skill generates -> skill validates -> review -> approve/revise
+Describe -> tool generates -> tool validates -> review -> approve/revise
 ```
 
 - Approved blocks saved to `.meta/blocks/`
@@ -177,7 +177,7 @@ Describe -> skill generates -> skill validates -> review -> approve/revise
 ### Phase 3: Assembly (per brick)
 
 ```
-All brick blocks approved -> skill assembles -> full validation -> review -> approve
+All brick blocks approved -> tool assembles -> full validation -> review -> approve
 ```
 
 - **Gate:** Each assembled brick file approved
@@ -193,7 +193,7 @@ All brick blocks approved -> skill assembles -> full validation -> review -> app
 
 ## QA Layer - Three Levels
 
-### Layer 1: Automated Validation (skill runs this)
+### Layer 1: Automated Validation (tool runs this)
 
 | Check | Catches | Severity |
 |-------|---------|----------|
@@ -240,9 +240,9 @@ Errors always flow backward to individual blocks. Never patch assembled brick fi
 | Dictionary (canonical terms) | |
 | Schema (template) | |
 | Approved blocks (.meta/blocks/) | |
-| Skill instructions | |
+| Tool instructions | |
 
-New session: `/scaleos-block-writer status` -> sees state -> picks up next block.
+New session: `block-writer status` -> sees state -> picks up next block.
 
 ---
 
@@ -251,7 +251,7 @@ New session: `/scaleos-block-writer status` -> sees state -> picks up next block
 1. `operations/.meta/schema.md` - block template + validation rules
 2. `operations/.meta/dictionary.md` - canonical terminology
 3. `operations/.meta/registry.md` - all ~84 blocks with metadata + wiring
-4. `skills/scaleos-block-writer/SKILL.md` - the skill
+4. workspace block writer instructions - the tool
 5. `operations/.meta/blocks/` directory - staging for approved blocks
 
 ## Dependencies

@@ -30,6 +30,7 @@ Core commands:
 
 ```bash
 markster-os init <slug>
+markster-os list-skills
 markster-os install-skills
 markster-os validate [path]
 markster-os update
@@ -42,6 +43,7 @@ markster-os push
 markster-os backup-workspace [path]
 markster-os export-workspace [path]
 markster-os status
+markster-os start
 markster-os doctor
 ```
 
@@ -56,8 +58,9 @@ If you want an AI tool to do the setup for you, see [setup-prompts/](setup-promp
 | **Methodology** | ScaleOS F1-F4 Foundation + GOD Engine (9 execution bricks) |
 | **Assessment** | Scored readiness scorecard - tells you which playbook to run first |
 | **Playbooks** | Cold email, events, content, sales, fundraising, technical review |
-| **Skills** | 6 skills that activate each playbook in your AI environment |
-| **Research prompts** | 8 structured prompts for competitive intel, buyer JTBD, signals, objections |
+| **Core installed skills** | 7 skills installed by default by the CLI: `markster-os` plus the 6 core playbook skills |
+| **Extended skill library** | 30 public skill files in the repo, including specialist advisors, copywriters, prep tools, and review workflows |
+| **Research prompts** | 8 canonical research prompts used by the `/research` skill, plus deeper prompt variants in the repo |
 | **Templates** | Real starting points for sequences, proposals, articles, LinkedIn posts |
 | **Company context pack** | Canonical identity, audience, offer, messaging, voice, proof, channels, and themes |
 | **Learning loop** | Human-approved system for turning conversations into approved business knowledge |
@@ -222,9 +225,13 @@ If you want to hand the setup to Claude, Codex, or Gemini, copy the prompt in [s
 
 ## Skills
 
-Each skill activates a playbook in your AI environment with a single command.
+Markster OS currently ships two layers of skills:
+
+- 7 default-installed skills: `markster-os` plus the 6 core playbook skills
+- an extended public skill library in `skills/` for more specialized writing, strategy, prep, and review tasks
 
 ```
+/markster-os     -> workspace guide, router, and CLI-aware operator
 /cold-email     -> cold email playbook
 /events         -> events playbook
 /content        -> content playbook
@@ -233,15 +240,31 @@ Each skill activates a playbook in your AI environment with a single command.
 /research       -> research prompt library
 ```
 
+If you need a specific public skill that is not installed yet:
+
+```bash
+markster-os list-skills
+markster-os install-skills --skill website-copywriter
+```
+
+The repo also includes specialist skills such as:
+
+- strategy: `business-advisor`, `marketing-strategist`, `sales-strategist`, `product-owner`, `startup-coach`
+- writing: `website-copywriter`, `blog-post-writer`, `cold-email-copywriter`, `direct-response`, `linkedin-post`, `case-study-builder`, `partnership-pitch`, `vc-comms`
+- prep and review: `debrief`, `event-prep`, `event-strategist`, `follow-up`, `funnel-builder`, `prospect-brief`, `vc-review`, `youtube-watcher`
+- style references: `hormozi`, `karpathy`
+
 See [skills/README.md](skills/README.md) for individual install instructions.
 
 The recommended flow is:
 
 1. create a Markster OS workspace with `markster-os init --git --path ...`
 2. attach it to the company GitHub repo with `markster-os attach-remote`
-2. install slash-command skills with `markster-os install-skills`
-3. run your AI tool from inside the workspace so the skills can resolve the local methodology, playbooks, company context, and learning loop files
-4. validate, commit, and push workspace changes through the company repo
+3. install slash-command skills with `markster-os install-skills`
+4. install any extra public skills you need with `markster-os install-skills --skill <name>`
+5. run `markster-os start` inside the workspace to see the readiness checklist
+6. run your AI tool from inside the workspace so the skills can resolve the local methodology, playbooks, company context, and learning loop files
+7. validate, commit, and push workspace changes through the company repo
 
 ---
 

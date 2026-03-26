@@ -11,11 +11,11 @@ tags: [scaleos, operations, block-writer, implementation]
 
 # Block Writer System Implementation Plan
 
-**Goal:** Build the block writer system (reference files + skill) so blocks can be described and generated.
+**Goal:** Build the block writer system (reference files + tool) so blocks can be described and generated.
 
-**Architecture:** Three reference files (.meta/schema.md, dictionary.md, registry.md) provide the data. One Claude Code skill (/scaleos-block-writer) reads them and generates/validates/assembles blocks. All files live in `operations/.meta/`. Skill lives at `skills/scaleos-block-writer/SKILL.md`.
+**Architecture:** Three reference files (.meta/schema.md, dictionary.md, registry.md) provide the data. One block writer tool reads them and generates, validates, and assembles blocks. All files live in `operations/.meta/`.
 
-**Tech Stack:** Markdown files, Claude Code skill (markdown with instructions), git.
+**Tech Stack:** Markdown files, AI workspace tool instructions, git.
 
 ---
 
@@ -78,8 +78,8 @@ Read the file back. Confirm:
 
 **Step 1: Gather canonical terms**
 
-Read these files to extract every system, agent, skill, repo, role, and platform name used in the business:
-- `CLAUDE.md` (system map, repo connections)
+Read these files to extract every system, agent, tool, repo, role, and platform name used in the business:
+- workspace guidance docs (system map, repo connections)
 - `handbook/scaleos-v1.md` (brick definitions)
 - Draft growth files: `operations/growth/g1-find.md`, `g2-warm.md`, `g3-book.md`
 
@@ -91,10 +91,10 @@ Organize into 6 categories. Each entry needs:
 - What It Is (one-line description)
 
 Categories:
-1. **Systems** - contact database, CRM, email sequencer, etc.
+1. **Systems** - prospect database, CRM, email sequencer, etc.
 2. **Agents** - Research Squad, Pitch Strategist, Email Executor, Enrollment Worker, etc.
-3. **Skills** - /content-calendar, /content, /contactdb, /campaign-launcher, etc.
-4. **Repos** - content-production, autoblog, outreach-agent, etc.
+3. **Tools** - content planner, content generator, prospect list builder, campaign launcher, etc.
+4. **Repos** - content-production, publishing engine, outreach-agent, etc.
 5. **Roles** - Founder, CTO (with scope)
 6. **Platforms** - LinkedIn, Facebook, X, HubSpot CMS, WordPress, Medium, Substack, Beehiiv
 
@@ -151,7 +151,7 @@ Read the file back. Confirm:
 ## Task 4: Build the Skill
 
 **Files:**
-- Create: `skills/scaleos-block-writer/SKILL.md`
+- Create: block writer tool instructions in the project workspace
 
 **Step 1: Read the skill-forge skill for standards**
 
@@ -216,7 +216,7 @@ The skill must have:
 
 **Step 3: Test the skill**
 
-Run `/scaleos-block-writer status` to verify it reads the reference files and reports status correctly.
+Run `block-writer status` to verify it reads the reference files and reports status correctly.
 
 ---
 
@@ -228,11 +228,11 @@ Use G2.7 (Blog Publishing) - it's fully automated and simple, making it a good v
 
 **Step 2: Describe it naturally**
 
-Describe G2.7: "Blog publishing is when an approved blog post gets published to all platforms automatically by the blog publisher worker. It publishes to HubSpot CMS, WordPress, Medium, and Substack. The trigger is when a blog post is approved. The SEO linker runs after to check links."
+Describe G2.7: "Blog publishing is when an approved blog post gets published to all configured platforms automatically by the blog publisher worker. The trigger is when a blog post is approved. The SEO linker runs after to check links."
 
 **Step 3: Run the skill**
 
-Run `/scaleos-block-writer write G2.7` and verify:
+Run `block-writer write G2.7` and verify:
 - Block generated in correct format
 - All dictionary terms validated
 - Upstream (G2.4, G2.5) and downstream (G2.8) referenced
@@ -261,7 +261,7 @@ After the system is validated:
 Add a header note to each draft file (g1-find.md, g2-warm.md, g3-book.md):
 ```
 > **STATUS: DRAFT** - These files were written before the block writer system.
-> They will be regenerated block-by-block through `/scaleos-block-writer` and replaced.
+> They will be regenerated block-by-block through the block writer tool and replaced.
 > Do not edit these directly.
 ```
 
@@ -281,7 +281,7 @@ git commit -m "docs(scaleos): mark draft growth files as pending regeneration"
 | 1. Schema | `.meta/schema.md` | Commit |
 | 2. Dictionary | `.meta/dictionary.md` | Commit |
 | 3. Registry | `.meta/registry.md` | **Founder approves** |
-| 4. Skill | `skills/scaleos-block-writer/SKILL.md` | Skill runs |
+| 4. Tool instructions | workspace block writer instructions | Tool runs |
 | 5. Test block | `.meta/blocks/G2.7.md` | Founder reviews test output |
 | 6. Clean up | Draft files marked | Push |
 
