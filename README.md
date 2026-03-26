@@ -35,6 +35,7 @@ markster-os validate [path]
 markster-os update
 markster-os upgrade-workspace [path]
 markster-os attach-remote <url>
+markster-os install-hooks
 markster-os sync
 markster-os commit -m "message"
 markster-os push
@@ -124,11 +125,27 @@ Then push it with normal Git:
 git push -u origin main
 ```
 
-**Step 4: Run the scorecard**
+**Step 4: Keep the validator hook installed**
+
+If you created the workspace with `--git`, Markster OS already installed a pre-commit hook for you.
+
+You can reinstall it any time with:
+
+```bash
+markster-os install-hooks
+```
+
+That hook runs:
+
+```bash
+markster-os validate .
+```
+
+**Step 5: Run the scorecard**
 
 Open [methodology/assessment/scorecard.md](methodology/assessment/scorecard.md). Score yourself honestly across F1-F4 and the GOD Engine bricks. The scoring tells you exactly which playbook to run first.
 
-**Step 5: Lock F1-F4, then activate a playbook**
+**Step 6: Lock F1-F4, then activate a playbook**
 
 Work through [methodology/foundation/](methodology/foundation/) in order. Once F1-F4 is complete, activate a playbook in your AI environment:
 
@@ -141,7 +158,7 @@ Work through [methodology/foundation/](methodology/foundation/) in order. Once F
 /research
 ```
 
-**Step 6: Fill in your company context**
+**Step 7: Fill in your company context**
 
 Copy the files in [company-context/](company-context/) and define:
 
@@ -151,11 +168,11 @@ Copy the files in [company-context/](company-context/) and define:
 - how you sound
 - what proof you can actually claim
 
-**Step 7: Use the learning loop**
+**Step 8: Use the learning loop**
 
 Use [learning-loop/](learning-loop/) to turn real conversations, notes, and edits into approved updates to your business context. Raw notes stay out of canon until reviewed.
 
-**Step 8: Validate, commit, and push**
+**Step 9: Validate, commit, and push**
 
 ```bash
 markster-os validate .
@@ -163,7 +180,7 @@ markster-os commit -m "Update company context"
 markster-os push
 ```
 
-**Step 9: Back up or share the workspace**
+**Step 10: Back up or share the workspace**
 
 ```bash
 markster-os backup-workspace ~/.markster-os/workspaces/your-company
@@ -181,7 +198,7 @@ If you are using Markster OS for your company, do this:
 3. run your AI tool from inside that workspace
 4. keep your real company context in `company-context/`
 5. keep raw notes in `learning-loop/inbox/`
-6. run `markster-os validate` before merging
+6. keep the pre-commit hook installed so validation runs before commits
 7. commit and push approved changes like a normal repo
 
 ---
@@ -293,6 +310,7 @@ Recommended team model:
 - employees collaborate in that repo
 - raw inbox material stays out of Git by default
 - approved canon changes are committed and pushed
+- pre-commit runs `markster-os validate .` locally
 - use `markster-os sync` to fetch and pull --rebase before working
 - use `markster-os commit` and `markster-os push` if you want the CLI to handle the common Git steps
 

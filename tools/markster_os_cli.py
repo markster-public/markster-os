@@ -42,6 +42,10 @@ __pycache__/
 .vscode/
 *~
 """
+PRE_COMMIT_HOOK = """#!/usr/bin/env bash
+set -euo pipefail
+markster-os validate .
+"""
 
 
 def die(message: str) -> None:
@@ -173,6 +177,15 @@ def git_init_workspace(path: Path) -> None:
         die(f"git init failed: {result.stderr.strip() or result.stdout.strip()}")
 
 
+def install_hooks(path: Path) -> None:
+    ensure_git_workspace(path)
+    hooks_dir = path / ".git" / "hooks"
+    hooks_dir.mkdir(parents=True, exist_ok=True)
+    pre_commit = hooks_dir / "pre-commit"
+    pre_commit.write_text(PRE_COMMIT_HOOK, encoding="utf-8")
+    pre_commit.chmod(0o755)
+
+
 def ensure_git_workspace(path: Path) -> None:
     if not (path / ".git").exists():
         die(f"workspace is not a Git repository: {path}. Re-run init with `--git` or run git init.")
@@ -216,14 +229,15 @@ def cmd_init(args: argparse.Namespace) -> int:
     write_workspace_files(workspace, slug)
     if args.git:
         git_init_workspace(workspace)
+        install_hooks(workspace)
 
     print(f"Initialized workspace: {workspace}")
     print("Next steps:")
     if args.git:
         print("  1. Add a Git remote for this workspace and push it to your own repository")
-        print("  2. Fill in company-context/")
-        print("  3. Store raw notes in learning-loop/inbox/")
-        print("  4. Run `markster-os validate <workspace>`")
+        print("  2. A pre-commit hook is already installed and will run `markster-os validate .`")
+        print("  3. Fill in company-context/")
+        print("  4. Store raw notes in learning-loop/inbox/")
         print("  5. Run your AI from inside the workspace when using Markster OS skills")
     else:
         print("  1. Consider re-running with `--git` for a team-ready workspace")
@@ -414,6 +428,14 @@ def cmd_attach_remote(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_install_hooks(args: argparse.Namespace) -> int:
+    workspace = Path(args.path).expanduser().resolve() if args.path else Path.cwd()
+    install_hooks(workspace)
+    print(f"Installed pre-commit hook for workspace: {workspace}")
+    print("The hook runs: markster-os validate .")
+    return 0
+
+
 def cmd_sync(args: argparse.Namespace) -> int:
     workspace = Path(args.path).expanduser().resolve() if args.path else Path.cwd()
     ensure_git_workspace(workspace)
@@ -564,6 +586,10 @@ def build_parser() -> argparse.ArgumentParser:
     remote_parser.add_argument("--name", default="origin", help="Remote name")
     remote_parser.add_argument("--path", help="Workspace path; defaults to current directory")
     remote_parser.set_defaults(func=cmd_attach_remote)
+
+    hooks_parser = sub.add_parser("install-hooks", help="Install the pre-commit validation hook in a workspace")
+    hooks_parser.add_argument("path", nargs="?", help="Workspace path; defaults to current directory")
+    hooks_parser.set_defaults(func=cmd_install_hooks)
 
     sync_parser = sub.add_parser("sync", help="Fetch and pull --rebase a workspace")
     sync_parser.add_argument("--path", help="Workspace path; defaults to current directory")

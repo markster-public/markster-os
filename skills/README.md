@@ -46,6 +46,7 @@ markster-os status
 markster-os doctor
 markster-os upgrade-workspace ~/.markster-os/workspaces/your-company
 markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
+markster-os install-hooks
 markster-os sync
 markster-os commit -m "Update canon"
 markster-os push
@@ -69,10 +70,11 @@ Very simple team workflow:
 2. `cd ./your-company-os`
 3. `markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git`
 4. `git push -u origin main`
-5. run your AI tool from inside the workspace
-6. `markster-os validate .`
-7. `markster-os commit -m "Update workspace"`
-8. `markster-os push`
+5. `markster-os install-hooks`
+6. run your AI tool from inside the workspace
+7. `markster-os validate .`
+8. `markster-os commit -m "Update workspace"`
+9. `markster-os push`
 
 ### Method 2: Install individual skill via curl
 
