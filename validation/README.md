@@ -11,11 +11,14 @@ tags: [validation, ci, standards]
 
 # Validation
 
-This folder defines the deterministic validation rules for protected Markster OS structures.
+This folder defines the deterministic validation rules for protected Markster OS structures and public-safety hygiene.
 
 Current scope:
 
 - `company-context/`
 - `learning-loop/`
+- repository hygiene for internal artifacts and leaked local-path/private-org references
 
 These validations are intended to be hard gates in CI.
+
+To make this block merges on GitHub, require the `Validate Markster OS` check in branch protection for the default branch.

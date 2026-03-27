@@ -11,7 +11,7 @@ tags: [validation, spec, ci]
 
 # Markster OS Validation Spec
 
-This spec defines deterministic hard-gate validation for `company-context/` and `learning-loop/`.
+This spec defines deterministic hard-gate validation for `company-context/`, `learning-loop/`, and repository public-safety hygiene.
 
 ## Goals
 
@@ -21,6 +21,17 @@ This spec defines deterministic hard-gate validation for `company-context/` and 
 - stop unapproved claims from entering canon
 
 ## Validation Domains
+
+## 0. Repository Hygiene
+
+Validate:
+
+- forbidden internal working files are not committed
+- no leaked local absolute paths like `/Users/...` appear in product files
+- no leaked local workspace references like `~/Workspace/...` appear in the repo
+- no private org references like `private-org-slug` appear in committed content
+
+Allow narrow exceptions only for public-facing install documentation or for the validator code/spec that explicitly describes the banned patterns.
 
 ## 1. File Inventory
 
@@ -103,5 +114,9 @@ Hard gate:
 - fail on heading mismatch
 - fail on prohibited content in protected folders
 - fail on unauthorized files in protected folders
+- fail on forbidden internal files anywhere in the repo
+- fail on prohibited repository-wide leak patterns
 
 Warn-only is not supported.
+
+To make this block merges on GitHub, configure branch protection to require the `Validate Markster OS` workflow check before merge.

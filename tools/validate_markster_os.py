@@ -143,6 +143,11 @@ PROMPT_FILES = {
     "extract-style-corrections.md",
 }
 
+FORBIDDEN_REPO_FILES = {
+    "STATE.md",
+    "MASTER_LOG.md",
+}
+
 PROHIBITED_PATH_PATTERNS = [
     "/Users/",
     "C:\\\\",
@@ -154,6 +159,23 @@ PROHIBITED_CANON_PATTERNS = [
     r"\btbd\b",
     r"Speaker\s+\d+:",
     r"Interviewer:",
+]
+
+REPO_TEXT_EXTENSIONS = {
+    ".md",
+    ".json",
+    ".py",
+    ".sh",
+    ".yml",
+    ".yaml",
+}
+
+REPO_PROHIBITED_CONTENT_RULES = [
+    ("/Users/", {"tools/validate_markster_os.py", "validation/validation-spec.md"}),
+    ("~/Workspace/", {"tools/validate_markster_os.py", "validation/validation-spec.md"}),
+    ("~/.claude/", {"skills/README.md", "tools/validate_markster_os.py"}),
+    ("~/.codex/", {"skills/README.md", "tools/validate_markster_os.py"}),
+    ("private-org-slug", {"tools/validate_markster_os.py", "validation/validation-spec.md"}),
 ]
 
 
@@ -217,6 +239,27 @@ def ensure_no_prohibited_canon_content(path: Path) -> None:
     for pattern in PROHIBITED_CANON_PATTERNS:
         if re.search(pattern, text, flags=re.IGNORECASE):
             fail(f"{path} contains prohibited canonical content matching `{pattern}`")
+
+
+def validate_repository_hygiene(repo_root: Path) -> None:
+    for file_name in FORBIDDEN_REPO_FILES:
+        path = repo_root / file_name
+        if path.exists():
+            fail(f"{path} must not be committed")
+
+    for path in repo_root.rglob("*"):
+        if not path.is_file():
+            continue
+        if ".git" in path.parts:
+            continue
+        if path.suffix not in REPO_TEXT_EXTENSIONS:
+            continue
+
+        relative_path = path.relative_to(repo_root).as_posix()
+        text = read_text(path)
+        for pattern, allowed_files in REPO_PROHIBITED_CONTENT_RULES:
+            if pattern in text and relative_path not in allowed_files:
+                fail(f"{path} contains prohibited repository content `{pattern}`")
 
 
 def validate_company_context(repo_root: Path) -> None:
@@ -312,6 +355,7 @@ def validate_validation_docs(repo_root: Path) -> None:
 
 def main() -> None:
     repo_root = repo_root_from_argv()
+    validate_repository_hygiene(repo_root)
     validate_company_context(repo_root)
     validate_learning_loop(repo_root)
     validate_validation_docs(repo_root)
