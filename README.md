@@ -1,5 +1,9 @@
 # Markster OS
 
+[![Validation required](https://img.shields.io/badge/validation-required-brightgreen.svg)](validation/README.md)
+![MIT License](https://img.shields.io/badge/license-MIT-green.svg)
+![AI-first setup](https://img.shields.io/badge/setup-AI--first-blue.svg)
+
 **The GTM operating system for companies under 20 people.**
 
 Built on the ScaleOS methodology. Works with Claude Code, Codex, and Gemini CLI. Free to use. Paid add-ons for proprietary data.
@@ -175,7 +179,7 @@ git push -u origin main
 
 **Step 4: Keep the validator hook installed**
 
-If you created the workspace with `--git`, Markster OS already installed a pre-commit hook for you.
+If you created the workspace with `--git`, Markster OS already installed pre-commit and pre-push hooks for you.
 
 You can reinstall it any time with:
 
@@ -183,7 +187,7 @@ You can reinstall it any time with:
 markster-os install-hooks
 ```
 
-That hook runs:
+Those hooks run:
 
 ```bash
 markster-os validate .
@@ -220,6 +224,11 @@ Copy the files in [company-context/](company-context/) and define:
 
 Use [learning-loop/](learning-loop/) to turn real conversations, notes, and edits into approved updates to your business context. Raw notes stay out of canon until reviewed.
 
+Use these starting points:
+
+- [learning-loop/candidates/candidate-template.md](learning-loop/candidates/candidate-template.md)
+- [learning-loop/candidates/example-company-context-update.md](learning-loop/candidates/example-company-context-update.md)
+
 **Step 9: Validate, commit, and push**
 
 ```bash
@@ -246,7 +255,7 @@ If you are using Markster OS for your company, do this:
 3. run your AI tool from inside that workspace
 4. keep your real company context in `company-context/`
 5. keep raw notes in `learning-loop/inbox/`
-6. keep the pre-commit hook installed so validation runs before commits
+6. keep the local validation hooks installed so validation runs before commits and pushes
 7. commit and push approved changes like a normal repo
 
 If you want to hand the setup to Claude, Codex, or Gemini, copy the prompt in [setup-prompts/install-workspace.md](setup-prompts/install-workspace.md).
@@ -380,7 +389,7 @@ Recommended team model:
 - employees collaborate in that repo
 - raw inbox material stays out of Git by default
 - approved canon changes are committed and pushed
-- pre-commit runs `markster-os validate .` locally
+- pre-commit and pre-push run `markster-os validate .` locally
 - use `markster-os sync` to fetch and pull --rebase before working
 - use `markster-os commit` and `markster-os push` if you want the CLI to handle the common Git steps
 

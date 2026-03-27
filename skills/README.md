@@ -95,6 +95,8 @@ Very simple team workflow:
 9. `markster-os commit -m "Update workspace"`
 10. `markster-os push`
 
+`markster-os install-hooks` installs both a pre-commit hook and a pre-push hook.
+
 ### Method 2: Install individual skill via curl
 
 ```bash

@@ -73,3 +73,21 @@ Do not paste raw conversation content into canon.
 - `style-corrections.md`: repeated editorial corrections
 - `truth-rules.md`: no-fabrication rules and claim taxonomy
 - `quality-checklist.md`: final QA gate for generated assets
+
+## Fill Order
+
+If this is a new workspace, fill these first:
+
+1. `identity.md`
+2. `audience.md`
+3. `offer.md`
+4. `messaging.md`
+
+Then complete:
+
+5. `voice.md`
+6. `proof.md`
+7. `channels.md`
+8. `themes.md`
+
+Use `truth-rules.md` and `quality-checklist.md` as the hard gate while you fill the rest.

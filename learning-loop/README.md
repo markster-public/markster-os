@@ -32,3 +32,15 @@ The flow is:
 - `canon/`: approved knowledge only
 - `prompts/`: extraction and promotion prompts
 - `promotion-rules.md`: promotion gate
+
+## How To Use It
+
+1. Drop raw call notes, transcripts, screenshots, and observations into `inbox/`
+2. Create a structured proposal in `candidates/`
+3. Review that proposal like an editor, not like a stenographer
+4. Promote only the approved parts into canon
+
+Start from:
+
+- `candidates/candidate-template.md` for a blank proposal
+- `candidates/example-company-context-update.md` for a realistic example
