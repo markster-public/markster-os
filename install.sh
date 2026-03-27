@@ -55,7 +55,10 @@ done
 # ─── Detect Source Location ─────────────────────────────────────────────────
 # Determine if we're running from a cloned repo or via curl
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-/dev/stdin}")" 2>/dev/null && pwd || echo "")"
-if [[ -d "$SCRIPT_DIR/skills" ]]; then
+if [[ "$MANAGED_UPDATE" == true && "$SCRIPT_DIR" == "$MARKSTER_HOME/dist/current" ]]; then
+    SOURCE_MODE="remote"
+    log_info "Updating managed distribution from installed copy"
+elif [[ -d "$SCRIPT_DIR/skills" ]]; then
     SOURCE_MODE="local"
     if [[ "$MANAGED_UPDATE" == true ]]; then
         log_info "Updating from local repo: $SCRIPT_DIR"

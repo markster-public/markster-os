@@ -56,10 +56,55 @@ PLACEHOLDER_MARKERS = (
     "list the main active channels",
     "offer name",
 )
+USE_COLOR = sys.stdout.isatty() and os.environ.get("TERM", "") != "dumb"
+USE_COLOR_ERR = sys.stderr.isatty() and os.environ.get("TERM", "") != "dumb"
+RESET = "\033[0m"
+BOLD = "\033[1m"
+DIM = "\033[2m"
+BLUE = "\033[34m"
+CYAN = "\033[36m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+RED = "\033[31m"
+
+
+def color(text: str, code: str, *, err: bool = False) -> str:
+    enabled = USE_COLOR_ERR if err else USE_COLOR
+    if not enabled:
+        return text
+    return f"{code}{text}{RESET}"
+
+
+def heading(text: str) -> str:
+    return color(f"== {text} ==", BOLD + BLUE)
+
+
+def subheading(text: str) -> str:
+    return color(text, BOLD + CYAN)
+
+
+def ok(text: str) -> str:
+    return color(f"ok: {text}", GREEN)
+
+
+def warn(text: str) -> str:
+    return color(f"warn: {text}", YELLOW)
+
+
+def bad(text: str) -> str:
+    return color(f"error: {text}", RED, err=True)
+
+
+def kv(label: str, value: str) -> str:
+    return f"{color(label + ':', BOLD)} {value}"
+
+
+def bullet(text: str, marker: str = "-") -> str:
+    return f"  {color(marker, CYAN)} {text}"
 
 
 def die(message: str) -> None:
-    print(f"ERROR: {message}", file=sys.stderr)
+    print(bad(message), file=sys.stderr)
     raise SystemExit(1)
 
 
@@ -444,8 +489,10 @@ def cmd_init(args: argparse.Namespace) -> int:
         git_init_workspace(workspace)
         install_hooks(workspace)
 
-    print(f"Initialized workspace: {workspace}")
-    print("Next steps:")
+    print(heading("Workspace Initialized"))
+    print(kv("Path", str(workspace)))
+    print("")
+    print(subheading("Next steps"))
     if args.git:
         print("  1. Add a Git remote for this workspace and push it to your own repository")
         print("  2. A pre-commit hook is already installed and will run `markster-os validate .`")
@@ -471,23 +518,25 @@ def cmd_validate(args: argparse.Namespace) -> int:
 
 def cmd_list_skills(args: argparse.Namespace) -> int:
     skills = available_skill_names()
-    print("Markster OS Skills")
-    print(f"Total available: {len(skills)}")
-    print(f"Core installed by default: {len([s for s in skills if s in CORE_SKILLS])}")
+    core_count = len([s for s in skills if s in CORE_SKILLS])
+    print(heading("Markster OS Skills"))
+    print(kv("Total available", str(len(skills))))
+    print(kv("Core installed by default", str(core_count)))
     print("")
     for skill in skills:
         metadata = parse_skill_metadata(skill)
         label = "core" if skill in CORE_SKILLS else "extended"
         description = metadata.get("description", "").replace("\n", " ").strip()
-        print(f"- {skill} ({label})")
+        label_text = color(label, GREEN if label == "core" else YELLOW)
+        print(f"{color('-', CYAN)} {color(skill, BOLD)} ({label_text})")
         if description:
-            print(f"  {description}")
+            print(f"  {color(description, DIM)}")
     print("")
-    print("Install examples:")
-    print("  markster-os install-skills")
-    print("  markster-os install-skills --skill website-copywriter --skill vc-review")
-    print("  markster-os install-skills --extended")
-    print("  markster-os install-skills --all-skills --all")
+    print(subheading("Install examples"))
+    print(bullet("markster-os install-skills"))
+    print(bullet("markster-os install-skills --skill website-copywriter --skill vc-review"))
+    print(bullet("markster-os install-skills --extended"))
+    print(bullet("markster-os install-skills --all-skills --all"))
     return 0
 
 
@@ -498,7 +547,7 @@ def install_skill_to_dir(skill: str, target_root: Path) -> None:
     skill_dir = target_root / skill
     skill_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, skill_dir / "SKILL.md")
-    print(f"Installed skill: {skill_dir / 'SKILL.md'}")
+    print(ok(f"installed skill {skill} -> {skill_dir / 'SKILL.md'}"))
 
 
 def cmd_install_skills(args: argparse.Namespace) -> int:
@@ -520,8 +569,11 @@ def cmd_install_skills(args: argparse.Namespace) -> int:
         for skill in selected_skills:
             install_skill_to_dir(skill, root)
 
-    print(f"Installed {len(selected_skills)} skill(s): {', '.join(selected_skills)}")
-    print("Run your AI from inside a Markster OS workspace so the skills can resolve repo-relative docs.")
+    print(heading("Skills Installed"))
+    print(kv("Count", str(len(selected_skills))))
+    print(kv("Skills", ", ".join(selected_skills)))
+    print("")
+    print(warn("run your AI from inside a Markster OS workspace so the skills can resolve repo-relative docs"))
     return 0
 
 
@@ -551,40 +603,40 @@ def cmd_status(args: argparse.Namespace) -> int:
                 }
             )
 
-    print("Markster OS Status")
-    print(f"Distribution: {'installed' if distribution_exists else 'missing'}")
-    print(f"Launcher: {'installed' if launcher_exists else 'missing'}")
-    print(f"Workspace root: {WORKSPACES_ROOT}")
-    print(f"Workspaces: {len(workspaces)}")
+    print(heading("Markster OS Status"))
+    print(kv("Distribution", color("installed", GREEN) if distribution_exists else color("missing", RED)))
+    print(kv("Launcher", color("installed", GREEN) if launcher_exists else color("missing", RED)))
+    print(kv("Workspace root", str(WORKSPACES_ROOT)))
+    print(kv("Workspaces", str(len(workspaces))))
     if workspaces:
         for workspace in workspaces:
             managed = "managed" if workspace["managed"] else "unmanaged"
-            print(f"  - {workspace['name']} ({managed})")
-            print(f"    {workspace['path']}")
+            print(bullet(f"{workspace['name']} ({managed})"))
+            print(f"    {color(workspace['path'], DIM)}")
     else:
-        print("  - none")
+        print(bullet("none"))
 
     cwd = Path.cwd().resolve()
     metadata = load_workspace_metadata(cwd)
     if metadata is not None:
         print("")
-        print("Active workspace")
-        print(f"Path: {cwd}")
+        print(subheading("Active workspace"))
+        print(kv("Path", str(cwd)))
         if is_git_workspace(cwd):
             branch = git_output(cwd, ["branch", "--show-current"]) or "unknown"
             remote = git_output(cwd, ["remote", "get-url", "origin"])
             status = git_output(cwd, ["status", "--short"]) or ""
-            print(f"Git: enabled")
-            print(f"Branch: {branch}")
-            print(f"Origin: {remote or 'not set'}")
-            print(f"Uncommitted changes: {'yes' if status else 'no'}")
-            print(f"Pre-commit hook: {'installed' if has_pre_commit_hook(cwd) else 'missing'}")
+            print(kv("Git", color("enabled", GREEN)))
+            print(kv("Branch", branch))
+            print(kv("Origin", remote or "not set"))
+            print(kv("Uncommitted changes", color("yes", YELLOW) if status else color("no", GREEN)))
+            print(kv("Pre-commit hook", color("installed", GREEN) if has_pre_commit_hook(cwd) else color("missing", YELLOW)))
         else:
-            print("Git: not initialized")
-            print("Hint: run `git init -b main` or recreate the workspace with `markster-os init --git --path ...`")
-            print("Hint: after Git init, run `markster-os install-hooks .`")
+            print(kv("Git", color("not initialized", YELLOW)))
+            print(bullet("run `git init -b main` or recreate the workspace with `markster-os init --git --path ...`"))
+            print(bullet("after Git init, run `markster-os install-hooks .`"))
         placeholder_hits = company_context_placeholder_hits(cwd)
-        print(f"Company context: {'ready' if not placeholder_hits else 'template values remain'}")
+        print(kv("Company context", color("ready", GREEN) if not placeholder_hits else color("template values remain", YELLOW)))
     return 0
 
 
@@ -619,13 +671,13 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         problems.append(f"missing workspaces root at {WORKSPACES_ROOT}")
 
     for line in checks:
-        print(line)
+        print(ok(line.removeprefix("ok: ")))
     if problems:
         for line in problems:
-            print(f"problem: {line}")
+            print(warn(line))
         return 1
 
-    print("doctor: no problems found")
+    print(ok("doctor: no problems found"))
     return 0
 
 
@@ -646,7 +698,7 @@ def cmd_upgrade_workspace(args: argparse.Namespace) -> int:
     slug = metadata.get("slug", workspace.name) if metadata else workspace.name
     write_workspace_metadata(workspace, slug)
     write_workspace_files(workspace, slug)
-    print(f"Upgraded workspace from managed distribution: {workspace}")
+    print(ok(f"upgraded workspace from managed distribution: {workspace}"))
     return 0
 
 
@@ -666,16 +718,16 @@ def cmd_attach_remote(args: argparse.Namespace) -> int:
     if result.returncode != 0:
         die(result.stderr.strip() or result.stdout.strip())
 
-    print(f"Remote `{args.name}` now points to: {args.url}")
-    print(f"Next step: git -C {workspace} push -u {args.name} main")
+    print(ok(f"remote `{args.name}` now points to: {args.url}"))
+    print(bullet(f"next: git -C {workspace} push -u {args.name} main"))
     return 0
 
 
 def cmd_install_hooks(args: argparse.Namespace) -> int:
     workspace = Path(args.path).expanduser().resolve() if args.path else Path.cwd()
     install_hooks(workspace)
-    print(f"Installed pre-commit hook for workspace: {workspace}")
-    print("The hook runs: markster-os validate .")
+    print(ok(f"installed pre-commit hook for workspace: {workspace}"))
+    print(bullet("hook command: markster-os validate ."))
     return 0
 
 
@@ -691,7 +743,7 @@ def cmd_sync(args: argparse.Namespace) -> int:
     if pull.returncode != 0:
         die(pull.stderr.strip() or pull.stdout.strip())
 
-    print(f"Synchronized workspace from {args.remote}/{args.branch}: {workspace}")
+    print(ok(f"synchronized workspace from {args.remote}/{args.branch}: {workspace}"))
     return 0
 
 
@@ -707,14 +759,14 @@ def cmd_commit(args: argparse.Namespace) -> int:
     if status.returncode != 0:
         die(status.stderr.strip() or status.stdout.strip())
     if not status.stdout.strip():
-        print("No changes to commit.")
+        print(warn("no changes to commit"))
         return 0
 
     commit = run_git(workspace, ["commit", "-m", args.message])
     if commit.returncode != 0:
         die(commit.stderr.strip() or commit.stdout.strip())
 
-    print(commit.stdout.strip() or f"Committed workspace changes: {workspace}")
+    print(commit.stdout.strip() or ok(f"committed workspace changes: {workspace}"))
     return 0
 
 
@@ -726,7 +778,7 @@ def cmd_push(args: argparse.Namespace) -> int:
     if push.returncode != 0:
         die(push.stderr.strip() or push.stdout.strip())
 
-    print(f"Pushed workspace to {args.remote}/{args.branch}: {workspace}")
+    print(ok(f"pushed workspace to {args.remote}/{args.branch}: {workspace}"))
     return 0
 
 
@@ -750,8 +802,9 @@ def cmd_backup_workspace(args: argparse.Namespace) -> int:
                 continue
             tar.add(item, arcname=item.relative_to(workspace))
 
-    print(f"Created workspace backup: {output}")
-    print(f"Included inbox: {'yes' if args.include_inbox else 'no'}")
+    print(heading("Workspace Backup"))
+    print(kv("Archive", str(output)))
+    print(kv("Included inbox", "yes" if args.include_inbox else "no"))
     return 0
 
 
@@ -772,19 +825,20 @@ def cmd_export_workspace(args: argparse.Namespace) -> int:
         destination.mkdir(parents=True, exist_ok=True)
 
     export_workspace_tree(workspace, destination, include_inbox=args.include_inbox)
-    print(f"Exported workspace copy: {destination}")
-    print(f"Included inbox: {'yes' if args.include_inbox else 'no'}")
-    print("This export is suitable for sharing or committing to a separate repo after review.")
+    print(heading("Workspace Export"))
+    print(kv("Destination", str(destination)))
+    print(kv("Included inbox", "yes" if args.include_inbox else "no"))
+    print(warn("this export is suitable for sharing or committing to a separate repo after review"))
     return 0
 
 
 def cmd_paths(args: argparse.Namespace) -> int:
-    print("Markster OS Paths")
-    print(f"Home: {MARKSTER_HOME}")
-    print(f"Distribution: {DIST_ROOT}")
-    print(f"Workspaces: {WORKSPACES_ROOT}")
-    print(f"Launcher: {LAUNCHER_PATH}")
-    print(f"Config: {CONFIG_PATH}")
+    print(heading("Markster OS Paths"))
+    print(kv("Home", str(MARKSTER_HOME)))
+    print(kv("Distribution", str(DIST_ROOT)))
+    print(kv("Workspaces", str(WORKSPACES_ROOT)))
+    print(kv("Launcher", str(LAUNCHER_PATH)))
+    print(kv("Config", str(CONFIG_PATH)))
     return 0
 
 
@@ -794,26 +848,26 @@ def cmd_start(args: argparse.Namespace) -> int:
     if metadata is None:
         die("not inside a Markster OS workspace. Run this from a workspace or pass --path.")
 
-    print("Markster OS Start")
-    print(f"Workspace: {cwd}")
+    print(heading("Markster OS Start"))
+    print(kv("Workspace", str(cwd)))
     print("")
     checks = workspace_readiness(cwd)
-    print("Readiness checklist:")
+    print(subheading("Readiness checklist"))
     for label, ok, next_step in checks:
-        marker = "ok" if ok else "needs work"
-        print(f"  - {label}: {marker}")
+        marker = color("ok", GREEN) if ok else color("needs work", YELLOW)
+        print(bullet(f"{label}: {marker}"))
         if not ok:
-            print(f"    next: {next_step}")
+            print(f"    {color('next:', BOLD)} {next_step}")
 
     placeholder_hits = company_context_placeholder_hits(cwd)
     if placeholder_hits:
         print("")
-        print("Company context gaps:")
+        print(subheading("Company context gaps"))
         for hit in placeholder_hits:
-            print(f"  - {hit}")
+            print(bullet(hit))
 
     print("")
-    print("Recommended workflow:")
+    print(subheading("Recommended workflow"))
     print("  1. Run `markster-os sync` if this is a shared repo")
     print("  2. Keep raw notes in `learning-loop/inbox/`")
     print("  3. Run your AI tool from this directory")
