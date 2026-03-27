@@ -18,11 +18,52 @@ Each playbook is a deterministic sequence: inputs in, steps to follow, outputs d
 
 ## Install
 
+### Recommended: use AI to install it for you
+
+Copy this directly into Claude Code, Codex, or Gemini CLI:
+
+```text
+Set up Markster OS for me.
+
+Requirements:
+- Install the Markster OS CLI if it is not already installed.
+- Use the official installer:
+  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+- Create a Git-backed workspace for my company with:
+  markster-os init <company-slug> --git --path ./<company-slug>-os
+- Move into that workspace.
+- Install Markster OS skills with:
+  markster-os install-skills
+- If I need an extra public skill later, list and install it with:
+  markster-os list-skills
+  markster-os install-skills --skill <skill-name>
+- Check the workspace readiness with:
+  markster-os start
+- Validate the workspace with:
+  markster-os validate .
+
+Then stop and ask me for my Git repository URL so you can attach the remote with:
+- markster-os attach-remote <git-url>
+
+If the remote is attached successfully, tell me the exact push command to run next.
+
+Important rules:
+- Treat the upstream markster-os repo as the product source, not as my company workspace.
+- Treat the new workspace repo as the place where my business context will live.
+- Keep raw notes in learning-loop/inbox and do not treat them as canonical.
+- Use markster-os validate before saying the workspace is ready.
+- Summarize what you changed in plain language at the end.
+```
+
+You can also use the standalone version in [setup-prompts/install-workspace.md](setup-prompts/install-workspace.md).
+
+### Manual install
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
 ```
 
-Installs the `markster-os` CLI into your home directory. The CLI manages a stable Markster OS distribution, customer workspaces, validation, and optional slash-command skill installation.
+This installs the `markster-os` CLI into your home directory. The CLI manages a stable Markster OS distribution, customer workspaces, validation, and optional slash-command skill installation.
 
 The launcher is installed at `~/bin/markster-os`.
 
@@ -108,6 +149,8 @@ Start with the [assessment scorecard](methodology/assessment/scorecard.md). It t
 ```bash
 curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
 ```
+
+If you prefer, use the AI-assisted install prompt above instead of doing this manually.
 
 **Step 2: Create a workspace**
 
