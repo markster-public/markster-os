@@ -35,7 +35,7 @@ If F1 is not complete, tell them: "The events playbook works best with a clear I
 Help the user:
 1. Identify target events: which events does their ICP actually attend? Ask them what they know about their ICP's conference and association habits. Prompt them to ask their best current clients.
 2. Build a target contact list: 10-20 specific people they want to meet at the event. Use LinkedIn to identify likely attendees.
-3. Write pre-event outreach: use `playbooks/events/templates/pre-event.md`. Send 5-7 days before the event.
+3. Write pre-event outreach: use `playbooks/warm/events/templates/pre-event.md`. Send 5-7 days before the event.
 4. Prepare a conversation setup: one-sentence company description, one qualifying question, and the agreed next step they will offer when the conversation goes well.
 
 If they have an EVENT_SCOUT_KEY environment variable set, tell them they can use the Event Scout add-on to get attendee intelligence before committing to the event.
@@ -57,7 +57,7 @@ Help them send follow-ups:
 - Offer something useful if applicable
 - Confirm the next step that was agreed during the conversation
 
-Use `playbooks/events/templates/post-event.md` as the starting point.
+Use `playbooks/warm/events/templates/post-event.md` as the starting point.
 
 ## Metrics to set up
 
@@ -73,7 +73,7 @@ Review after each event to decide whether to attend again.
 
 ## Reference files
 
-- Full playbook: `playbooks/events/README.md`
-- Pre-event template: `playbooks/events/templates/pre-event.md`
-- Post-event template: `playbooks/events/templates/post-event.md`
+- Full playbook: `playbooks/warm/events/README.md`
+- Pre-event template: `playbooks/warm/events/templates/pre-event.md`
+- Post-event template: `playbooks/warm/events/templates/post-event.md`
 - Event Scout add-on: `addons/event-scout/README.md`

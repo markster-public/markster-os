@@ -53,7 +53,7 @@ Using the buyer verbatims from Step 1 and the F3 message:
 - Write Email 1 (cold intro, under 100 words, one CTA)
 - Write Follow-up 1 (different angle, same offer, under 60 words)
 - Write Follow-up 2 (pattern interrupt or breakup frame, under 60 words)
-- Reference the template at `playbooks/cold-email/templates/sequence-b2b.md`
+- Reference the template at `playbooks/book/cold-email/templates/sequence-b2b.md`
 - Apply the em-dash-free, short-sentence writing rules
 
 ### Step 4: Send
@@ -87,7 +87,7 @@ If the user has a LEAD_PACKS_KEY set, they can access pre-built, verified contac
 
 ## Reference files
 
-- Full playbook: `playbooks/cold-email/README.md`
-- Sequence template: `playbooks/cold-email/templates/sequence-b2b.md`
-- Follow-up templates: `playbooks/cold-email/templates/follow-up.md`
+- Full playbook: `playbooks/book/cold-email/README.md`
+- Sequence template: `playbooks/book/cold-email/templates/sequence-b2b.md`
+- Follow-up templates: `playbooks/book/cold-email/templates/follow-up.md`
 - Research prompts: `research/prompts/`

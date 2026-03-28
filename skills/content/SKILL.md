@@ -59,8 +59,8 @@ For each calendar item, define:
 
 ### Step 3: Write
 
-For long-form content: use `playbooks/content/long-form/templates/article.md`
-For short-form content: use `playbooks/content/short-form/templates/linkedin-post.md`
+For long-form content: use `playbooks/warm/content/long-form/templates/article.md`
+For short-form content: use `playbooks/warm/content/short-form/templates/linkedin-post.md`
 
 Apply these writing rules:
 - First line of every post must earn the scroll
@@ -90,8 +90,8 @@ Distribution plan:
 
 ## Reference files
 
-- Full playbook: `playbooks/content/README.md`
-- Long-form guide: `playbooks/content/long-form/README.md`
-- Short-form guide: `playbooks/content/short-form/README.md`
-- Article template: `playbooks/content/long-form/templates/article.md`
-- LinkedIn post template: `playbooks/content/short-form/templates/linkedin-post.md`
+- Full playbook: `playbooks/warm/content/README.md`
+- Long-form guide: `playbooks/warm/content/long-form/README.md`
+- Short-form guide: `playbooks/warm/content/short-form/README.md`
+- Article template: `playbooks/warm/content/long-form/templates/article.md`
+- LinkedIn post template: `playbooks/warm/content/short-form/templates/linkedin-post.md`
