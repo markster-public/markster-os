@@ -22,11 +22,11 @@ Playbook: [content](../../playbooks/content/README.md)
 
 **G4 - Generate: Referral Activation**
 Active referral system. Not passive waiting - systematic outreach to current clients, past clients, and professional network asking for specific introductions. Highest conversion rate of any channel.
-(Template: coming in a future release)
+Playbook: [referral](../../playbooks/referral/README.md)
 
 **G5 - Generate: Paid Acquisition**
 Targeted paid channels (LinkedIn Ads, Google, Meta) to generate leads at scale once organic channels are validated. Not a starting point - paid amplifies what already works organically.
-(Template: coming in a future release)
+Playbook: [paid](../../playbooks/paid/README.md)
 
 **O1 - Optimize: CRM and Pipeline**
 Contact database, opportunity tracking, deal stage management, and follow-up automation. The infrastructure that makes all other bricks retain their output instead of losing leads to manual process gaps.
@@ -38,7 +38,7 @@ Reference: [F2-offer.md](../foundation/F2-offer.md)
 
 **D1 - Distribute: Community and Partnerships**
 Reaching your ICP through communities they already trust: industry associations, peer groups, Slack communities, newsletters, podcast audiences. Access without cold friction.
-(Template: coming in a future release)
+Playbook: [communities](../../playbooks/communities/README.md)
 
 **D2 - Distribute: AI Visibility**
 Ensuring your company and expertise appears in AI-generated answers, recommendations, and search results. The emerging channel as buyers increasingly use LLMs as research tools.
