@@ -8,14 +8,14 @@
 # - customer workspaces at ~/.markster-os/workspaces/<slug>
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 #   OR: bash install.sh (from cloned repo)
 #   OR: bash install.sh --managed-update
 
 set -euo pipefail
 
-DEFAULT_REPO_URL="https://raw.githubusercontent.com/markster-public/markster-os/main"
-DEFAULT_ARCHIVE_URL="https://github.com/markster-public/markster-os/archive/refs/heads/main.tar.gz"
+DEFAULT_REPO_URL="https://raw.githubusercontent.com/markster-public/markster-os/master"
+DEFAULT_ARCHIVE_URL="https://github.com/markster-public/markster-os/archive/refs/heads/master.tar.gz"
 REPO_URL="$DEFAULT_REPO_URL"
 ARCHIVE_URL="$DEFAULT_ARCHIVE_URL"
 MARKSTER_HOME="$HOME/.markster-os"
@@ -82,8 +82,8 @@ github_urls_from_remote() {
     fi
 
     if [[ -n "$slug" ]]; then
-        REPO_URL="https://raw.githubusercontent.com/$slug/main"
-        ARCHIVE_URL="https://github.com/$slug/archive/refs/heads/main.tar.gz"
+        REPO_URL="https://raw.githubusercontent.com/$slug/master"
+        ARCHIVE_URL="https://github.com/$slug/archive/refs/heads/master.tar.gz"
     fi
 }
 

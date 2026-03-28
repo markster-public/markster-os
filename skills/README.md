@@ -45,7 +45,7 @@ That brings the current public repo inventory to 30 skill directories in total. 
 ### Method 1: Install the Markster OS CLI (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 ```
 
 Then install skills with:
@@ -110,12 +110,12 @@ Very simple team workflow:
 ```bash
 # Claude Code
 mkdir -p ~/.claude/skills/cold-email
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/skills/cold-email/SKILL.md \
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/skills/cold-email/SKILL.md \
   -o ~/.claude/skills/cold-email/SKILL.md
 
 # Codex
 mkdir -p ~/.codex/skills/cold-email
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/skills/cold-email/SKILL.md \
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/skills/cold-email/SKILL.md \
   -o ~/.codex/skills/cold-email/SKILL.md
 ```
 

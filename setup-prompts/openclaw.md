@@ -36,7 +36,7 @@ Do not use the upstream `markster-os` clone as your live company workspace.
 1. Install the CLI:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 ```
 
 2. Create a Git-backed workspace:
@@ -99,7 +99,7 @@ Set up Markster OS in this workspace.
 
 Requirements:
 - If Markster OS is not installed, install it with:
-  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 - Create a Git-backed workspace for my company:
   markster-os init <company-slug> --git --path ./<company-slug>-os
 - Move into that workspace.

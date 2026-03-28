@@ -120,7 +120,7 @@ def ensure_distribution() -> None:
     if not DIST_ROOT.exists():
         die(
             "managed distribution not found. Re-run the installer with "
-            "`curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash`."
+            "`curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash`."
         )
 
 

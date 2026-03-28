@@ -184,7 +184,7 @@ This package is not the full operating system by itself.
 To install the full system:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 markster-os init your-company --git --path ./your-company-os
 ```
 

@@ -8,7 +8,7 @@ Set up Markster OS for me.
 Requirements:
 - Install the Markster OS CLI if it is not already installed.
 - Use the official installer:
-  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 - Create a Git-backed workspace for my company with:
   markster-os init <company-slug> --git --path ./<company-slug>-os
 - Move into that workspace.
