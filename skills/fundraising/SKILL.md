@@ -1,110 +1,174 @@
 ---
 name: fundraising
-description: 'Run the Markster OS fundraising playbook. Investor ICP definition, warm and cold outreach, pitch prep, follow-up system. Structured from first contact to term sheet.'
+description: 'Run the Markster OS fundraising playbook. CHECK stage, traction, and funding path before building anything. DO investor ICP + list + outreach + pitch + close. VERIFY investor pipeline is real before claiming readiness. Routes through ScaleOS Biz Dev.'
 ---
 
-You are running the Markster OS fundraising playbook.
+# Fundraising Operator
 
-## Workspace Context
+---
 
-Assume the user should run this skill from inside a Markster OS workspace.
+## CHECK
 
-Before relying on generic answers, look for:
-- `company-context/identity.md`
-- `company-context/offer.md`
-- `company-context/messaging.md`
-- `company-context/proof.md`
-- `company-context/voice.md`
+Do not proceed past any failed check.
 
-If these files exist, use them as the primary source of truth.
-If they are missing or empty, tell the user to fill them in or provide the missing context directly.
-
-If you update canonical workspace files such as `company-context/` or promoted learning-loop files, remind the user to run `markster-os validate .` before commit, and prefer validating before claiming the update is complete.
-
-## Your archetype
-
-Fundraising looks very different depending on your business type. Before running this playbook:
-
-1. Read your segment file to understand which funding paths apply to your category.
-2. Read `playbooks/biz-dev/fundraising/traction-by-archetype.md` -- what traction means for your archetype at each round.
-3. Read `playbooks/biz-dev/fundraising/funding-mechanisms.md` -- especially if you are a service firm or trade business (non-VC paths apply).
-4. Read `playbooks/biz-dev/fundraising/round-sizing.md` -- SAFE vs. convertible note vs. priced round, and how much to raise.
-
-- `playbooks/segments/startup-archetypes/` -- SaaS, devtools, marketplace, DTC, hardware, indie
-- `playbooks/segments/service-firms/` -- agency, consulting, IT/MSP, advisory (PE and SBA paths)
-- `playbooks/segments/trade-businesses/` -- residential services, specialty trades, commercial (SBA, equipment financing, PE roll-up)
-
-## Before starting
+**1. Stage and traction defined?**
 
 Ask the user:
-1. What stage are they raising at? (Pre-seed, seed, Series A?)
-2. How much are they raising?
-3. What traction do they have? (ARR, customers, growth rate, key metrics)
-4. Do they have warm intro paths to target investors, or are they starting cold?
+- What stage are they raising at? (Pre-seed / Seed / Series A / growth?)
+- How much are they raising?
+- What traction do they have right now? (ARR, MRR, customers, growth rate, retention -- whatever applies)
 
-Also ask which part they need help with:
+If they cannot state a specific traction number: "Investors fund traction, not potential. Before building an investor list, you need at least one measurable proof point. What is the most specific thing you can say about your results right now?"
+
+**2. Funding path confirmed for their archetype**
+
+Fundraising looks very different by business type. Read the right file before advising.
+
+Read `playbooks/biz-dev/fundraising/funding-mechanisms.md` -- especially if the user is a service firm or trade business. VC is one path. It is not the only path.
+
+| Your type | Relevant funding paths |
+|-----------|----------------------|
+| SaaS, devtools, marketplace | VC, angels, SAFE, priced round |
+| Agency, consulting, advisory | PE, SBA, revenue-based financing |
+| Trade businesses | SBA, equipment financing, PE roll-up |
+| Hardware, DTC | Strategic, VC with hardware thesis, debt |
+
+Read `playbooks/biz-dev/fundraising/traction-by-archetype.md` -- what traction means for your archetype at each stage.
+
+Read `playbooks/biz-dev/fundraising/round-sizing.md` -- SAFE vs. convertible note vs. priced round, and how much to raise at each stage.
+
+If the user is pursuing VC for a business type where it is not the optimal path, name it clearly before proceeding.
+
+**3. Which part do they need?**
+
+Ask which stage they are working on:
 - Building the investor target list
-- Writing outreach (cold or warm intro requests)
+- Writing outreach (warm intro requests or cold)
 - Preparing for pitch meetings
 - Managing follow-up and the close process
 
-## Stage 1: Investor target list
+Do not build a full 4-stage plan if they only need one stage. Route directly.
 
-Help them define their investor ICP:
-- Stage fit: who invests at their traction level?
+---
+
+## DO
+
+Run the relevant stage(s). If they are starting from zero, run all four in order.
+
+### Stage 1: Investor target list
+
+Define the investor ICP -- the profile of an investor who is the right fit for this raise:
+- Stage fit: who invests at their current traction level?
 - Sector fit: who has portfolio companies in their category?
 - Check size: who writes the right check size for this raise?
-- Value-add: who brings relevant introductions or operating experience?
+- Value-add: who brings relevant introductions or operating experience beyond capital?
 
-Help them categorize into 3 tiers:
-- Tier 1 (10-20): ideal fit, warm intro required
-- Tier 2 (30-50): good fit, warm or cold
-- Tier 3 (50-100): possible fit, cold only
+Categorize into three tiers:
 
-Sources for building the list: Crunchbase, AngelList, LinkedIn, portfolio companies of target funds.
+| Tier | Count | Priority |
+|------|-------|---------|
+| Tier 1 | 10-20 | Ideal fit, warm intro required to approach |
+| Tier 2 | 30-50 | Good fit, warm or cold both viable |
+| Tier 3 | 50-100 | Possible fit, cold only |
 
-## Stage 2: Outreach
+Sources for building the list: Crunchbase, AngelList, LinkedIn (portfolio companies of target funds), Axios Pro Rata, fund websites.
 
-For warm intros:
-- Map intro paths through LinkedIn second-degree connections
-- Help them write the mutual connection request (short, specific, honest)
-- Help them write the forward blurb (one paragraph, lead with traction)
+Do not send to Tier 3 until Tier 1 and 2 are active.
 
-For cold outreach:
-- Use `playbooks/biz-dev/fundraising/templates/investor-outreach.md`
-- Keep under 100 words
-- Lead with traction, not vision
-- Make the ask specific: 15-minute intro call
+### Stage 2: Outreach
 
-## Stage 3: Pitch preparation
+**For warm intros (Tier 1 and 2):**
+1. Map intro paths through LinkedIn second-degree connections
+2. Help write the mutual connection request -- short, honest, specific on why this investor is the right fit
+3. Help write the forward blurb -- one paragraph, lead with traction not vision
+
+Forward blurb structure:
+- One sentence on what the company does
+- One number (traction metric)
+- One sentence on why you thought of this investor specifically
+- The ask (15-minute intro call)
+
+**For cold outreach (Tier 2 and 3):**
+
+Use `playbooks/biz-dev/fundraising/templates/investor-outreach.md`.
+
+Rules:
+- Under 100 words
+- Lead with traction, not vision or market size
+- Specific ask: 15-minute intro call (not "let me know if you're interested")
+- No deck in the first message
+
+### Stage 3: Pitch preparation
 
 Walk through the 10-slide deck structure:
-1. Cover (company name, one-liner, date)
-2. Problem (specific scenario, not a statistic)
-3. Solution (what you built, one sentence)
-4. Why now (market timing argument)
-5. Traction (most compelling numbers)
-6. Product (screenshots, not diagrams)
-7. Business model (how you make money)
-8. Market size (with logic)
-9. Team (the 2-3 things that make you the right people)
-10. The ask (amount, use of funds, milestones)
 
-Also help with the verbal narrative: why you, why this market, why now.
+| Slide | Content |
+|-------|---------|
+| 1. Cover | Company name, one-liner, date |
+| 2. Problem | Specific scenario -- a story, not a statistic |
+| 3. Solution | What you built, one sentence |
+| 4. Why now | Market timing argument -- what changed that makes this the right moment |
+| 5. Traction | Most compelling numbers first |
+| 6. Product | Screenshots or demo, not diagrams |
+| 7. Business model | How you make money -- unit economics if available |
+| 8. Market size | Bottom-up logic, not TAM from a report |
+| 9. Team | The 2-3 things that make you the right people for this specific problem |
+| 10. The ask | Amount, use of funds, milestones this raise gets you to |
 
-## Stage 4: Follow-up and close
+Also help with the verbal narrative: 2 minutes max, covers why you, why this market, why now.
 
-After every meeting: help write the follow-up using `playbooks/biz-dev/fundraising/templates/follow-up.md`.
+**Pitch quality gates before taking meetings:**
+- The problem slide uses a specific scenario, not a statistic
+- Slide 5 (traction) leads with the most compelling number
+- Market size uses bottom-up logic the investor can follow
+- The ask slide states what milestone the money reaches (not "growth")
 
-For managing the process:
-- Track every investor in CRM with stage, last contact, next action
-- Set weekly review of all active investor relationships
-- Create momentum: be transparent about other investor interest when genuine
+### Stage 4: Follow-up and close
 
-For feedback after a pass: help write the feedback request. Their answer is the roadmap.
+After every meeting, send a follow-up within 24 hours. Use `playbooks/biz-dev/fundraising/templates/follow-up.md`.
+
+Pipeline management rules:
+- Track every investor with: stage, last contact date, next action, notes from last meeting
+- Review active investor relationships weekly
+- Create momentum: when other investors express genuine interest, share it transparently
+
+When an investor passes: send a feedback request within 48 hours. Their answer is the product roadmap.
+
+When closing: state the close timeline clearly. "We are targeting to close this round by [date]. Current commitments are [amount]. We have space for [X] more investors at this stage."
+
+---
+
+## VERIFY
+
+Before this session ends:
+
+**1. Investor list is tiered?**
+
+Confirm Tier 1, 2, and 3 are defined with clear criteria. Tier 1 should require a warm intro -- if everything is cold, the target list is probably too broad.
+
+**2. Outreach passes the traction-first check?**
+
+Read the first sentence of the outreach message. Does it lead with a traction metric or a vision statement? If it starts with vision, rewrite.
+
+**3. Pitch deck structure is complete?**
+
+Confirm all 10 slides exist and the quality gates from Stage 3 pass.
+
+**4. CRM tracking is set?**
+
+Confirm every active investor has a next action and a next contact date. No investor in active conversations should have a blank next action field.
+
+**5. Raise timeline is stated?**
+
+Confirm they have a close target date and know the current commitments. Fundraises without deadlines drift.
+
+---
 
 ## Reference files
 
 - Full playbook: `playbooks/biz-dev/fundraising/README.md`
-- Outreach templates: `playbooks/biz-dev/fundraising/templates/investor-outreach.md`
-- Follow-up templates: `playbooks/biz-dev/fundraising/templates/follow-up.md`
+- Funding mechanisms: `playbooks/biz-dev/fundraising/funding-mechanisms.md`
+- Traction by archetype: `playbooks/biz-dev/fundraising/traction-by-archetype.md`
+- Round sizing: `playbooks/biz-dev/fundraising/round-sizing.md`
+- Investor outreach template: `playbooks/biz-dev/fundraising/templates/investor-outreach.md`
+- Follow-up template: `playbooks/biz-dev/fundraising/templates/follow-up.md`
