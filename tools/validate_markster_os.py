@@ -176,6 +176,8 @@ REPO_PROHIBITED_CONTENT_RULES = [
     ("~/.claude/", {"skills/README.md", "tools/validate_markster_os.py"}),
     ("~/.codex/", {"skills/README.md", "tools/validate_markster_os.py"}),
 ]
+CHANGELOG_RELEASE_RE = re.compile(r"^## \[(\d+\.\d+\.\d+)\] - \d{4}-\d{2}-\d{2}$", flags=re.MULTILINE)
+README_VERSION_BADGE_RE = re.compile(r"img\.shields\.io/badge/version-v(\d+\.\d+\.\d+)-blue\.svg")
 
 
 def fail(message: str) -> None:
@@ -352,12 +354,44 @@ def validate_validation_docs(repo_root: Path) -> None:
         parse_front_matter(text, path)
 
 
+def validate_release_metadata(repo_root: Path) -> None:
+    changelog_path = repo_root / "CHANGELOG.md"
+    readme_path = repo_root / "README.md"
+    if not changelog_path.exists():
+        fail("CHANGELOG.md is missing")
+    if not readme_path.exists():
+        fail("README.md is missing")
+
+    changelog_text = read_text(changelog_path)
+    readme_text = read_text(readme_path)
+
+    if "## [Unreleased]" not in changelog_text:
+        fail("CHANGELOG.md is missing the `## [Unreleased]` section")
+
+    releases = CHANGELOG_RELEASE_RE.findall(changelog_text)
+    if not releases:
+        fail("CHANGELOG.md does not contain any released version sections")
+    latest_release = releases[0]
+
+    badge_match = README_VERSION_BADGE_RE.search(readme_text)
+    if badge_match is None:
+        fail("README.md is missing the version badge")
+    readme_version = badge_match.group(1)
+
+    if readme_version != latest_release:
+        fail(
+            "README.md version badge does not match the latest release in CHANGELOG.md. "
+            f"expected v{latest_release}, found v{readme_version}"
+        )
+
+
 def main() -> None:
     repo_root = repo_root_from_argv()
     validate_repository_hygiene(repo_root)
     validate_company_context(repo_root)
     validate_learning_loop(repo_root)
     validate_validation_docs(repo_root)
+    validate_release_metadata(repo_root)
     print(f"Markster OS validation passed: {repo_root}")
 
 

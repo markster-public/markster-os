@@ -11,7 +11,7 @@ tags: [validation, spec, ci]
 
 # Markster OS Validation Spec
 
-This spec defines deterministic hard-gate validation for `company-context/`, `learning-loop/`, and repository public-safety hygiene.
+This spec defines deterministic hard-gate validation for `company-context/`, `learning-loop/`, repository public-safety hygiene, and release metadata consistency.
 
 ## Goals
 
@@ -104,6 +104,14 @@ Block protected files containing:
 
 - absolute local filesystem paths
 - home-directory shorthands like `~/`
+
+## 8. Release Metadata Hygiene
+
+Validate:
+
+- `CHANGELOG.md` contains an `## [Unreleased]` section
+- `CHANGELOG.md` contains at least one released version section in the form `## [x.y.z] - YYYY-MM-DD`
+- the latest released version in `CHANGELOG.md` matches the version badge in `README.md`
 
 ## GitHub Action Behavior
 

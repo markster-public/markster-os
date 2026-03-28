@@ -6,6 +6,8 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.4] - 2026-03-28
+
 ### Fixed
 - `markster-os update` now refreshes from the tracked upstream archive by default instead of reinstalling from the original local clone path
 
