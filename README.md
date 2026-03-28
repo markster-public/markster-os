@@ -1,7 +1,7 @@
 # Markster OS
 
 [![Validation](https://img.shields.io/badge/validation-passing-brightgreen.svg)](validation/README.md)
-[![Version](https://img.shields.io/badge/version-v1.1.2-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v1.1.3-blue.svg)](CHANGELOG.md)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PRs required](https://img.shields.io/badge/changes-PRs%20required-orange.svg)](CONTRIBUTING.md)
 [![Security policy](https://img.shields.io/badge/security-policy-lightgrey.svg)](SECURITY.md)
