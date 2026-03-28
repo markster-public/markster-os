@@ -18,7 +18,8 @@ Do not maintain a separate repository for the main `markster-os` skill unless a 
 The source of truth should stay here:
 
 - repo: `markster-public/markster-os`
-- core skill source: `skills/markster-os/SKILL.md`
+- local runtime skill source: `skills/markster-os/SKILL.md`
+- marketplace wrapper source: `distribution/clawhub/markster-os/`
 - public docs: `README.md`
 - install flow: `install.sh`
 - release history: `CHANGELOG.md`
@@ -37,16 +38,24 @@ Publish one marketplace entry first:
 
 This is the right first package because it acts as:
 
-- workspace guide
-- router
-- installer entrypoint
+- bootstrap entrypoint
+- safe installer guide
+- workspace setup handoff
 - skill discovery surface
 
 It can then point people to:
 
 - the full GitHub repo
 - the official installer
+- the local installed `markster-os` runtime skill
 - on-demand skill installation with `markster-os install-skills --skill <name>`
+
+Important:
+
+- the ClawHub package and the local runtime use the same skill name: `markster-os`
+- the difference is stage, not branding
+- ClawHub `markster-os` is the safe bootstrap wrapper
+- local `markster-os` is the full operator once the workspace exists
 
 ### Next publish
 
@@ -107,7 +116,7 @@ Do not include:
 - any private references
 - any raw notes or example business data
 
-The skill should instruct the agent to install and operate the full OS through the official repo and CLI.
+The skill should instruct the agent to install and operate the full OS through the official repo and CLI, then hand off to the locally installed `markster-os` runtime.
 
 ---
 
@@ -120,6 +129,7 @@ Role:
 - bootstrap the user into the full Markster OS install path
 - detect whether `markster-os` CLI is installed
 - detect whether the user is inside a workspace
+- hand off to the local `markster-os` runtime skill after setup
 - route to `markster-os start`, `markster-os list-skills`, and `markster-os install-skills --skill <name>`
 - avoid assuming the full repo is already present locally
 
@@ -145,6 +155,7 @@ This should contain:
 
 - the official install command
 - the workspace init command
+- the handoff to the local `markster-os` runtime skill
 - the remote attach command
 - the first-run commands for `start`, `validate`, and `install-skills`
 
@@ -230,5 +241,6 @@ For now:
 - publish `markster-os` as the first marketplace package
 - use GitHub + the official installer as the real product entrypoint
 - treat marketplace listings as discovery and guided install surfaces
+- keep one user-facing skill name everywhere: `markster-os`
 
 Do not split this into a second repository yet.

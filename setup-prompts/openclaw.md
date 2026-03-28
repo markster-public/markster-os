@@ -7,6 +7,7 @@ What is supported today:
 - use OpenClaw as the AI runtime
 - keep Markster OS in a normal Git-backed workspace repo
 - use the `markster-os` CLI for install, validation, sync, and skill management
+- use the same `markster-os` skill name before and after setup
 - point the OpenClaw agent at that workspace so it reads the workspace canon, not the upstream template repo
 
 What is not claimed yet:
@@ -22,6 +23,11 @@ Use this split:
 - `markster-os` repo: product source, templates, validator, skills
 - your company workspace repo: actual business canon and operating system
 - OpenClaw: agent runtime working inside the company workspace repo
+
+The skill name stays the same:
+
+- marketplace `markster-os`: safe setup/bootstrap entrypoint
+- local `markster-os`: full runtime skill inside the workspace
 
 Do not use the upstream `markster-os` clone as your live company workspace.
 
@@ -62,6 +68,8 @@ markster-os validate .
 
 6. Configure OpenClaw to work from this workspace directory.
 
+7. After setup, use the local `markster-os` skill from inside the workspace for day-to-day operation.
+
 The important part is not a specific UI flow. The important part is that the agent runs with this repo as its working directory so it can read:
 
 - `company-context/`
@@ -80,6 +88,7 @@ When using OpenClaw, make sure the agent follows these rules:
 - run `markster-os validate .` before commit
 - use `AUTOPILOT.md` for the weekly operating loop
 - use `/markster-os` or the equivalent Markster OS operator entry point first
+- after setup, use the local `markster-os` skill from inside the workspace, not the lightweight marketplace bootstrap behavior
 
 ## Copy-paste prompt
 
@@ -104,6 +113,7 @@ Important rules:
 - Treat this new workspace repo as the canonical business repo.
 - Keep raw notes in learning-loop/inbox/.
 - Validate before saying setup is complete.
+- After setup, use the local `markster-os` skill from inside the workspace for normal operation.
 ```
 
 ## Current maturity

@@ -20,6 +20,13 @@ When you type `/cold-email` in Claude Code, Codex, or Gemini, the skill loads th
 
 These 7 are installed by default when you run `markster-os install-skills`.
 
+The skill name stays the same across environments:
+
+- `markster-os` in Claude Code, Codex, Gemini, and local workspace installs is the full runtime skill
+- `markster-os` in a marketplace package like ClawHub is only the bootstrap entrypoint before local setup
+
+After setup, always run your AI tool from inside the workspace and use the local `markster-os` skill.
+
 ## Extended public skill library
 
 The repo also contains additional public skills for specialized work. Current inventory:
