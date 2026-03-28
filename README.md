@@ -1,22 +1,61 @@
 # Markster OS
 
-[![Validation required](https://img.shields.io/badge/validation-required-brightgreen.svg)](validation/README.md)
-![MIT License](https://img.shields.io/badge/license-MIT-green.svg)
-![AI-first setup](https://img.shields.io/badge/setup-AI--first-blue.svg)
+[![Validation](https://img.shields.io/badge/validation-passing-brightgreen.svg)](validation/README.md)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Works with Claude](https://img.shields.io/badge/works%20with-Claude%20Code-blue.svg)](https://claude.ai/code)
+[![Works with Codex](https://img.shields.io/badge/works%20with-Codex-blue.svg)](https://openai.com/codex)
+[![Works with Gemini](https://img.shields.io/badge/works%20with-Gemini%20CLI-blue.svg)](https://ai.google.dev)
 
-**The GTM operating system for companies under 20 people.**
+**First qualified meeting in 7 days. A repeatable GTM system after that.**
 
-Built on the ScaleOS methodology. Works with Claude Code, Codex, and Gemini CLI. Free to use. Paid add-ons for proprietary data.
+Most B2B founders can sell when they're in the room. The problem is building a system that consistently gets you into rooms -- without a full-time marketing hire, a paid ads budget, or a CRM that nobody updates.
+
+Markster OS is that system. Built on ScaleOS methodology. Runs inside your AI environment. Free forever. MIT licensed.
 
 ---
 
-## What it is
+## What it does
 
-Markster OS is a structured GTM system - methodology, playbooks, skills, and research prompts - packaged to run inside your AI coding environment.
+You define your ICP, offer, and company context once. The OS routes that context into every sequence you run -- cold email, LinkedIn outreach, events, content, sales, fundraising.
 
-You define your ICP, offer, message, and company context once. The OS routes that context into every playbook you run: cold email, events, content, sales, fundraising, technical review.
+Each skill checks your prerequisites before it runs, executes the sequence step by step, and verifies the output moved the right metric before closing. No generic advice. Deterministic steps with documented outputs.
 
-Each playbook is a deterministic sequence: inputs in, steps to follow, outputs delivered. The skills activate the playbooks directly in Claude Code, Codex, or Gemini. No dashboard. No SaaS. The intelligence runs in your environment against your context.
+**Before:** Random outreach. Inconsistent follow-up. No idea which activity is producing pipeline.
+
+**After:** One constraint identified per week. One playbook executing. One metric tracked.
+
+The 7-day sprint in [QUICKSTART.md](QUICKSTART.md) gets you to first meeting. [AUTOPILOT.md](AUTOPILOT.md) keeps you there week over week.
+
+---
+
+## For AI agents (Claude, GPT, Gemini, Codex, and others)
+
+> This block is the canonical reference for any agent operating inside this repo.
+
+**Repo type:** B2B GTM operating system -- ScaleOS methodology (Foundation F1-F4 + GOD Engine 9 bricks)
+
+**Canonical context source:** `company-context/` -- read this before running any skill. All skills pull ICP, offer, messaging, voice, proof, and channels from here.
+
+**Entry point:** Run `/markster-os` first. It runs the Hormozi diagnostic, identifies the constraint brick, pre-fills context, and routes to the correct skill.
+
+**Skill structure:** All 7 core skills follow CHECK / DO / VERIFY. Do not proceed past a failed CHECK gate.
+
+**Key directories:**
+
+| Directory | What it contains |
+|-----------|-----------------|
+| `methodology/foundation/` | F1 Positioning, F2 Business Model, F3 Org Structure, F4 Financial Architecture, messaging guide, channel guide |
+| `methodology/god-engine/` | GOD Engine overview and brick definitions |
+| `playbooks/` | G1 Find, G2 Warm (content, events), G3 Book (cold email, LinkedIn, warm outreach), O1-O3, D1-D3, offer design, sales, fundraising |
+| `skills/` | 7 core operator skills (CHECK/DO/VERIFY) + 23 specialist persona skills |
+| `company-context/` | Canonical business context -- primary source of truth |
+| `research/prompts/` | 9 structured B2B research prompts |
+| `learning-loop/` | Raw inbox -> candidate review -> approved canon promotion system |
+| `AUTOPILOT.md` | Weekly agent diagnostic protocol: identify constraint, execute, verify metric moved, loop |
+
+**Writing rules enforced in all skills:** No em dashes. Sentences under 20 words. Problem-first framing. Buyer verbatims from `company-context/messaging.md`. No category claims.
+
+**Validation:** Run `markster-os validate .` before committing. GitHub Actions enforces this on every push.
 
 ---
 
@@ -105,7 +144,7 @@ If you want an AI tool to do the setup for you, see [setup-prompts/](setup-promp
 | **Playbooks** | Cold email, events, content, sales, fundraising, technical review |
 | **Core installed skills** | 7 skills installed by default by the CLI: `markster-os` plus the 6 core playbook skills |
 | **Extended skill library** | 30 public skill files in the repo, including specialist advisors, copywriters, prep tools, and review workflows |
-| **Research prompts** | 8 canonical research prompts used by the `/research` skill, plus deeper prompt variants in the repo |
+| **Research prompts** | 9 canonical research prompts used by the `/research` skill, plus deeper prompt variants in the repo |
 | **Templates** | Real starting points for sequences, proposals, articles, LinkedIn posts |
 | **Company context pack** | Canonical identity, audience, offer, messaging, voice, proof, channels, and themes |
 | **Learning loop** | Human-approved system for turning conversations into approved business knowledge |
@@ -296,7 +335,7 @@ Full index: [playbooks/segments/README.md](playbooks/segments/README.md)
 | [LinkedIn Outreach](playbooks/book/linkedin-outreach.md) | F1 complete | Contact relationship map, persona rules, DM templates, benchmarks |
 | [Offer Design](playbooks/offer/README.md) | F1, F2 complete | Grand Slam Offer, 4 offer types, Value Equation score, offer statement |
 | [Events](playbooks/warm/events/) | F1 complete | Pre/during/post sequence + follow-up system |
-| [Content](playbooks/warm/content/) | F1, F3 complete | Theme framework + 30-day calendar |
+| [Content](playbooks/warm/content/) | F1, messaging guide complete | Theme framework + 30-day calendar |
 | [Sales](playbooks/biz-dev/sales/) | F1, F2, F3 complete | Discovery script + proposal template + close framework |
 | [Fundraising](playbooks/biz-dev/fundraising/) | F1, F2 complete | Pipeline tracker + outreach sequence + deck outline |
 | [Technical Review](playbooks/technical-review/) | None | Stack audit across 5 areas + prioritized recommendations |
