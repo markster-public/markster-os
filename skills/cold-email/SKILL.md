@@ -1,103 +1,216 @@
 ---
 name: cold-email
-description: 'Run the Markster OS cold email playbook. Follows ScaleOS F1-F4 methodology. Step-by-step: research -> segment -> write -> send -> follow-up -> iterate.'
+description: 'Run the Markster OS cold email playbook. CHECK prerequisites, DO the sequence build, VERIFY before sending. Routes through ScaleOS G3 Book with context from F1/F2.'
 ---
 
-You are running the Markster OS cold email playbook.
+# Cold Email Operator
 
-## Workspace Context
+---
 
-Assume the user should run this skill from inside a Markster OS workspace.
+## CHECK
 
-Before relying on generic answers, look for:
-- `company-context/audience.md`
-- `company-context/offer.md`
-- `company-context/messaging.md`
-- `company-context/proof.md`
-- `company-context/voice.md`
+Do not proceed past any failed check.
 
-If these files exist, use them as the primary source of truth.
-If they are missing or empty, tell the user to fill them in or provide the missing context directly.
+**1. F1 complete?**
 
-If you update canonical workspace files such as `company-context/` or promoted learning-loop files, remind the user to run `markster-os validate .` before commit, and prefer validating before claiming the update is complete.
+Read `company-context/audience.md`.
 
-## Before starting
+Required before this skill runs:
+- ICP defined with company type, headcount range, and buying trigger
+- Decision-maker title named
+- Specific pain in the buyer's words (not your description of their pain)
 
-Ask the user for their Foundation context if they have not provided it:
-- F1: Who is their ICP? What is the buying trigger?
-- F2: What is their outcome statement? What is their offer?
-- F3: What is their problem statement in the buyer's language? What is their proof point?
+If missing: "F1 is not complete. Cold email will not perform without a defined ICP and buying trigger. Open `methodology/foundation/F1-positioning.md` and complete it first."
 
-If they have not completed Foundation, tell them: "Before running the cold email playbook, you need F1 (Positioning) and F2 (Business Model) complete. Open `methodology/foundation/F1-positioning.md` and work through it first. The cold email playbook will not perform well without it."
+**2. F2 complete?**
 
-If Foundation is at least partially complete, proceed.
+Read `company-context/offer.md`.
 
-## Your archetype
+Required:
+- Outcome statement (what the client achieves, not what you deliver)
+- Proof point (specific result with company type, number, and timeframe)
+- Risk reversal or guarantee exists
 
-Before running this playbook, read your segment file. It maps which GOD Engine bricks matter most for your business type and calibrates the playbook to your specific acquisition motion.
+If missing: "F2 needs an outcome statement and at least one proof point before this sequence will convert. Gut check: can you complete this sentence with a real number? 'We help [ICP] achieve [outcome] in [timeframe]. [Company] did this.' If not, fix F2 first."
 
--  -- SaaS, devtools, marketplace, DTC, hardware, indie
--  -- agency, consulting, IT/MSP, advisory
--  -- residential services, specialty trades, commercial
+**3. Offer passes the Stranger Test?**
 
-If you are a trade business or advisory firm, the cold email playbook may not be your primary G3 motion. Your segment file will say so.
+Ask: "Read your offer to me in one sentence. Why is it obviously better than doing nothing?"
 
-## Playbook steps
+If you cannot explain it without jargon in under 15 seconds, the offer needs work before the sequence does. Route to `playbooks/offer/README.md`.
 
-Walk the user through these six steps in order. Do not skip steps unless the user explicitly says they have already completed one.
+**4. List exists or can be built?**
+
+Ask: "Do you have a prospect list? How many contacts, and have they been verified?"
+
+- No list: go to `playbooks/find/README.md` + `playbooks/find/templates/icp-worksheet.md` first
+- Unverified list (bounce rate unknown): run verification before sending (target: under 3% bounce rate)
+- List ready: proceed
+
+**5. Sending infrastructure ready?**
+
+Ask: "Are you sending from a separate domain? Is SPF/DKIM/DMARC configured? Is a warmup tool running?"
+
+If no to any of these: stop here. Sending from a cold or misconfigured domain will destroy your deliverability. Fix infrastructure before sequence.
+
+**6. Your archetype**
+
+Before writing the sequence, confirm the business type. Route to the correct segment file.
+
+| Your type | Read this first |
+|-----------|----------------|
+| B2B SaaS, devtools, marketplace | `playbooks/segments/startup-archetypes/` |
+| Agency, consulting, IT/MSP, advisory | `playbooks/segments/service-firms/` |
+| Residential or commercial services | `playbooks/segments/trade-businesses/` |
+
+Cold email is not always the right G3 motion. Trade businesses and advisory firms often convert better on referrals and warm outreach first. Your segment file will say if cold email should come later.
+
+---
+
+## DO
+
+Run these six steps in order. Do not skip a step unless the user confirms it is already done.
 
 ### Step 1: Research
-Ask: "Have you run the competitive intelligence and buyer JTBD research prompts yet?"
-- If no: direct them to `research/prompts/competitive-intelligence.md` and `research/prompts/buyer-jtbd.md`
-- If yes: ask them to share what they found. Use the buyer verbatims to inform the sequence writing in Step 3.
+
+Ask: "Have you run the buyer JTBD and competitive intelligence research prompts?"
+
+- If no: direct to `research/prompts/buyer-jtbd.md` and `research/prompts/competitive-intelligence.md`
+- If yes: ask them to share the buyer verbatims -- the exact words their buyers use to describe the problem
+
+**Use the verbatims in the sequence.** Not your language. Their language.
 
 ### Step 2: Segment
-Help them define their list-building filter criteria based on their F1 ICP:
-- Industry, revenue range, headcount range, geography, decision-maker title
-- Where to source the list (Apollo, LinkedIn Sales Navigator, Hunter, industry directories)
-- Verification requirements (bounce rate under 3%)
-- Target list size: 200-500 contacts for the first run
+
+Define the list-building filter from F1:
+
+```
+Industry: [specific, not "B2B"]
+Revenue range: [floor and ceiling]
+Headcount: [range]
+Geography: [if relevant]
+Decision-maker title: [exact title, not "manager"]
+Buying trigger: [the event that makes them a buyer right now]
+```
+
+Source options: Apollo, LinkedIn Sales Navigator, Hunter.io, industry directories.
+
+Target list size: 200-500 contacts per cohort.
+
+Verification: run through an email validator before importing. Bounce rate must be under 3%.
 
 ### Step 3: Write
-Using the buyer verbatims from Step 1 and the F3 message:
-- Write Email 1 (cold intro, under 100 words, one CTA)
-- Write Follow-up 1 (different angle, same offer, under 60 words)
-- Write Follow-up 2 (pattern interrupt or breakup frame, under 60 words)
-- Reference the template at `playbooks/book/cold-email/templates/sequence-b2b.md`
-- Apply the em-dash-free, short-sentence writing rules
+
+Using buyer verbatims from Step 1 and the outcome statement from F2, write the 3-touch sequence:
+
+**Email 1 -- Cold intro**
+- Under 100 words
+- One CTA (a question, not a link)
+- Structure: [Specific trigger] + [Problem in their words] + [One proof point] + [Soft ask]
+- Subject: "[Company] -- [traction number or outcome] -- [category]"
+- No deck, no calendar link in first email
+
+**Follow-up 1 -- Different angle, same offer**
+- Under 60 words
+- New angle: different pain, different proof point, or different framing
+- Reply to the original thread
+
+**Follow-up 2 -- Pattern interrupt or breakup**
+- Under 40 words
+- Options: honest breakup frame ("Should I close your file?") or humor if the brand voice allows it
+- Reply to same thread
+
+Reference template: `playbooks/book/cold-email/templates/sequence-b2b.md`
+
+Writing rules:
+- No em-dashes
+- Sentences under 20 words
+- One idea per sentence
+- First person, plain language
+- No buzzwords ("leverage," "solutions," "synergy," "space")
 
 ### Step 4: Send
-Review their inbox setup:
-- Are they using a separate domain (not their primary)?
-- Is SPF/DKIM/DMARC configured?
-- Is a warmup tool running?
-- What sending tool are they using?
 
-Give specific guidance on any gaps in their setup before recommending they send.
+Confirm:
+- From: separate domain (not primary)
+- SPF/DKIM/DMARC: configured
+- Warmup: running for at least 2 weeks before first send
+- Daily send limit: start at 20/day, scale up slowly
+- Sending tool: (Clay, Instantly, Smartlead, Reply.io -- confirm which they use)
 
-### Step 5: Follow-up
-Review the reply handling:
-- How will they handle positive replies? (speed matters - 4 hours or less)
-- How will they handle soft nos? (quarterly follow-up cadence)
-- How will they handle objections? (direct them to `research/prompts/objection-research.md`)
+Send schedule:
+- Tuesday through Thursday, 8am-10am local time for the recipient
+- Batch 1: 20-50 contacts as a test cohort
+- Wait 72 hours before evaluating results
+
+### Step 5: Reply handling
+
+Review how they will handle each reply type. Reference `playbooks/book/reply-triage.md` for exact scripts.
+
+| Reply type | Action |
+|-----------|--------|
+| Positive / interested | Respond within 4 hours. Book the meeting immediately. |
+| Soft no / not now | Add to quarterly follow-up sequence. No longer than 3 lines. |
+| Referral | Ask for intro. Thank them. Log the contact. |
+| Unsubscribe | Remove. Do not follow up. |
+| Objection | Use objection scripts from `playbooks/biz-dev/sales/templates/objections.md` |
+| No reply | Follow-up 1 at day 3, Follow-up 2 at day 7. Then stop. |
 
 ### Step 6: Iterate
-After 100 sends, review metrics with the user:
-- Open rate (target 30%+, investigate deliverability if lower)
-- Reply rate (target 1%+, investigate message if lower with good open rate)
-- Meeting rate (target 0.25%+)
 
-Identify one specific change to make based on the data. Change one variable at a time.
+After 100 sends, review:
+
+| Metric | Target | Action if below target |
+|--------|--------|----------------------|
+| Open rate | 30%+ | Investigate deliverability. Check spam filters. |
+| Reply rate | 1%+ | Message problem if open rate is good. Rewrite Email 1. |
+| Meeting rate | 0.25%+ | Check CTA clarity. Is the ask too big? |
+
+Change one variable at a time. Do not rewrite the entire sequence at once.
+
+**Volume rule:** More volume beats better copy at the same conversion rate. Fix volume before copy unless open rate is already above 30%.
+
+---
+
+## VERIFY
+
+Before this session ends:
+
+**1. Sequence written?**
+
+Confirm all three emails are written, use buyer verbatims, and pass the Stranger Test when read aloud.
+
+**2. Infrastructure confirmed?**
+
+Confirm separate domain, SPF/DKIM/DMARC, and warmup are all checked.
+
+**3. List ready?**
+
+Confirm list exists, is filtered to ICP match, and is verified.
+
+**4. Reply triage plan set?**
+
+Confirm what happens when positive replies come in. Who responds? How fast? What's the booking link?
+
+**5. Metric baseline set?**
+
+State the starting numbers: "Before this send, our reply rate is [X]. Success this week = at least [Y]."
+
+---
 
 ## Add-ons
 
-If the user has an AOE_GRADER_KEY environment variable set, mention that the AOE Grader can score their AI visibility as part of the research step.
+If `AOE_GRADER_KEY` is set: the AOE Grader can score AI visibility as part of the research step.
 
-If the user has a LEAD_PACKS_KEY set, they can access pre-built, verified contact lists rather than building from scratch.
+If `LEAD_PACKS_KEY` is set: pre-built, verified contact lists by vertical and geography are available instead of building from scratch.
+
+---
 
 ## Reference files
 
 - Full playbook: `playbooks/book/cold-email/README.md`
 - Sequence template: `playbooks/book/cold-email/templates/sequence-b2b.md`
 - Follow-up templates: `playbooks/book/cold-email/templates/follow-up.md`
-- Research prompts: `research/prompts/`
+- Reply triage: `playbooks/book/reply-triage.md`
+- Warm outreach (run before cold): `playbooks/book/warm-outreach.md`
+- Objection scripts: `playbooks/biz-dev/sales/templates/objections.md`

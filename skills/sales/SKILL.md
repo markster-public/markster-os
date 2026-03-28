@@ -1,102 +1,209 @@
 ---
 name: sales
-description: 'Run the Markster OS sales playbook. Discovery call framework, outcome-based proposal, close process. Structured from first meeting to signed contract.'
+description: 'Run the Markster OS sales playbook. CHECK deal context, DO discovery/proposal/close, VERIFY before moving stages. Includes 9 Kill Skills audit for conversion problems.'
 ---
 
-You are running the Markster OS sales playbook.
+# Sales Operator
 
-## Workspace Context
+---
 
-Assume the user should run this skill from inside a Markster OS workspace.
+## CHECK
 
-Before relying on generic answers, look for:
-- `company-context/audience.md`
-- `company-context/offer.md`
-- `company-context/messaging.md`
-- `company-context/proof.md`
-- `company-context/voice.md`
+**1. Foundation ready?**
 
-If these files exist, use them as the primary source of truth.
-If they are missing or empty, tell the user to fill them in or provide the missing context directly.
+Read `company-context/offer.md` and `company-context/audience.md`.
 
-If you update canonical workspace files such as `company-context/` or promoted learning-loop files, remind the user to run `markster-os validate .` before commit, and prefer validating before claiming the update is complete.
+Required before running this skill:
+- F1: ICP defined with buying trigger
+- F2: Offer stated as an outcome, not a deliverable. Pricing documented.
+- Proof: at least one specific result (company type + number + timeframe)
 
-## Your archetype
+If any of these are missing: "The sales process runs on Foundation. Without a defined ICP, outcome statement, and proof point, your sales calls will produce inconsistent results because you are improvising instead of executing a system. Complete F1 and F2 first."
 
-Before running this playbook, read your segment file. The sales motion differs significantly by business type -- the discovery questions, the proposal structure, and the close framework for a marketplace are not the same as for a consulting firm.
+**2. Which stage?**
 
-- `playbooks/segments/startup-archetypes/` -- SaaS, devtools, marketplace, DTC, hardware, indie
-- `playbooks/segments/service-firms/` -- agency, consulting, IT/MSP, advisory
-- `playbooks/segments/trade-businesses/` -- residential services, specialty trades, commercial
+Ask: "Which of these describes where you need help right now?"
 
-## Before starting
-
-Ask the user which stage they need help with:
-1. Preparing for a discovery call
+```
+1. Preparing for a discovery call (upcoming call)
 2. Writing a proposal after a discovery call
-3. Handling a stalled deal or objection
-4. General pipeline review
+3. Handling a stall or objection
+4. Auditing why deals aren't closing (conversion problem)
+5. Reviewing the pipeline
+```
 
-Then ask: do they have F1, F2, and F3 complete? The sales playbook depends on all three.
+Route to the corresponding DO section below.
 
-## Stage 1: Discovery call preparation
+**3. Archetype**
 
-Help them prepare:
-1. Research the company and the contact (5-10 minutes of specific research)
-2. Define the qualifying threshold: what must be true about their situation to want this client?
-3. Prepare their situation questions (pull from `playbooks/biz-dev/sales/templates/discovery-call.md`)
-4. Know their outcome statement (F2) for the brief solution framing in the last 5 minutes of the call
+The sales motion differs by business type. Confirm the type before starting.
 
-Walk through the call structure:
-- Open (5 min): agenda setting, why they agreed to the call
-- Situation questions (20 min): current state, history, future state
-- Implication questions (10 min): cost of inaction
-- Solution framing (5 min): brief, tailored to what they described
-- Next steps (5 min): define specific action with date
+| Type | Key difference |
+|------|---------------|
+| B2B SaaS | Demo-led, shorter cycle, trial or POC as close mechanism |
+| Consulting / Advisory | Longer cycle, relationship-driven, proposal is the close mechanism |
+| Agency | Scoped project or retainer, value tied to outcomes not hours |
+| Trades | Phone + in-person, speed of response is often the competitive moat |
 
-After the call, capture notes immediately: their language, the cost they named, qualifying signals, next step confirmed.
+Read the relevant segment file before running any stage: `playbooks/segments/`
 
-## Stage 2: Proposal writing
+---
+
+## DO
+
+### Stage 1: Discovery call prep
+
+**Pre-call research (10 minutes max):**
+- Company: what do they do, how big, what changed recently
+- Contact: role, tenure, what they have said publicly
+- Trigger: what happened that made them take this meeting
+
+**Qualification threshold:**
+Before the call, define what must be true for you to want this client:
+- Company type match
+- Budget range
+- Problem severity
+- Decision-making authority
+
+If they do not meet the threshold on the call, do not propose. Qualify out cleanly.
+
+**Call structure (45 minutes):**
+
+| Minutes | Phase | Purpose |
+|---------|-------|---------|
+| 0-5 | Open | Set agenda. Ask why they agreed to the call. |
+| 5-25 | Situation questions | Current state, history, what they have tried |
+| 25-35 | Implication questions | Cost of the problem continuing. Their words, not yours. |
+| 35-40 | Solution framing | 2-3 sentences. Tailored to what they described. |
+| 40-45 | Next steps | One specific action with a date. |
+
+**Key questions to ask (pull from `playbooks/biz-dev/sales/templates/discovery-call.md`):**
+- "What does solving this mean for you personally?"
+- "What have you already tried?"
+- "If we do nothing, what happens to this problem in 6 months?"
+- "What would need to be true for you to move forward on this?"
+
+**After the call (within 30 minutes):**
+Capture: their exact language, the cost they named, qualifying signals, confirmed next step.
+Use this to write the proposal.
+
+### Stage 2: Proposal writing
 
 Use `playbooks/biz-dev/sales/templates/proposal.md`.
 
-Help them build each section:
-1. **Situation summary:** reference specific things the prospect said in discovery - not generic language
-2. **Outcome:** F2 outcome statement tailored to their situation
-3. **Approach:** brief, 3-6 steps, enough for confidence
-4. **Timeline:** first visible result in 14 days, full outcome by [date]
-5. **Investment:** outcome-based pricing from F2, stated confidently
-6. **Risk reversal:** from F2, stated clearly
-7. **Next steps:** one action to say yes
+Build each section with the discovery notes in front of you:
 
-Remind them: walk through the proposal on a call rather than just emailing a PDF.
+| Section | Rule |
+|---------|------|
+| Situation summary | Use their words. Quote what they said. Do not rephrase. |
+| Outcome | F2 outcome statement tailored to their specific situation. |
+| Approach | 3-6 steps. Enough for confidence. Not enough to DIY. |
+| Timeline | First visible result in 14 days. Full outcome by [specific date]. |
+| Investment | Outcome-based price from F2. State confidently, no apology. |
+| Risk reversal | From F2. One clear statement of what happens if it does not work. |
+| Next steps | One action to say yes. Not two. One. |
 
-## Stage 3: Handling stalls and objections
+**Delivery rule:** Walk through the proposal on a call. Do not just email a PDF and wait. Send it 2 hours before the call so they can review. Walk through it live. Close on the call.
 
-For "I need to think about it":
-Ask what would make them more confident. Address the specific concern, not the general objection.
+### Stage 3: Objection handling
 
-For "too expensive":
-Ask what they are comparing it to. Reframe against the cost of the problem continuing, the cost of hiring, or the outcome value.
+**"I need to think about it"**
+Ask: "Of course -- what specifically would make you more confident moving forward?"
+Do not accept the vague response. Get the specific concern. Address that, not the general objection.
 
-For "we need internal approval":
-Offer to create a one-pager they can share internally. Write it for them. Reduce their work.
+**"Too expensive"**
+Ask: "What are you comparing it to?"
+Reframe against: cost of the problem continuing, cost of hiring internally, or the value of the outcome.
+Never lower the price without removing scope. If they need a lower entry point, propose the Downsell: a smaller first engagement, not a discount.
 
-For "we already have someone for this":
-Ask if there is still an area where the problem persists. Do not counter-pitch.
+**"We need internal approval"**
+Offer to create a one-pager they can share internally. Write it for them. Use their language. Make their internal sell easy.
 
-## Stage 4: Pipeline review
+**"We already have someone for this"**
+Ask: "Is there still an area where the problem persists?"
+Do not pitch against the incumbent directly. Find the gap the incumbent is not solving.
 
-Walk through every active deal:
-- What is the stage?
-- When was last contact?
-- What is the next action and date?
-- What is the blocker, if any?
+**"Not the right time"**
+Ask: "When would be the right time, and what needs to happen between now and then?"
+Their answer is your follow-up roadmap. Set a reminder. Come back when the condition is met.
 
-Flag any deal without a next action date - it will stall. Every open deal needs a task with a date.
+Full objection scripts: `playbooks/biz-dev/sales/templates/objections.md`
+
+### Stage 4: Conversion audit (9 Kill Skills)
+
+Use this when close rate is below target or declining.
+
+Pull the last 5 recorded calls. Score each Kill Skill 1-3.
+
+| Kill Skill | What to listen for |
+|-----------|-------------------|
+| 1 Breathe the Script | Is the script running word for word, or improvised? |
+| 2 Tone | 150-170 wpm? Loud enough? Every word clear? |
+| 3 Introduction | Call framed in first 60 seconds? Agenda set? |
+| 4 Discovery | At least 20 minutes of questions before offering anything? |
+| 5 Offer | Is the offer presented using their own words from discovery? |
+| 6 Objections | Are objections addressed without losing momentum? |
+| 7 Looping | After a failed close, does the rep return to discovery? |
+| 8 BAMFAM | Does every call end with a next meeting booked? |
+| 9 Referrals | Is every closed customer asked for names on the close call? |
+
+The lowest-scoring Kill Skill is the training drill.
+
+**Pause rule:** After asking for the business, pause for at least 8 seconds. Do not fill the silence. The person who speaks first loses. Most closers answer their own question within 3 seconds.
+
+### Stage 5: Pipeline review
+
+Walk through every active deal. For each one, answer:
+
+```
+Deal: [Company name]
+Stage: intro / discovery / proposal / negotiation / stalled
+Last contact: [date]
+Next action: [specific action]
+Next action date: [date]
+Blocker: [if any]
+```
+
+Flag: any deal without a next action date. It will die.
+
+Flag: any deal with no contact in 14+ days. Send a re-engagement email today.
+
+Flag: any deal sitting at "proposal sent" for more than 7 days. Follow up with a specific question, not "just checking in."
+
+---
+
+## VERIFY
+
+Before ending this session:
+
+**1. Next step defined?**
+
+Every active deal must have one next action with a date. No exceptions.
+
+**2. Objection unblocked?**
+
+If a deal was stuck on an objection, confirm the response was sent or scheduled.
+
+**3. Conversion metric set?**
+
+State the baseline: "Current close rate is [X]%. Target this month is [Y]%."
+
+If close rate is below target: confirm which Kill Skill was identified as the gap and what the drill is.
+
+**4. Pipeline health?**
+
+Confirm no deal is sitting without a next action date.
+
+**5. BAMFAM confirmed?**
+
+If a discovery call was prepared this session: confirm a follow-up call or proposal delivery date is already on the calendar.
+
+---
 
 ## Reference files
 
 - Full playbook: `playbooks/biz-dev/sales/README.md`
 - Discovery call guide: `playbooks/biz-dev/sales/templates/discovery-call.md`
 - Proposal template: `playbooks/biz-dev/sales/templates/proposal.md`
+- Objection scripts: `playbooks/biz-dev/sales/templates/objections.md`
+- Segment archetypes: `playbooks/segments/`
