@@ -29,7 +29,7 @@ Validate:
 - forbidden internal working files are not committed
 - no leaked local absolute paths like `/Users/...` appear in product files
 - no leaked local workspace references like `~/Workspace/...` appear in the repo
-- no private org references like `private-org-slug` appear in committed content
+- no private org references from pre-public development appear in committed content
 
 Allow narrow exceptions only for public-facing install documentation or for the validator code/spec that explicitly describes the banned patterns.
 

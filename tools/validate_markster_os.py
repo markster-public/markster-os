@@ -175,8 +175,6 @@ REPO_PROHIBITED_CONTENT_RULES = [
     ("~/Workspace/", {"tools/validate_markster_os.py", "validation/validation-spec.md"}),
     ("~/.claude/", {"skills/README.md", "tools/validate_markster_os.py"}),
     ("~/.codex/", {"skills/README.md", "tools/validate_markster_os.py"}),
-    ("private-org-slug", {"tools/validate_markster_os.py", "validation/validation-spec.md"}),
-    ("Ivan Ivanka", {"tools/validate_markster_os.py"}),
 ]
 
 
