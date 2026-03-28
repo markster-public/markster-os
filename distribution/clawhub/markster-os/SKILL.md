@@ -1,6 +1,6 @@
 ---
 name: markster-os
-description: Lightweight installer and router for Markster OS. Use to set up the full Git-backed workspace, check readiness, and install additional public Markster OS skills when needed.
+description: Lightweight guide and router for Markster OS. Use to explain the system, point users to the full Git-backed workspace setup, and help them decide whether to approve a full Markster OS installation.
 ---
 
 # Markster OS
@@ -9,7 +9,7 @@ This is the marketplace entrypoint for Markster OS.
 
 Do not pretend this package is the full operating system.
 
-Your job is to help the user get into the official Markster OS workflow safely and quickly.
+Your job is to explain Markster OS, route the user to the right next step, and ask for explicit approval before any full installation or Git operation.
 
 ---
 
@@ -17,18 +17,51 @@ Your job is to help the user get into the official Markster OS workflow safely a
 
 Ask:
 
-1. Is `markster-os` already installed?
-2. Is the user already inside a Markster OS workspace?
-3. Do they want the full Git-backed company workspace, or just one extra public skill?
+1. Do you want an overview, setup guidance, or a specific skill recommendation?
+2. Is `markster-os` already installed?
+3. Are you already inside a Markster OS workspace?
+
+Do not jump straight into installation commands.
 
 ---
 
-## If the CLI is not installed
+## If the user wants an overview
 
-Use the official installer:
+Explain this in plain language:
+
+- Markster OS is the full open-source GTM operating system
+- this ClawHub package is only the lightweight marketplace entrypoint
+- the full system lives in the GitHub repository and uses a Git-backed workspace
+- the workspace stores the company context, learning loop, playbooks, and validation rules
+
+Then ask:
+
+> "Do you want to review the full Markster OS installation steps now?"
+
+---
+
+## If the user wants setup guidance
+
+Do not run commands immediately.
+
+First say:
+
+> "I can guide you through the full Markster OS installation. It will clone the public repository, run the installer locally, and create a Git-backed workspace for your company. Do you want to approve that full Markster OS installation?"
+
+Only continue if the user explicitly says yes.
+
+If the user approves, direct them to `SETUP.md` and summarize the steps before running anything.
+
+---
+
+## If the CLI is not installed and the user approved full installation
+
+Use the reviewable install path from `SETUP.md`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+git clone https://github.com/markster-public/markster-os.git
+cd markster-os
+bash install.sh
 ```
 
 After install, use:
@@ -39,7 +72,7 @@ markster-os doctor
 
 ---
 
-## If the user wants the full operating system
+## If the user wants the full operating system and has approved setup
 
 Create a Git-backed workspace:
 
@@ -55,13 +88,15 @@ markster-os start
 markster-os validate .
 ```
 
-If they have a company repo URL, attach it with:
+If they want to connect a company repository, ask for explicit approval before any remote or push command.
+
+Only after approval, suggest:
 
 ```bash
 markster-os attach-remote <git-url>
 ```
 
-Then tell them the next push command:
+If they also approve the first push, suggest:
 
 ```bash
 git push -u origin main
@@ -79,7 +114,7 @@ markster-os install-skills
 markster-os install-skills --skill <skill-name>
 ```
 
-Do not invent skill names. List first, then install.
+Do not invent skill names. List first, then ask for approval before installing additional skills.
 
 ---
 
@@ -99,7 +134,9 @@ If the workspace is missing hooks:
 markster-os install-hooks
 ```
 
-If the user wants to sync or push:
+If the user wants to sync, commit, or push, ask first.
+
+Only after approval, suggest:
 
 ```bash
 markster-os sync
@@ -115,5 +152,6 @@ markster-os push
 - treat the company workspace as the place where business context lives
 - keep raw notes in `learning-loop/inbox/`
 - use `markster-os validate .` before claiming the workspace is ready
-- if a specialized public skill is needed, list skills first and install explicitly
+- if a specialized public skill is needed, list skills first and install explicitly only after user approval
 - do not claim native OpenClaw integration beyond the documented setup flow
+- do not run install, remote, or push commands without explicit user approval
