@@ -1,4 +1,4 @@
-# Scale OS Operational Handbook
+# ScaleOS Operational Handbook
 
 **The Operating System for Predictable Revenue**
 
@@ -8,7 +8,7 @@ Version: 1.0
 
 ## What This Handbook Is
 
-This is the operational manual for Scale OS -- a complete operating system for B2B service businesses. It covers:
+This is the operational manual for ScaleOS -- a complete operating system for B2B service businesses. It covers:
 
 - **Foundation** -- The four strategic prerequisites
 - **GOD Engine** -- The nine operational bricks
@@ -17,7 +17,7 @@ This is the operational manual for Scale OS -- a complete operating system for B
 - **Rhythms** -- Operating cadences that work
 - **Assessments** -- How to diagnose and prioritize
 
-Scale OS turns chaos into system. Random revenue into predictable pipeline. Founder dependency into business freedom.
+ScaleOS turns chaos into system. Random revenue into predictable pipeline. Founder dependency into business freedom.
 
 ---
 
@@ -45,7 +45,7 @@ These aren't character flaws. They're system failures.
 
 ### The Solution
 
-Scale OS provides an integrated operating architecture:
+ScaleOS provides an integrated operating architecture:
 
 ```
 FOUNDATION (Layer 0)
@@ -272,7 +272,7 @@ Every business needs three functional owners:
 
 # PART II: THE GOD ENGINE -- 9 Bricks
 
-The GOD Engine is the operational core of Scale OS. Three pillars, nine bricks, one integrated system.
+The GOD Engine is the operational core of ScaleOS. Three pillars, nine bricks, one integrated system.
 
 ```
 GROWTH          OPERATIONS       DELIVERY
@@ -530,7 +530,7 @@ DELIVER (create results) -> PROVE (document results) -> WARM (content from proof
 
 # PART III: THE 5 LAWS
 
-The 5 Laws are non-negotiable principles. Break them and Scale OS fails.
+The 5 Laws are non-negotiable principles. Break them and ScaleOS fails.
 
 ---
 

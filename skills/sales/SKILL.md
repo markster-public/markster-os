@@ -103,6 +103,8 @@ Build each section with the discovery notes in front of you:
 | Risk reversal | From F2. One clear statement of what happens if it does not work. |
 | Next steps | One action to say yes. Not two. One. |
 
+**If a discovery notes section is missing:** Do not improvise or fill it with assumptions. Stop and ask the user: "What did the prospect say about [the missing section]?" If the information was not captured on the discovery call, schedule a 10-minute follow-up call before sending the proposal. A proposal missing the prospect's own words will not close.
+
 **Delivery rule:** Walk through the proposal on a call. Do not just email a PDF and wait. Send it 2 hours before the call so they can review. Walk through it live. Close on the call.
 
 ### Stage 3: Objection handling

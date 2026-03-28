@@ -35,7 +35,7 @@ Full overview: [god-engine/README.md](god-engine/README.md)
 
 ## The 5 Laws
 
-Non-negotiable governing principles. Break any one and Scale OS fails.
+Non-negotiable governing principles. Break any one and ScaleOS fails.
 
 [scaleos/laws.md](scaleos/laws.md)
 

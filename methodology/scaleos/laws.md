@@ -1,6 +1,6 @@
 # The 5 Laws of ScaleOS
 
-The 5 Laws are non-negotiable. They are not best practices or guidelines. They are governing principles. Break any one and Scale OS fails.
+The 5 Laws are non-negotiable. They are not best practices or guidelines. They are governing principles. Break any one and ScaleOS fails.
 
 ---
 

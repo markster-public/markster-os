@@ -92,13 +92,15 @@ Ask: "Are you publishing content? Where? How often?"
 Ask: "Are you running paid ads?"
 ```
 
-Identify which Core 4 source has not been tried in sequence.
+Identify which Core 4 source is missing or not at consistent weekly volume. Apply the distinction:
+- **Not tried at all** = build it from scratch
+- **Tried inconsistently** = systematize what exists, do not rebuild
 
 Route to:
-- Warm outreach not done: `playbooks/book/warm-outreach.md`
-- Cold outreach not consistent: `/cold-email`
-- Content not live: `/content`
-- Paid ads before the above are working: block it and say why
+- Warm outreach not done or no weekly habit: `playbooks/book/warm-outreach.md`
+- Cold outreach not done or under 50 sends/week: `/cold-email`
+- Content not live or no publishing cadence: `/content`
+- Paid ads requested before the above are working: block it and explain -- "Paid ads amplify what is already converting. Running ads before warm and cold are working will burn budget without learning. Fix the upstream source first."
 
 **If C -- Lumpy revenue:**
 
@@ -138,7 +140,17 @@ If no: the constraint is O1. Document before delegating.
 
 Route to: `playbooks/standardize/README.md`
 
-If yes: ask about O2 (automation) and O3 (instrumentation).
+If yes: run this two-question diagnostic.
+
+```
+Ask: "What tasks are eating the most manual hours each week?"
+Ask: "Do you know which activities are producing your revenue, or are you guessing?"
+```
+
+Route to:
+- Manual hours are the primary drain (unautomated repeatable tasks): `/automate` -> `playbooks/automate/README.md`
+- Visibility is the primary problem (do not know what is working): `/instrument` -> `playbooks/instrument/README.md`
+- Both: route to `/automate` first. Automation without instrumentation is faster chaos. Measurement without automation is diagnostic only. Fix automation first, then measure the result.
 
 **If F -- No obvious constraint:**
 

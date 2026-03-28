@@ -16,7 +16,7 @@ F3 fixes this by establishing clear ownership before you add people. Ownership w
 
 ## The GOD Ownership Model
 
-Scale OS uses a simple ownership model: one owner per pillar, one owner per brick.
+ScaleOS uses a simple ownership model: one owner per pillar, one owner per brick.
 
 Each of the three GOD Engine pillars has a single owner who is accountable for that pillar's North Star metric:
 
