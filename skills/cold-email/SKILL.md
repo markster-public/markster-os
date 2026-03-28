@@ -28,7 +28,7 @@ Ask the user for their Foundation context if they have not provided it:
 - F2: What is their outcome statement? What is their offer?
 - F3: What is their problem statement in the buyer's language? What is their proof point?
 
-If they have not completed Foundation, tell them: "Before running the cold email playbook, you need F1 (ICP) and F2 (Offer) complete. Open `methodology/foundation/F1-icp.md` and work through it first. The cold email playbook will not perform well without it."
+If they have not completed Foundation, tell them: "Before running the cold email playbook, you need F1 (Positioning) and F2 (Business Model) complete. Open `methodology/foundation/F1-positioning.md` and work through it first. The cold email playbook will not perform well without it."
 
 If Foundation is at least partially complete, proceed.
 

@@ -166,9 +166,9 @@ The shareable export excludes `learning-loop/inbox/` by default.
 
 Skills work best when you have your Foundation answers ready. Before running any skill except `/research`, have these documents open or ready to paste:
 
-- F1 ICP summary (from `methodology/foundation/F1-icp.md`)
-- F2 offer summary (from `methodology/foundation/F2-offer.md`)
-- F3 message summary (from `methodology/foundation/F3-message.md`)
-- F4 channel selection (from `methodology/foundation/F4-channel.md`)
+- F1 Positioning summary (from `methodology/foundation/F1-positioning.md`)
+- F2 Business Model summary (from `methodology/foundation/F2-business-model.md`)
+- F3 Org Structure summary (from `methodology/foundation/F3-org-structure.md`)
+- F4 Financial Architecture summary (from `methodology/foundation/F4-financial.md`)
 
 The skill will ask for this context if you do not provide it upfront.

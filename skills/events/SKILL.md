@@ -26,7 +26,7 @@ Ask the user:
 1. Do they have an upcoming event in mind, or are they looking to identify which events to attend?
 2. Is their F1 ICP complete? (The ICP defines which events are worth attending.)
 
-If F1 is not complete, tell them: "The events playbook works best with a clear ICP so you can identify which events your buyers actually attend. Open `methodology/foundation/F1-icp.md` and complete it first, then return to this playbook."
+If F1 is not complete, tell them: "The events playbook works best with a clear ICP so you can identify which events your buyers actually attend. Open `methodology/foundation/F1-positioning.md` and complete it first, then return to this playbook."
 
 ## Playbook steps
 

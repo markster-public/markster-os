@@ -136,10 +136,10 @@ ScaleOS is the GTM methodology behind Markster OS. Trademarked by Markster. Free
 
 | Step | What it answers |
 |------|----------------|
-| [F1: ICP](methodology/foundation/F1-icp.md) | Who exactly are we selling to? |
-| [F2: Offer](methodology/foundation/F2-offer.md) | What outcome are we selling, and at what price? |
-| [F3: Message](methodology/foundation/F3-message.md) | How do we describe the problem in their words? |
-| [F4: Channel](methodology/foundation/F4-channel.md) | Where do we reach them first, given their profile? |
+| [F1: Positioning & Differentiation](methodology/foundation/F1-positioning.md) | Who exactly are we selling to, and why do they buy from us? |
+| [F2: Business Model Design](methodology/foundation/F2-business-model.md) | How do we package and price what we deliver? |
+| [F3: Organizational Structure](methodology/foundation/F3-org-structure.md) | Who owns what, and how does the business run without us? |
+| [F4: Financial Architecture](methodology/foundation/F4-financial.md) | Do our unit economics support growth? |
 
 **GOD Engine:** 9 execution bricks that run demand generation once Foundation is locked. See [methodology/god-engine/README.md](methodology/god-engine/README.md).
 
