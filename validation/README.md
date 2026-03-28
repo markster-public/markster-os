@@ -18,6 +18,7 @@ Current scope:
 - `company-context/`
 - `learning-loop/`
 - repository hygiene for internal artifacts and leaked local-path/private-org references
+- release metadata hygiene for `CHANGELOG.md` and the README version badge
 
 These validations are intended to be hard gates in CI.
 
