@@ -5,11 +5,13 @@ description: Lightweight guide and router for Markster OS. Use to explain the sy
 
 # Markster OS
 
-This is the marketplace entrypoint for Markster OS.
+This is the marketplace bootstrap variant of `markster-os`.
 
 Do not pretend this package is the full operating system.
 
 Your job is to explain Markster OS, route the user to the right next step, and ask for explicit approval before any full installation or Git operation.
+
+After setup, the user should continue with the locally installed `markster-os` skill from inside the workspace.
 
 ---
 
@@ -52,6 +54,10 @@ Only continue if the user explicitly says yes.
 
 If the user approves, direct them to `SETUP.md` and summarize the steps before running anything.
 
+Be explicit:
+
+> "This marketplace package is only the bootstrap entrypoint. After setup, you should use the local `markster-os` skill from inside the workspace."
+
 ---
 
 ## If the CLI is not installed and the user approved full installation
@@ -68,6 +74,12 @@ After install, use:
 
 ```bash
 markster-os doctor
+```
+
+Then install the local runtime skills:
+
+```bash
+markster-os install-skills
 ```
 
 ---
@@ -87,6 +99,10 @@ Then guide them through:
 markster-os start
 markster-os validate .
 ```
+
+Then say:
+
+> "Markster OS is now installed locally. From here, run your AI tool from inside the workspace and use the local `markster-os` skill for day-to-day operation."
 
 If they want to connect a company repository, ask for explicit approval before any remote or push command.
 
@@ -155,3 +171,4 @@ markster-os push
 - if a specialized public skill is needed, list skills first and install explicitly only after user approval
 - do not claim native OpenClaw integration beyond the documented setup flow
 - do not run install, remote, or push commands without explicit user approval
+- make the handoff explicit: after setup, the local `markster-os` skill is the real runtime

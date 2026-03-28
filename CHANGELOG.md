@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-03-28
+
+### Changed
+- clarified the single-identity skill model: `markster-os` stays the same name across marketplace bootstrap and local runtime contexts, with the ClawHub package acting as a safe entrypoint and the local installed skill acting as the full operator
+
 ## [1.1.0] - 2026-03-28
 
 ### Added

@@ -1,7 +1,7 @@
 # Markster OS
 
 [![Validation](https://img.shields.io/badge/validation-passing-brightgreen.svg)](validation/README.md)
-[![Version](https://img.shields.io/badge/version-v1.1.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v1.1.1-blue.svg)](CHANGELOG.md)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PRs required](https://img.shields.io/badge/changes-PRs%20required-orange.svg)](CONTRIBUTING.md)
 [![Security policy](https://img.shields.io/badge/security-policy-lightgrey.svg)](SECURITY.md)
@@ -141,6 +141,13 @@ markster-os doctor
 If you want an AI tool to do the setup for you, see [setup-prompts/](setup-prompts/).
 
 If you want to use Markster OS through OpenClaw, start with [setup-prompts/openclaw.md](setup-prompts/openclaw.md).
+
+The skill name stays simple everywhere:
+
+- `markster-os` in a marketplace package is the safe bootstrap entrypoint
+- `markster-os` installed locally is the full runtime skill inside the workspace
+
+After setup, run your AI tool from inside the workspace and use the local `markster-os` skill for normal operation.
 
 ---
 

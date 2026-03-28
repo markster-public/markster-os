@@ -2,16 +2,18 @@
 
 Markster OS is an open-source B2B growth operating system for small teams.
 
-This ClawHub package is a thin entrypoint. It helps the agent:
+This ClawHub package is a thin bootstrap entrypoint. It helps the agent:
 
 - explain what Markster OS is
 - ask whether the user wants to approve a full Markster OS installation
 - guide the user through the official reviewable install path
 - create a Git-backed company workspace
 - check workspace readiness
-- install additional public Markster OS skills when needed
+- install the local runtime skills when needed
 
 This package is not the full operating system by itself.
+
+After setup, the user should run their AI tool from inside the workspace and use the local `markster-os` skill for day-to-day operation.
 
 To use the full system, review and run the setup from the official repository:
 

@@ -42,9 +42,18 @@ markster-os install-skills
 ## First run
 
 ```bash
+markster-os install-skills
 markster-os start
 markster-os validate .
 ```
+
+## Handoff
+
+After setup:
+
+- run your AI tool from inside the workspace directory
+- use the local `markster-os` skill for day-to-day operation
+- treat this ClawHub package as the bootstrap entrypoint, not the runtime
 
 ## Install an additional public skill
 
