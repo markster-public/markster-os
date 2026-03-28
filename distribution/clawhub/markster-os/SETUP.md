@@ -1,11 +1,13 @@
 # Markster OS Setup
 
-Use these commands when the user wants the full Markster OS workflow.
+Use these steps only after the user explicitly approves the full Markster OS installation.
 
-## Install the CLI
+## Reviewable install path
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+git clone https://github.com/markster-public/markster-os.git
+cd markster-os
+bash install.sh
 ```
 
 ## Create the workspace
@@ -17,8 +19,17 @@ cd ./your-company-os
 
 ## Attach the company repository
 
+Only do this after the user explicitly approves connecting their repo.
+
 ```bash
 markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
+```
+
+## First push
+
+Only do this after the user explicitly approves the first push.
+
+```bash
 git push -u origin main
 ```
 
@@ -36,6 +47,8 @@ markster-os validate .
 ```
 
 ## Install an additional public skill
+
+Only do this after the user explicitly approves extra skill installation.
 
 ```bash
 markster-os list-skills
