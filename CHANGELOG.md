@@ -6,6 +6,16 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.5] - 2026-03-28
+
+### Fixed
+- synced the README version badge with the latest released tag
+- moved the updater fix into a proper `1.1.4` changelog section
+
+### Added
+- validator now enforces that `CHANGELOG.md` contains an `## [Unreleased]` section
+- validator now enforces that the latest released changelog version matches the README version badge
+
 ## [1.1.4] - 2026-03-28
 
 ### Fixed
