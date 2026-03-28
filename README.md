@@ -77,7 +77,7 @@ Set up Markster OS for me.
 Requirements:
 - Install the Markster OS CLI if it is not already installed.
 - Use the official installer:
-  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 - Create a Git-backed workspace for my company with:
   markster-os init <company-slug> --git --path ./<company-slug>-os
 - Move into that workspace.
@@ -109,7 +109,7 @@ You can also use the standalone version in [setup-prompts/install-workspace.md](
 ### Manual install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 ```
 
 This installs the `markster-os` CLI into your home directory. The CLI manages a stable Markster OS distribution, customer workspaces, validation, and optional slash-command skill installation.
@@ -208,7 +208,7 @@ Start with the [assessment scorecard](methodology/assessment/scorecard.md). It t
 
 **Step 1: Install the CLI**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/markster-public/markster-os/master/install.sh | bash
 ```
 
 If you prefer, use the AI-assisted install prompt above instead of doing this manually.

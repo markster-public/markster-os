@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- corrected public install and raw GitHub URLs to use the actual `master` branch for `markster-public/markster-os`
+
 ## [1.1.1] - 2026-03-28
 
 ### Changed
