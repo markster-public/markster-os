@@ -6,7 +6,8 @@
 ## Verification
 
 - [ ] `python3 tools/validate_markster_os.py`
-- [ ] `python3 -m py_compile tools/markster_os_cli.py tools/validate_markster_os.py` if CLI code changed
+- [ ] `python3 -m py_compile tools/markster_os_cli.py tools/validate_markster_os.py tools/validate_commit_message.py` if CLI code changed
+- [ ] commit subjects in this PR follow `type(scope): summary`
 
 ## Changelog
 

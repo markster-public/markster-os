@@ -46,6 +46,10 @@ PRE_COMMIT_HOOK = """#!/usr/bin/env bash
 set -euo pipefail
 markster-os validate .
 """
+COMMIT_MSG_HOOK = """#!/usr/bin/env bash
+set -euo pipefail
+python3 ~/.markster-os/dist/current/tools/validate_commit_message.py "$1"
+"""
 PRE_PUSH_HOOK = """#!/usr/bin/env bash
 set -euo pipefail
 markster-os validate .
@@ -343,7 +347,8 @@ def write_workspace_files(path: Path, slug: str) -> None:
                 "## Validation",
                 "",
                 "- pre-commit and pre-push hooks are installed for Git workspaces",
-                "- the hook runs `markster-os validate .`",
+                "- pre-commit and pre-push run `markster-os validate .`",
+                "- commit-msg enforces the commit subject format: `type(scope): summary`",
                 "- CI should also run `markster-os validate .` on pull requests",
                 "- if you push directly to the default branch, the local pre-push hook is the last safety check before the remote",
                 "",
@@ -354,7 +359,7 @@ def write_workspace_files(path: Path, slug: str) -> None:
                 "- `markster-os doctor`",
                 "- `markster-os sync`",
                 "- `markster-os validate .`",
-                "- `markster-os commit -m \"Update workspace\"`",
+                "- `markster-os commit -m \"docs(context): update workspace\"`",
                 "- `markster-os push`",
                 "- `markster-os backup-workspace .`",
                 "- `markster-os export-workspace .`",
@@ -391,6 +396,9 @@ def install_hooks(path: Path) -> None:
     pre_commit = hooks_dir / "pre-commit"
     pre_commit.write_text(PRE_COMMIT_HOOK, encoding="utf-8")
     pre_commit.chmod(0o755)
+    commit_msg = hooks_dir / "commit-msg"
+    commit_msg.write_text(COMMIT_MSG_HOOK, encoding="utf-8")
+    commit_msg.chmod(0o755)
     pre_push = hooks_dir / "pre-push"
     pre_push.write_text(PRE_PUSH_HOOK, encoding="utf-8")
     pre_push.chmod(0o755)
@@ -427,6 +435,11 @@ def has_pre_commit_hook(path: Path) -> bool:
 
 def has_pre_push_hook(path: Path) -> bool:
     hook = path / ".git" / "hooks" / "pre-push"
+    return hook.exists()
+
+
+def has_commit_msg_hook(path: Path) -> bool:
+    hook = path / ".git" / "hooks" / "commit-msg"
     return hook.exists()
 
 
@@ -504,6 +517,13 @@ def workspace_readiness(path: Path) -> list[tuple[str, bool, str]]:
             "install hooks with `markster-os install-hooks .`",
         )
     )
+    checks.append(
+        (
+            "Commit message hook",
+            git_enabled and has_commit_msg_hook(path),
+            "install hooks with `markster-os install-hooks .`",
+        )
+    )
 
     placeholder_hits = company_context_placeholder_hits(path)
     checks.append(
@@ -548,10 +568,11 @@ def cmd_init(args: argparse.Namespace) -> int:
     if args.git:
         print("  1. Add a Git remote for this workspace and push it to your own repository")
         print("  2. Pre-commit and pre-push hooks are already installed and will run `markster-os validate .`")
-        print("  3. Run `markster-os start`")
-        print("  4. Fill in company-context/")
-        print("  5. Store raw notes in learning-loop/inbox/")
-        print("  6. Run your AI from inside the workspace when using Markster OS skills")
+        print("  3. Commit messages are enforced locally as `type(scope): summary`")
+        print("  4. Run `markster-os start`")
+        print("  5. Fill in company-context/")
+        print("  6. Store raw notes in learning-loop/inbox/")
+        print("  7. Run your AI from inside the workspace when using Markster OS skills")
     else:
         print("  1. Consider re-running with `--git` for a team-ready workspace")
         print("  2. Run `markster-os start --path <workspace>`")
@@ -567,6 +588,20 @@ def cmd_validate(args: argparse.Namespace) -> int:
     target = Path(args.path).expanduser().resolve() if args.path else Path.cwd()
     validator = DIST_ROOT / "tools" / "validate_markster_os.py"
     result = subprocess.run([sys.executable, str(validator), str(target)])
+    return result.returncode
+
+
+def cmd_validate_commit_message(args: argparse.Namespace) -> int:
+    ensure_distribution()
+    validator = DIST_ROOT / "tools" / "validate_commit_message.py"
+    command = [sys.executable, str(validator)]
+    if args.message:
+        command.extend(["--message", args.message])
+    elif args.path:
+        command.append(args.path)
+    else:
+        die("provide --message or a commit message file path")
+    result = subprocess.run(command)
     return result.returncode
 
 
@@ -686,6 +721,7 @@ def cmd_status(args: argparse.Namespace) -> int:
             print(kv("Uncommitted changes", color("yes", YELLOW) if status else color("no", GREEN)))
             print(kv("Pre-commit hook", color("installed", GREEN) if has_pre_commit_hook(cwd) else color("missing", YELLOW)))
             print(kv("Pre-push hook", color("installed", GREEN) if has_pre_push_hook(cwd) else color("missing", YELLOW)))
+            print(kv("Commit-msg hook", color("installed", GREEN) if has_commit_msg_hook(cwd) else color("missing", YELLOW)))
         else:
             print(kv("Git", color("not initialized", YELLOW)))
             print(bullet("run `git init -b main` or recreate the workspace with `markster-os init --git --path ...`"))
@@ -781,8 +817,10 @@ def cmd_attach_remote(args: argparse.Namespace) -> int:
 def cmd_install_hooks(args: argparse.Namespace) -> int:
     workspace = Path(args.path).expanduser().resolve() if args.path else Path.cwd()
     install_hooks(workspace)
-    print(ok(f"installed pre-commit and pre-push hooks for workspace: {workspace}"))
-    print(bullet("hook command: markster-os validate ."))
+    print(ok(f"installed pre-commit, commit-msg, and pre-push hooks for workspace: {workspace}"))
+    print(bullet("pre-commit: markster-os validate ."))
+    print(bullet("commit-msg: type(scope): summary"))
+    print(bullet("pre-push: markster-os validate ."))
     return 0
 
 
@@ -927,7 +965,7 @@ def cmd_start(args: argparse.Namespace) -> int:
     print("  2. Keep raw notes in `learning-loop/inbox/`")
     print("  3. Run your AI tool from this directory")
     print("  4. Before commit: `markster-os validate .`")
-    print("  5. Then: `markster-os commit -m \"Update workspace\"` and `markster-os push`")
+    print("  5. Then: `markster-os commit -m \"docs(context): update workspace\"` and `markster-os push`")
     return 0
 
 
@@ -945,6 +983,11 @@ def build_parser() -> argparse.ArgumentParser:
     validate_parser = sub.add_parser("validate", help="Validate a workspace")
     validate_parser.add_argument("path", nargs="?", help="Workspace path; defaults to current directory")
     validate_parser.set_defaults(func=cmd_validate)
+
+    validate_commit_parser = sub.add_parser("validate-commit-message", help="Validate a commit subject line")
+    validate_commit_parser.add_argument("path", nargs="?", help="Commit message file path")
+    validate_commit_parser.add_argument("--message", help="Commit subject line to validate directly")
+    validate_commit_parser.set_defaults(func=cmd_validate_commit_message)
 
     list_skills_parser = sub.add_parser("list-skills", help="List public Markster OS skills available in the distribution")
     list_skills_parser.set_defaults(func=cmd_list_skills)

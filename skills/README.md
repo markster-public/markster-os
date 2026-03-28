@@ -65,8 +65,9 @@ markster-os doctor
 markster-os upgrade-workspace ~/.markster-os/workspaces/your-company
 markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
 markster-os install-hooks
+markster-os validate-commit-message --message "docs(readme): clarify skill install flow"
 markster-os sync
-markster-os commit -m "Update canon"
+markster-os commit -m "docs(context): update canon"
 markster-os push
 markster-os backup-workspace ~/.markster-os/workspaces/your-company
 markster-os export-workspace ~/.markster-os/workspaces/your-company
@@ -92,10 +93,10 @@ Very simple team workflow:
 6. `markster-os start`
 7. run your AI tool from inside the workspace
 8. `markster-os validate .`
-9. `markster-os commit -m "Update workspace"`
+9. `markster-os commit -m "docs(context): update workspace"`
 10. `markster-os push`
 
-`markster-os install-hooks` installs both a pre-commit hook and a pre-push hook.
+`markster-os install-hooks` installs pre-commit, commit-msg, and pre-push hooks.
 
 ### Method 2: Install individual skill via curl
 
