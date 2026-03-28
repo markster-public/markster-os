@@ -1,69 +1,121 @@
 # GOD Engine
 
-The GOD Engine is the execution layer of ScaleOS. It activates after F1-F4 Foundation is locked.
+GOD = Growth, Operations, Delivery.
 
-Nine bricks. Each one is a distinct demand generation or demand capture motion. You do not run all nine at once. The assessment scorecard tells you which bricks to activate first based on your Foundation answers and current baseline.
+The GOD Engine is the execution layer of ScaleOS. It activates after Foundation (F1-F4) is locked. Nine bricks. Three pillars. Each brick represents a specific business function that must be systematized.
 
----
-
-## The nine bricks
-
-**G1 - Generate: Cold Outbound**
-Systematic cold email and cold message execution at volume. Research -> segment -> write -> send -> follow up -> iterate. The highest-control demand generation motion for companies under 20 people.
-Playbook: [cold-email](../../playbooks/cold-email/README.md)
-
-**G2 - Generate: Event Presence**
-Pre-event targeting, during-event conversation strategy, and post-event follow-up sequence. Turns conferences and meetups into pipeline rather than networking.
-Playbook: [events](../../playbooks/events/README.md)
-
-**G3 - Generate: Content Engine**
-ICP-driven content production across long-form (articles, posts) and short-form (LinkedIn, X, video). Content shortens sales cycles for warm contacts and generates inbound signals over time.
-Playbook: [content](../../playbooks/content/README.md)
-
-**G4 - Generate: Referral Activation**
-Active referral system. Not passive waiting - systematic outreach to current clients, past clients, and professional network asking for specific introductions. Highest conversion rate of any channel.
-Playbook: [referral](../../playbooks/referral/README.md)
-
-**G5 - Generate: Paid Acquisition**
-Targeted paid channels (LinkedIn Ads, Google, Meta) to generate leads at scale once organic channels are validated. Not a starting point - paid amplifies what already works organically.
-Playbook: [paid](../../playbooks/paid/README.md)
-
-**O1 - Optimize: CRM and Pipeline**
-Contact database, opportunity tracking, deal stage management, and follow-up automation. The infrastructure that makes all other bricks retain their output instead of losing leads to manual process gaps.
-Integration: [ClickUp](../../integrations/clickup/README.md)
-
-**O2 - Optimize: Offer Testing**
-Systematic testing of offer framing, pricing anchors, and package structure. The mechanism for improving conversion rates on the backend of any demand generation motion.
-Reference: [F2-offer.md](../foundation/F2-offer.md)
-
-**D1 - Distribute: Community and Partnerships**
-Reaching your ICP through communities they already trust: industry associations, peer groups, Slack communities, newsletters, podcast audiences. Access without cold friction.
-Playbook: [communities](../../playbooks/communities/README.md)
-
-**D2 - Distribute: AI Visibility**
-Ensuring your company and expertise appears in AI-generated answers, recommendations, and search results. The emerging channel as buyers increasingly use LLMs as research tools.
-Add-on: [AOE Grader](../../addons/aoe-grader/README.md)
+The bricks do not all run at once. The assessment scorecard scores you across all nine and tells you which bricks to activate first based on where the biggest constraints are.
 
 ---
 
-## Which bricks to run first
+## The Three Pillars
 
-The assessment scorecard scores you and gives you a prioritized recommendation. As a general rule:
+| Pillar | North Star Metric | What It Covers |
+|--------|------------------|----------------|
+| **GROWTH** | Qualified meetings booked per week | Getting customers |
+| **OPERATIONS** | Hours saved per week through systems | Running smoothly |
+| **DELIVERY** | Net Revenue Retention | Keeping customers |
 
-| If you have... | Start with... |
-|----------------|--------------|
-| No pipeline at all | G1 (Cold Outbound) + O1 (CRM) |
-| Some clients, no system | G4 (Referral) + O1 (CRM) |
-| Active pipeline, need volume | G1 + G2 + G3 in parallel |
-| Pipeline but poor conversion | O2 (Offer Testing) |
-| Validation done, need scale | G5 (Paid) + D1 (Communities) |
+---
 
-Run the [scorecard](../assessment/scorecard.md) for a calibrated recommendation based on your actual situation.
+## The Nine Bricks
+
+### GROWTH
+
+**G1: Find**
+ICP operationalization, list building, data enrichment, intent signals, lead scoring.
+The work that happens before any outreach. Who to target, how to find them, how to qualify them before making contact.
+Playbook: [find](../../playbooks/find/README.md)
+
+**G2: Warm**
+Content marketing, nurture sequences, social, paid, SEO, events, authority building.
+Everything that builds trust and recognition before a direct sales conversation. Content shortens sales cycles. Events give cold outreach a reference point. Paid amplifies what already converts organically.
+Playbook: [warm](../../playbooks/warm/README.md)
+
+**G3: Book**
+Cold outreach, sequences, inbound handling, BANT+ qualification, meeting scheduling.
+Converting interest -- both outbound and inbound -- into qualified meetings. The systematic motion from first contact to booked call.
+Playbook: [book](../../playbooks/book/README.md)
+
+---
+
+### OPERATIONS
+
+**O1: Standardize**
+SOPs, process mapping, playbooks, checklists, knowledge management.
+Documenting how the business runs so that execution does not depend on the founder's memory or presence. Law 1 applies here: Document Before You Scale.
+Playbook: [standardize](../../playbooks/standardize/README.md)
+
+**O2: Automate**
+Workflow automation, AI agents, integrations, email automation, document generation, scheduling automation, reporting automation.
+Using technology to eliminate manual work. The rule: standardize first, then automate. Never automate an undocumented process -- you are scaling the wrong thing.
+Playbook: [automate](../../playbooks/automate/README.md)
+
+**O3: Instrument**
+KPI definition, dashboards, analytics, attribution, forecasting.
+Making the right numbers visible to the right people on the right cadence. You cannot improve what you cannot see. You cannot forecast what you do not track.
+Playbook: [instrument](../../playbooks/instrument/README.md)
+
+---
+
+### DELIVERY
+
+**D1: Deliver**
+Client onboarding, delivery workflows, QA, communication frameworks, scope management.
+Executing services with the quality and consistency that earns renewals and referrals. The Delivery pillar is where revenue is kept or lost.
+Playbook: [deliver](../../playbooks/deliver/README.md)
+
+**D2: Prove**
+Results documentation, ROI calculation, case studies, testimonials, proof collection cadence.
+Converting delivery results into reusable proof assets. Proof fuels G2 (Warm) and G3 (Book). The Proof Loop: Deliver well -> document the result -> use it in outreach -> book better clients -> deliver well again.
+Playbook: [prove](../../playbooks/prove/README.md)
+
+**D3: Expand**
+Upsell and cross-sell, health scoring, churn prevention, referral programs, win-back.
+Growing revenue from existing clients. Net Revenue Retention above 100% means expansion revenue exceeds churn -- the business grows even without new clients.
+Playbook: [expand](../../playbooks/expand/README.md)
+
+---
+
+## Brick Summary
+
+| Brick | One-Line Definition | Key Metric |
+|-------|---------------------|------------|
+| G1: Find | Identifying and building qualified prospect lists | Qualified prospects/week |
+| G2: Warm | Building awareness and trust before selling | Engagement rate, nurture-to-meeting rate |
+| G3: Book | Converting interest into qualified meetings | Meetings booked/week |
+| O1: Standardize | Documenting processes so anyone can execute | % processes documented |
+| O2: Automate | Using technology to eliminate manual work | Hours saved/week |
+| O3: Instrument | Making key metrics visible and reviewed | Forecast accuracy, time to insight |
+| D1: Deliver | Executing with quality and consistency | On-time delivery rate, NPS |
+| D2: Prove | Documenting and communicating value created | Case studies/quarter |
+| D3: Expand | Growing revenue from existing clients | Net Revenue Retention |
+
+---
+
+## Which brick to activate first
+
+Run the assessment: [god-engine-assessment.md](../scaleos/assessments/god-engine-assessment.md)
+
+As a general guide:
+
+| Situation | Start with |
+|-----------|-----------|
+| No pipeline at all | G1 (Find) + G3 (Book) |
+| Some clients, no repeatable system | G3 (Book) + O1 (Standardize) |
+| Pipeline exists, delivery is inconsistent | D1 (Deliver) + O1 (Standardize) |
+| Delivery is solid, no proof assets | D2 (Prove) + G2 (Warm) |
+| Everything chaotic, no visibility | O3 (Instrument) first |
+| Clients happy but no expansion | D3 (Expand) |
 
 ---
 
 ## How bricks connect
 
-Bricks are designed to compound. Content (G3) warms up contacts that cold outbound (G1) reaches, increasing reply rates. Events (G2) give cold outbound a conversation reference, increasing trust. AI Visibility (D2) means buyers who research you before a call already have a positive impression.
+Growth feeds Operations: more clients means more systems are required. Build O1 and O2 before volume overwhelms delivery capacity.
 
-The full compounding loop typically takes 6-12 months to mature. Start with the highest-leverage brick for your current situation. Add the next brick when the first is running sustainably.
+Operations enables Delivery: efficient systems produce consistent delivery quality. Teams without systems make heroic saves. Heroic saves are a symptom of system failure (Law 5).
+
+Delivery fuels Growth: client results become proof assets (D2) that warm new prospects (G2) and shorten sales cycles (G3). The Proof Loop compounds when all three pillars are working.
+
+The full compounding effect typically takes 6-12 months to mature. Start with the highest-leverage brick for your current situation. Add the next brick when the first is running sustainably with a named owner.

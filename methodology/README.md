@@ -1,10 +1,10 @@
 # ScaleOS Methodology
 
-ScaleOS is a GTM methodology built for companies under 20 people. It is the backbone of every playbook in this OS.
+ScaleOS is a GTM operating system for B2B service businesses under 20 people. It is built on two layers.
 
-The methodology has two parts. Foundation (F1-F4) is a set of four prerequisite decisions. You make them once. Every playbook, every campaign, every message draws from them. Without Foundation, execution is random. With Foundation locked, execution becomes deterministic.
+**Foundation (F1-F4)** is Layer 0. Four strategic prerequisites you establish once. Every playbook, every campaign, every message draws from them. Without Foundation, execution is random. With Foundation locked, execution becomes deterministic.
 
-The GOD Engine is the second part - nine execution bricks that run demand generation once Foundation is set. Each brick is a distinct motion: some generate demand, some capture it, some convert it. Which bricks you run first depends on your Foundation answers and your assessment score.
+**The GOD Engine** is the execution layer. Nine bricks organized across Growth, Operations, and Delivery. Each brick is a distinct business function that must be systematized. Which bricks you activate first depends on your Foundation score and current baseline.
 
 ---
 
@@ -12,29 +12,39 @@ The GOD Engine is the second part - nine execution bricks that run demand genera
 
 Work through these in order. Do not skip ahead.
 
-| Step | File | Time Required |
-|------|------|--------------|
-| F1: ICP | [F1-icp.md](foundation/F1-icp.md) | 45-90 min |
-| F2: Offer | [F2-offer.md](foundation/F2-offer.md) | 60-90 min |
-| F3: Message | [F3-message.md](foundation/F3-message.md) | 60-90 min |
-| F4: Channel | [F4-channel.md](foundation/F4-channel.md) | 30-45 min |
+| Component | File | Time Required |
+|-----------|------|--------------|
+| F1: Positioning & Differentiation | [F1-positioning.md](foundation/F1-positioning.md) | 60-90 min |
+| F2: Business Model Design | [F2-business-model.md](foundation/F2-business-model.md) | 60-90 min |
+| F3: Organizational Structure | [F3-org-structure.md](foundation/F3-org-structure.md) | 45-60 min |
+| F4: Financial Architecture | [F4-financial.md](foundation/F4-financial.md) | 45-60 min |
 
-Total: 3-5 hours done once. Most companies spend months trying to figure this out iteratively. Do it systematically.
+Total: 3-5 hours done once.
+
+Score yourself using the assessment in each file (/50 per component, /200 total). Below 35 on any component = fix that component before building the GOD Engine.
 
 ---
 
 ## GOD Engine
 
-Nine execution bricks that sit on top of Foundation.
+Nine execution bricks that sit on top of Foundation. Three pillars: Growth, Operations, Delivery.
 
 Full overview: [god-engine/README.md](god-engine/README.md)
 
 ---
 
+## The 5 Laws
+
+Non-negotiable governing principles. Break any one and Scale OS fails.
+
+[scaleos/laws.md](scaleos/laws.md)
+
+---
+
 ## Assessment
 
-Before starting any playbook, run the scorecard.
+Before starting any playbook, score yourself.
 
-[assessment/scorecard.md](assessment/scorecard.md)
-
-Score yourself across F1-F4 and the GOD Engine bricks. The output tells you what to do next in priority order.
+- Foundation scorecard: included in each F1-F4 file
+- GOD Engine assessment: [scaleos/assessments/god-engine-assessment.md](scaleos/assessments/god-engine-assessment.md)
+- Full Foundation scorecard: [scaleos/assessments/foundation-scorecard.md](scaleos/assessments/foundation-scorecard.md)
