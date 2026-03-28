@@ -130,7 +130,9 @@ The diagnostic appears maximum 2 times across the entire sequence.
 - Ask: would someone in this industry think a peer sent this?
 
 **Templates to use:**
-- [sequence-b2b.md](templates/sequence-b2b.md)
+- [sequence-b2b.md](templates/sequence-b2b.md) -- index with shared rules, tone guide, CTA matrix
+- [sequence-b2b-5touch.md](templates/sequence-b2b-5touch.md) -- 5-touch/16-day (SMB, sub-$10K, batch campaigns)
+- [sequence-b2b-7touch.md](templates/sequence-b2b-7touch.md) -- 7-touch/25-day (enterprise, high-ACV, complex sales)
 - [follow-up.md](templates/follow-up.md)
 
 ---

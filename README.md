@@ -143,6 +143,8 @@ ScaleOS is the GTM methodology behind Markster OS. Trademarked by Markster. Free
 
 **GOD Engine:** 9 execution bricks that run demand generation once Foundation is locked. See [methodology/god-engine/README.md](methodology/god-engine/README.md).
 
+**Autopilot:** The weekly agent operating protocol. Diagnose the constraint, execute one brick, verify the metric moved, loop. See [AUTOPILOT.md](AUTOPILOT.md).
+
 Start with the [assessment scorecard](methodology/assessment/scorecard.md). It tells you exactly where you are and which playbook to run first.
 
 ---
@@ -290,7 +292,9 @@ Full index: [playbooks/segments/README.md](playbooks/segments/README.md)
 
 | Playbook | Prerequisites | Output |
 |----------|--------------|--------|
-| [Cold Email](playbooks/book/cold-email/) | F1, F2 complete | Verified list + 3-touch sequence + send schedule |
+| [Cold Email](playbooks/book/cold-email/) | F1, F2 complete | Verified list + 5 or 7-touch sequence + send schedule |
+| [LinkedIn Outreach](playbooks/book/linkedin-outreach.md) | F1 complete | Contact relationship map, persona rules, DM templates, benchmarks |
+| [Offer Design](playbooks/offer/README.md) | F1, F2 complete | Grand Slam Offer, 4 offer types, Value Equation score, offer statement |
 | [Events](playbooks/warm/events/) | F1 complete | Pre/during/post sequence + follow-up system |
 | [Content](playbooks/warm/content/) | F1, F3 complete | Theme framework + 30-day calendar |
 | [Sales](playbooks/biz-dev/sales/) | F1, F2, F3 complete | Discovery script + proposal template + close framework |
@@ -307,7 +311,7 @@ Markster OS currently ships two layers of skills:
 - an extended public skill library in `skills/` for more specialized writing, strategy, prep, and review tasks
 
 ```
-/markster-os     -> workspace guide, router, and CLI-aware operator
+/markster-os     -> diagnostic operator: Hormozi diagnostic, constraint routing, context pre-fill
 /cold-email     -> cold email playbook
 /events         -> events playbook
 /content        -> content playbook

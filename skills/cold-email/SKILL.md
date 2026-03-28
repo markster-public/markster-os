@@ -75,7 +75,7 @@ Run these six steps in order. Do not skip a step unless the user confirms it is 
 
 Ask: "Have you run the buyer JTBD and competitive intelligence research prompts?"
 
-- If no: direct to `research/prompts/buyer-jtbd.md` and `research/prompts/competitive-intelligence.md`
+- If no: direct to `research/prompts/buyer-jobs-to-be-done-prompt.md` and `research/prompts/competitive-intelligence-prompt.md`
 - If yes: ask them to share the buyer verbatims -- the exact words their buyers use to describe the problem
 
 **Use the verbatims in the sequence.** Not your language. Their language.

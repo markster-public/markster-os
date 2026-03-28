@@ -71,3 +71,10 @@ Weight prospects by:
 - Timing: 20%
 
 Score 1-10 per dimension. Total score determines outreach priority. Contacts scoring 7+ get personalized outreach first.
+
+---
+
+## Templates
+
+- [icp-worksheet.md](templates/icp-worksheet.md) -- 5-layer ICP definition and validation
+- [list-building-sop.md](templates/list-building-sop.md) -- step-by-step from ICP to verified, send-ready list

@@ -87,3 +87,10 @@ Level 3 is optional for low-stakes routine deliverables once the client relation
 ## Deliver Done Right
 
 D1 is working when: New clients are onboarded via a consistent process without founder involvement. The QA framework catches quality issues before the client sees them. On-time delivery rate is above 90%. NPS is above 50. A delivery team member can onboard a new client independently using documentation.
+
+---
+
+## Templates
+
+- [onboarding-checklist.md](templates/onboarding-checklist.md) -- 30-day onboarding checklist with health score rubric
+- [kickoff-agenda.md](templates/kickoff-agenda.md) -- 60-minute kickoff call agenda with post-call email template

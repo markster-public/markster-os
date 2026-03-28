@@ -87,3 +87,9 @@ Key Takeaway:
 ## Prove Done Right
 
 D2 is working when: Two to four case studies are produced per quarter. New case studies are referenced in outreach within two weeks of creation. Proposals include at least one specific result from a similar client. The team can answer "what results have you produced?" with a specific, verifiable example in under 30 seconds.
+
+---
+
+## Templates
+
+- [case-study.md](templates/case-study.md) -- structured case study format with worked example, quality gates, and collection process

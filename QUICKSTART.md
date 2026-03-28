@@ -29,12 +29,15 @@ If you cannot fill these in, do F1 and F2 first:
 
 Work through: `playbooks/find/templates/icp-worksheet.md`
 
+Then score your offer with the Value Equation: `playbooks/offer/templates/offer-builder.md`
+
 Output:
 - ICP: "[Title] at [company type] who [buying trigger]"
 - Offer: "[Outcome] in [timeframe] for [price]"
+- Value Equation score of 15+/20
 - One qualifying question to ask every prospect
 
-Do not move to Day 2 until you can say both sentences without hesitation.
+Do not move to Day 2 until you can say both sentences without hesitation and your offer scores 15+/20.
 
 ---
 
@@ -136,14 +139,24 @@ Make one change based on the data. Run the next 50. Repeat.
 
 ---
 
-## Full playbook map (after the 7-day sprint)
+## After the 7-day sprint: switch to autopilot
 
-Once you have first meetings booked:
+Once you have first meetings booked, stop doing the sprint and switch to the weekly operating loop.
+
+Read `AUTOPILOT.md`. It runs the Hormozi diagnostic, identifies your constraint brick, and routes you to the right playbook every week. The sprint gets you moving. Autopilot keeps you moving.
+
+---
+
+## Full playbook map (after the 7-day sprint)
 
 | Next step | Where to go |
 |-----------|-------------|
+| Weekly constraint-brick loop | `AUTOPILOT.md` |
+| Design or fix your offer | `playbooks/offer/README.md` |
 | Run a great discovery call | `playbooks/biz-dev/sales/README.md` |
 | Write a proposal | `playbooks/biz-dev/sales/templates/proposal.md` |
+| Handle objections | `playbooks/biz-dev/sales/templates/objections.md` |
+| LinkedIn outreach | `playbooks/book/linkedin-outreach.md` |
 | Build content to warm your pipeline | `playbooks/warm/content/README.md` |
 | Attend events strategically | `playbooks/warm/events/README.md` |
 | Document your first client results | `playbooks/prove/README.md` |

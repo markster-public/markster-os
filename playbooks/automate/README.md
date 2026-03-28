@@ -81,3 +81,9 @@ Dependencies: [tools, APIs, or data sources it requires]
 ## Automate Done Right
 
 O2 is working when: 20+ hours per week are provably saved through automation, measured by tracking the manual time before and after. The automation stack runs with a 95%+ success rate. Failures trigger alerts and are resolved within 24 hours. New automations are added quarterly against the priority matrix.
+
+---
+
+## Templates
+
+- [automation-map.md](templates/automation-map.md) -- 3-tier automation stack, build protocol, ROI tracker, and what not to automate

@@ -85,3 +85,9 @@ O3 makes the right numbers visible to the right people on the right cadence. You
 ## Instrument Done Right
 
 O3 is working when: Every pillar owner can answer "how is my pillar performing this week?" in under five minutes by looking at their dashboard. Revenue is forecasted 30 days out with plus-or-minus 15% accuracy. Falling metrics trigger investigation and action within the week they are detected.
+
+---
+
+## Templates
+
+- [kpi-dashboard.md](templates/kpi-dashboard.md) -- weekly dashboard with 3 North Star metrics, drill-down guidance, and monthly secondary metrics
