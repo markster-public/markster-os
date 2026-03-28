@@ -36,7 +36,7 @@ The skills in this OS activate playbooks in your AI environment. You can also ru
 | Brick | Playbook | What it produces | Requires |
 |-------|----------|-----------------|---------|
 | G1: Find | [find/](find/README.md) | Qualified prospect lists, scoring, enrichment process | F1 (ICP) |
-| G2: Warm | [warm/](warm/README.md) | Content calendar, nurture sequences, event follow-up | F1, F3 (message) |
+| G2: Warm | [warm/](warm/README.md) | Content calendar, nurture sequences, event follow-up | F1, messaging guide |
 | G3: Book | [book/](book/README.md) | Outreach sequences, qualification framework, show rate system | F1, F2 |
 | G3: LinkedIn | [book/linkedin-outreach.md](book/linkedin-outreach.md) | Contact relationship map, persona rules, DM templates | F1 |
 

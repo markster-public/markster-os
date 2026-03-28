@@ -56,4 +56,4 @@ G3 is working when: Qualified meetings are booking consistently each week from a
 ## Sub-Playbooks
 
 - [Cold Email](cold-email/README.md) -- sequences, templates, send schedule, domain setup
-- [Sales](../../biz-dev/sales/README.md) -- discovery framework, qualification, proposal, close
+- [Sales](../biz-dev/sales/README.md) -- discovery framework, qualification, proposal, close

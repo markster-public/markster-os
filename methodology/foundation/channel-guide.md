@@ -1,4 +1,4 @@
-# F4: Channel
+# Channel Guide
 
 **The question:** Where do you reach your ICP first, given their profile and buying behavior?
 
@@ -46,7 +46,7 @@ If most of your answers are Column A, start with cold outreach. If most are Colu
 **Realistic expectations:** 1-3% reply rate, 10-20% of replies convert to calls, 20-40% of calls lead to proposals. Volume matters. You need to reach 200-500 contacts before drawing conclusions.
 **What it requires:** Verified email addresses, personalized first line, message that passes the "sounds like everyone else" test, inbox setup that lands in primary, a follow-up sequence.
 **Time to results:** 3-6 weeks for first booked meetings. 8-12 weeks for a real data set.
-**Playbook:** [cold-email](../../playbooks/cold-email/README.md)
+**Playbook:** [cold-email](../../playbooks/book/cold-email/README.md)
 
 ### Warm outbound (LinkedIn + direct message)
 **Best for:** ICPs where you have a warm signal (they visited your content, commented on a post, connected but never converted, or are second-degree via a mutual you can name). Medium deal size. Trust-based buying.
@@ -59,14 +59,14 @@ If most of your answers are Column A, start with cold outreach. If most are Colu
 **Realistic expectations:** 10-30 conversations per event, 3-10 qualified follow-up meetings, 1-3 deals per event cycle (4-6 month timeline from event to close).
 **What it requires:** Event selection based on ICP attendance (not topic relevance), pre-event outreach, during-event conversation strategy, post-event sequence within 48 hours.
 **Time to results:** First deals typically close 90-180 days after first event.
-**Playbook:** [events](../../playbooks/events/README.md)
+**Playbook:** [events](../../playbooks/warm/events/README.md)
 
 ### Content
 **Best for:** ICPs who are actively researching, have time to read, and make trust-based decisions. Longer sales cycles. High-trust categories (finance, legal, professional services, tech).
 **Realistic expectations:** Slow burn. First inbound inquiry from content typically takes 3-6 months to materialize. But content shortens all other channel conversion rates when it is running in parallel.
 **What it requires:** A clear point of view, consistent publishing on the platform where your ICP reads, distribution strategy beyond just posting.
 **Time to results:** 3-6 months for first inbound. 12 months to compound.
-**Playbook:** [content](../../playbooks/content/README.md)
+**Playbook:** [content](../../playbooks/warm/content/README.md)
 
 ### Referral activation
 **Best for:** Any ICP type. Referrals have the highest close rate and shortest sales cycle of any channel because trust is transferred, not earned.
@@ -90,7 +90,7 @@ Do not launch all channels at once. Validate one. Then add the second.
 
 ## Channel selection output
 
-Answer these to confirm your F4 channel selection:
+Answer these to confirm your channel selection:
 
 1. What is my primary channel and why does it match my ICP profile?
 2. What is my support channel?
