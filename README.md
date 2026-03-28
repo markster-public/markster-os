@@ -5,6 +5,7 @@
 [![Works with Claude](https://img.shields.io/badge/works%20with-Claude%20Code-blue.svg)](https://claude.ai/code)
 [![Works with Codex](https://img.shields.io/badge/works%20with-Codex-blue.svg)](https://openai.com/codex)
 [![Works with Gemini](https://img.shields.io/badge/works%20with-Gemini%20CLI-blue.svg)](https://ai.google.dev)
+[![Works with Openclaw](https://img.shields.io/badge/works%20with-Openclaw-blue.svg)](https://openclaw.ai)
 
 **First qualified meeting in 7 days. A repeatable GTM system after that.**
 
