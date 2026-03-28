@@ -21,6 +21,19 @@ If they are missing or empty, tell the user to fill them in or provide the missi
 
 If you update canonical workspace files such as `company-context/` or promoted learning-loop files, remind the user to run `markster-os validate .` before commit, and prefer validating before claiming the update is complete.
 
+## Your archetype
+
+Fundraising looks very different depending on your business type. Before running this playbook:
+
+1. Read your segment file to understand which funding paths apply to your category.
+2. Read `playbooks/biz-dev/fundraising/traction-by-archetype.md` -- what traction means for your archetype at each round.
+3. Read `playbooks/biz-dev/fundraising/funding-mechanisms.md` -- especially if you are a service firm or trade business (non-VC paths apply).
+4. Read `playbooks/biz-dev/fundraising/round-sizing.md` -- SAFE vs. convertible note vs. priced round, and how much to raise.
+
+- `playbooks/segments/startup-archetypes/` -- SaaS, devtools, marketplace, DTC, hardware, indie
+- `playbooks/segments/service-firms/` -- agency, consulting, IT/MSP, advisory (PE and SBA paths)
+- `playbooks/segments/trade-businesses/` -- residential services, specialty trades, commercial (SBA, equipment financing, PE roll-up)
+
 ## Before starting
 
 Ask the user:

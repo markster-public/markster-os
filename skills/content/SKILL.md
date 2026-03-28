@@ -30,6 +30,14 @@ Ask the user:
 3. What platform do they primarily publish on? (LinkedIn, website, newsletter, X?)
 4. How much time per week can they dedicate to content? (30 min / 1 hour / 2+ hours)
 
+## Your archetype
+
+Before running this playbook, read your segment file. It maps which GOD Engine bricks matter most for your business type and what the primary G2 motion looks like for your category.
+
+- `playbooks/segments/startup-archetypes/` -- SaaS, devtools, marketplace, DTC, hardware, indie
+- `playbooks/segments/service-firms/` -- agency, consulting, IT/MSP, advisory
+- `playbooks/segments/trade-businesses/` -- residential services, specialty trades, commercial
+
 ## Playbook steps
 
 ### Step 1: Define core theme

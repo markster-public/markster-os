@@ -32,6 +32,16 @@ If they have not completed Foundation, tell them: "Before running the cold email
 
 If Foundation is at least partially complete, proceed.
 
+## Your archetype
+
+Before running this playbook, read your segment file. It maps which GOD Engine bricks matter most for your business type and calibrates the playbook to your specific acquisition motion.
+
+-  -- SaaS, devtools, marketplace, DTC, hardware, indie
+-  -- agency, consulting, IT/MSP, advisory
+-  -- residential services, specialty trades, commercial
+
+If you are a trade business or advisory firm, the cold email playbook may not be your primary G3 motion. Your segment file will say so.
+
 ## Playbook steps
 
 Walk the user through these six steps in order. Do not skip steps unless the user explicitly says they have already completed one.

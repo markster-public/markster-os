@@ -60,7 +60,7 @@ The skills in this OS activate playbooks in your AI environment. You can also ru
 | [debrief.md](debrief.md) | Post-session debrief and learnings capture |
 | [prospect-brief.md](prospect-brief.md) | Pre-call research brief for a specific prospect |
 | [sales-proposal.md](sales-proposal.md) | Proposal structure and template |
-| [segments/](segments/) | ICP profiles by vertical (agency, CPA, MSP, etc.) |
+| [segments/](segments/) | Archetype guides: startups, service firms, and trade businesses -- read yours before running any playbook |
 | [biz-dev/](biz-dev/) | Sales and fundraising frameworks |
 | [technical-review/](technical-review/) | Tech stack audit playbook |
 | [weekly-pulse.md](weekly-pulse.md) | Weekly review template |

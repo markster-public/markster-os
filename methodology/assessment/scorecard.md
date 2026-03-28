@@ -184,6 +184,28 @@ Find your lowest-scoring section. That is your starting point.
 
 ---
 
+## After scoring: find your segment
+
+Once you have your score and know which brick to start with, read your business type's archetype file. It maps which bricks matter most at your current stage and where founders in your category most commonly get stuck.
+
+| Your business | Archetype file |
+|---------------|---------------|
+| B2B SaaS, vertical SaaS, AI SaaS | `playbooks/segments/startup-archetypes/b2b-saas.md` |
+| Developer tools, API, open source | `playbooks/segments/startup-archetypes/devtools.md` |
+| Marketplace (2-sided) | `playbooks/segments/startup-archetypes/marketplace.md` |
+| DTC, consumer app, consumer social | `playbooks/segments/startup-archetypes/dtc-consumer.md` |
+| Hardware + software | `playbooks/segments/startup-archetypes/hardware.md` |
+| Indie SaaS, productized service | `playbooks/segments/startup-archetypes/indie-saas.md` |
+| Marketing / SEO / paid media agency | `playbooks/segments/service-firms/marketing-agency.md` |
+| Consulting (strategy, ops, sales, HR) | `playbooks/segments/service-firms/consulting.md` |
+| IT consulting, MSP, cybersecurity | `playbooks/segments/service-firms/it-msp.md` |
+| Financial advisory, legal, coaching, fractional | `playbooks/segments/service-firms/advisory.md` |
+| Residential home services | `playbooks/segments/trade-businesses/residential-trades.md` |
+| Specialty trades (GC, remodeling, flooring...) | `playbooks/segments/trade-businesses/specialty-trades.md` |
+| Commercial services | `playbooks/segments/trade-businesses/commercial-services.md` |
+
+---
+
 ## Scoring Notes
 
 - Do not inflate scores. Answer based on what is actually running today.

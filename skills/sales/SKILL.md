@@ -21,6 +21,14 @@ If they are missing or empty, tell the user to fill them in or provide the missi
 
 If you update canonical workspace files such as `company-context/` or promoted learning-loop files, remind the user to run `markster-os validate .` before commit, and prefer validating before claiming the update is complete.
 
+## Your archetype
+
+Before running this playbook, read your segment file. The sales motion differs significantly by business type -- the discovery questions, the proposal structure, and the close framework for a marketplace are not the same as for a consulting firm.
+
+- `playbooks/segments/startup-archetypes/` -- SaaS, devtools, marketplace, DTC, hardware, indie
+- `playbooks/segments/service-firms/` -- agency, consulting, IT/MSP, advisory
+- `playbooks/segments/trade-businesses/` -- residential services, specialty trades, commercial
+
 ## Before starting
 
 Ask the user which stage they need help with:

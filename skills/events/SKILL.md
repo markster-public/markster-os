@@ -28,6 +28,14 @@ Ask the user:
 
 If F1 is not complete, tell them: "The events playbook works best with a clear ICP so you can identify which events your buyers actually attend. Open `methodology/foundation/F1-positioning.md` and complete it first, then return to this playbook."
 
+## Your archetype
+
+Before running this playbook, read your segment file. The events playbook applies to most archetypes but the conversations, qualifying signals, and follow-up differ by business type.
+
+- `playbooks/segments/startup-archetypes/` -- SaaS, devtools, marketplace, DTC, hardware, indie
+- `playbooks/segments/service-firms/` -- agency, consulting, IT/MSP, advisory
+- `playbooks/segments/trade-businesses/` -- residential services, specialty trades, commercial
+
 ## Playbook steps
 
 ### Phase 1: Before the event

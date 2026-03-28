@@ -262,13 +262,37 @@ If you want to hand the setup to Claude, Codex, or Gemini, copy the prompt in [s
 
 ---
 
+## Segments
+
+Before running any playbook, find your business type. Each segment file maps which GOD Engine bricks matter most at your stage, what your key metrics are, and where founders in your category most commonly get stuck.
+
+| Type | File |
+|------|------|
+| B2B SaaS, vertical SaaS, AI SaaS | [b2b-saas.md](playbooks/segments/startup-archetypes/b2b-saas.md) |
+| Developer tools, API, open source | [devtools.md](playbooks/segments/startup-archetypes/devtools.md) |
+| Marketplace (2-sided) | [marketplace.md](playbooks/segments/startup-archetypes/marketplace.md) |
+| DTC, consumer app, consumer social | [dtc-consumer.md](playbooks/segments/startup-archetypes/dtc-consumer.md) |
+| Hardware + software | [hardware.md](playbooks/segments/startup-archetypes/hardware.md) |
+| Indie SaaS, productized service | [indie-saas.md](playbooks/segments/startup-archetypes/indie-saas.md) |
+| Marketing / SEO / paid media agency | [marketing-agency.md](playbooks/segments/service-firms/marketing-agency.md) |
+| Strategy, ops, sales, HR consulting | [consulting.md](playbooks/segments/service-firms/consulting.md) |
+| IT consulting, MSP, cybersecurity | [it-msp.md](playbooks/segments/service-firms/it-msp.md) |
+| Financial advisory, legal, coaching, fractional | [advisory.md](playbooks/segments/service-firms/advisory.md) |
+| Residential home services | [residential-trades.md](playbooks/segments/trade-businesses/residential-trades.md) |
+| Specialty trades (GC, remodeling, flooring...) | [specialty-trades.md](playbooks/segments/trade-businesses/specialty-trades.md) |
+| Commercial services | [commercial-services.md](playbooks/segments/trade-businesses/commercial-services.md) |
+
+Full index: [playbooks/segments/README.md](playbooks/segments/README.md)
+
+---
+
 ## Playbooks
 
 | Playbook | Prerequisites | Output |
 |----------|--------------|--------|
-| [Cold Email](playbooks/cold-email/) | F1, F2 complete | Verified list + 3-touch sequence + send schedule |
-| [Events](playbooks/events/) | F1 complete | Pre/during/post sequence + follow-up system |
-| [Content](playbooks/content/) | F1, F3 complete | Theme framework + 30-day calendar |
+| [Cold Email](playbooks/book/cold-email/) | F1, F2 complete | Verified list + 3-touch sequence + send schedule |
+| [Events](playbooks/warm/events/) | F1 complete | Pre/during/post sequence + follow-up system |
+| [Content](playbooks/warm/content/) | F1, F3 complete | Theme framework + 30-day calendar |
 | [Sales](playbooks/biz-dev/sales/) | F1, F2, F3 complete | Discovery script + proposal template + close framework |
 | [Fundraising](playbooks/biz-dev/fundraising/) | F1, F2 complete | Pipeline tracker + outreach sequence + deck outline |
 | [Technical Review](playbooks/technical-review/) | None | Stack audit across 5 areas + prioritized recommendations |
