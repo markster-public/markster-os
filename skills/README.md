@@ -52,6 +52,7 @@ Then install skills with:
 
 ```bash
 markster-os install-skills
+markster-os install-skills --openclaw
 markster-os list-skills
 markster-os install-skills --skill website-copywriter --skill vc-review
 markster-os install-skills --extended
@@ -138,6 +139,8 @@ cp -r markster-os/skills/sales ~/.claude/skills/
 |------|-----------------|
 | Claude Code | `~/.claude/skills/` |
 | Codex | `~/.codex/skills/` |
+| Gemini CLI | `~/.gemini/skills/` |
+| OpenClaw (shared local skills) | `~/.openclaw/skills/` |
 | Gemini CLI | `~/.gemini/skills/` (if supported) |
 
 ---

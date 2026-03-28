@@ -17,6 +17,8 @@ DIST_ROOT = MARKSTER_HOME / "dist" / "current"
 WORKSPACES_ROOT = MARKSTER_HOME / "workspaces"
 CONFIG_PATH = MARKSTER_HOME / "config.json"
 LAUNCHER_PATH = Path.home() / "bin" / "markster-os"
+OPENCLAW_HOME = Path.home() / ".openclaw"
+OPENCLAW_SKILLS_DIR = OPENCLAW_HOME / "skills"
 CORE_SKILLS = ["markster-os", "cold-email", "events", "content", "sales", "fundraising", "research"]
 IGNORE_NAMES = {".git", "__pycache__", ".DS_Store"}
 WORKSPACE_GITIGNORE = """# Markster OS workspace
@@ -623,6 +625,7 @@ def cmd_list_skills(args: argparse.Namespace) -> int:
     print("")
     print(subheading("Install examples"))
     print(bullet("markster-os install-skills"))
+    print(bullet("markster-os install-skills --openclaw"))
     print(bullet("markster-os install-skills --skill website-copywriter --skill vc-review"))
     print(bullet("markster-os install-skills --extended"))
     print(bullet("markster-os install-skills --all-skills --all"))
@@ -649,6 +652,8 @@ def cmd_install_skills(args: argparse.Namespace) -> int:
         homes.append(Path.home() / ".codex" / "skills")
     if args.gemini or args.all:
         homes.append(Path.home() / ".gemini" / "skills")
+    if args.openclaw or (args.all and OPENCLAW_HOME.exists()):
+        homes.append(OPENCLAW_SKILLS_DIR)
     if not homes:
         homes = [Path.home() / ".claude" / "skills", Path.home() / ".codex" / "skills"]
     homes = list(dict.fromkeys(homes))
@@ -661,6 +666,7 @@ def cmd_install_skills(args: argparse.Namespace) -> int:
     print(heading("Skills Installed"))
     print(kv("Count", str(len(selected_skills))))
     print(kv("Skills", ", ".join(selected_skills)))
+    print(kv("Targets", ", ".join(str(root) for root in homes)))
     print("")
     print(warn("run your AI from inside a Markster OS workspace so the skills can resolve repo-relative docs"))
     return 0
@@ -932,6 +938,8 @@ def cmd_paths(args: argparse.Namespace) -> int:
     print(kv("Workspaces", str(WORKSPACES_ROOT)))
     print(kv("Launcher", str(LAUNCHER_PATH)))
     print(kv("Config", str(CONFIG_PATH)))
+    print(kv("OpenClaw home", str(OPENCLAW_HOME)))
+    print(kv("OpenClaw skills", str(OPENCLAW_SKILLS_DIR)))
     return 0
 
 
@@ -996,6 +1004,7 @@ def build_parser() -> argparse.ArgumentParser:
     install_skills_parser.add_argument("--claude", action="store_true", help="Install for Claude Code")
     install_skills_parser.add_argument("--codex", action="store_true", help="Install for Codex")
     install_skills_parser.add_argument("--gemini", action="store_true", help="Install for Gemini CLI")
+    install_skills_parser.add_argument("--openclaw", action="store_true", help="Install for OpenClaw (~/.openclaw/skills)")
     install_skills_parser.add_argument("--all", action="store_true", help="Install for all supported environments")
     install_skills_parser.add_argument("--skill", action="append", help="Install a specific skill by name; repeat for multiple skills")
     install_skills_parser.add_argument("--extended", action="store_true", help="Install all public skills except the default core set")

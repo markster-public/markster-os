@@ -7,6 +7,7 @@ What is supported today:
 - use OpenClaw as the AI runtime
 - keep Markster OS in a normal Git-backed workspace repo
 - use the `markster-os` CLI for install, validation, sync, and skill management
+- install shared local Markster OS skills into `~/.openclaw/skills`
 - use the same `markster-os` skill name before and after setup
 - point the OpenClaw agent at that workspace so it reads the workspace canon, not the upstream template repo
 
@@ -53,10 +54,10 @@ markster-os attach-remote git@github.com:YOUR-ORG/YOUR-REPO.git
 git push -u origin main
 ```
 
-4. Install Markster OS skills if your OpenClaw setup uses local skill folders or repo instructions:
+4. Install Markster OS skills into OpenClaw's shared local skill folder:
 
 ```bash
-markster-os install-skills
+markster-os install-skills --openclaw
 ```
 
 5. Run readiness checks:
@@ -104,6 +105,7 @@ Requirements:
   markster-os init <company-slug> --git --path ./<company-slug>-os
 - Move into that workspace.
 - Run:
+  markster-os install-skills --openclaw
   markster-os start
   markster-os validate .
 - Tell me which company-context files I need to fill first.

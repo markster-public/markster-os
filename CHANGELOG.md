@@ -6,6 +6,9 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- added explicit `markster-os install-skills --openclaw` support for installing shared local skills into `~/.openclaw/skills`
+
 ### Fixed
 - corrected public install and raw GitHub URLs to use the actual `master` branch for `markster-public/markster-os`
 
