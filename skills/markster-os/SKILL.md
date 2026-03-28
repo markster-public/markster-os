@@ -148,9 +148,9 @@ Ask: "Do you know which activities are producing your revenue, or are you guessi
 ```
 
 Route to:
-- Manual hours are the primary drain (unautomated repeatable tasks): `/automate` -> `playbooks/automate/README.md`
-- Visibility is the primary problem (do not know what is working): `/instrument` -> `playbooks/instrument/README.md`
-- Both: route to `/automate` first. Automation without instrumentation is faster chaos. Measurement without automation is diagnostic only. Fix automation first, then measure the result.
+- Manual hours are the primary drain (unautomated repeatable tasks): route manually to `playbooks/automate/README.md`
+- Visibility is the primary problem (do not know what is working): route manually to `playbooks/instrument/README.md`
+- Both: route manually to `playbooks/automate/README.md` first. Automation without instrumentation is faster chaos. Measurement without automation is diagnostic only. Fix automation first, then measure the result.
 
 **If F -- No obvious constraint:**
 

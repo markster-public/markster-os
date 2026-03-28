@@ -5,7 +5,7 @@
 [![Works with Claude](https://img.shields.io/badge/works%20with-Claude%20Code-blue.svg)](https://claude.ai/code)
 [![Works with Codex](https://img.shields.io/badge/works%20with-Codex-blue.svg)](https://openai.com/codex)
 [![Works with Gemini](https://img.shields.io/badge/works%20with-Gemini%20CLI-blue.svg)](https://ai.google.dev)
-[![Works with Openclaw](https://img.shields.io/badge/works%20with-Openclaw-blue.svg)](https://openclaw.ai)
+[![Works with OpenClaw](https://img.shields.io/badge/works%20with-OpenClaw-blue.svg)](setup-prompts/openclaw.md)
 
 **First qualified meeting in 7 days. A repeatable GTM system after that.**
 
@@ -31,11 +31,11 @@ The 7-day sprint in [QUICKSTART.md](QUICKSTART.md) gets you to first meeting. [A
 
 ## For AI agents (Claude, GPT, Gemini, Codex, and others)
 
-> This block is the canonical reference for any agent operating inside this repo.
+> This block is the canonical reference for any agent operating inside a Markster OS workspace.
 
 **Repo type:** B2B GTM operating system -- ScaleOS methodology (Foundation F1-F4 + GOD Engine 9 bricks)
 
-**Canonical context source:** `company-context/` -- read this before running any skill. All skills pull ICP, offer, messaging, voice, proof, and channels from here.
+**Canonical context source:** the workspace `company-context/` folder. Read this before running any skill. Do not treat the upstream `markster-os` repo templates as a real company context.
 
 **Entry point:** Run `/markster-os` first. It runs the Hormozi diagnostic, identifies the constraint brick, pre-fills context, and routes to the correct skill.
 
@@ -133,6 +133,8 @@ markster-os doctor
 ```
 
 If you want an AI tool to do the setup for you, see [setup-prompts/](setup-prompts/).
+
+If you want to use Markster OS through OpenClaw, start with [setup-prompts/openclaw.md](setup-prompts/openclaw.md).
 
 ---
 

@@ -15,3 +15,4 @@ Recommended flow:
 Files:
 
 - `install-workspace.md`: copy-paste prompt for installing Markster OS and creating a team workspace
+- `openclaw.md`: initial guide for running Markster OS from an OpenClaw-managed workspace
