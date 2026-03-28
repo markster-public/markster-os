@@ -132,11 +132,8 @@ set_local_source_from_config_if_available() {
 if [[ "$SOURCE_MODE" == "local" ]]; then
     set_urls_from_local_origin_if_available
 elif [[ "$MANAGED_UPDATE" == true ]]; then
-    set_local_source_from_config_if_available
     set_urls_from_config_if_available
-    if [[ "$SOURCE_MODE" == "local" ]]; then
-        set_urls_from_local_origin_if_available
-    fi
+    log_info "Updating from tracked upstream archive"
 fi
 
 ensure_path_setup() {
