@@ -21,7 +21,7 @@ Requirements:
   markster-os start
 - Validate the workspace with:
   markster-os validate .
-- Keep the local validation hooks installed so validation runs before commits and pushes.
+- Keep the local validation hooks installed so validation runs before commits and pushes, and so commit subjects follow `type(scope): summary`.
 
 Then stop and ask me for my Git repository URL so you can attach the remote with:
 - markster-os attach-remote <git-url>

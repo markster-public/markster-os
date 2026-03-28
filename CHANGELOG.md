@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-03-28
+
+### Added
+- commit message validation via local `commit-msg` hook, CLI validator, and pull request CI enforcement
+
+### Changed
+- Git workspaces now install pre-commit, commit-msg, and pre-push hooks together by default
+
 ## [1.0.0] - 2026-03-28
 
 ### Added

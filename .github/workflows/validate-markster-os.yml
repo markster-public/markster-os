@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -18,3 +20,14 @@ jobs:
 
       - name: Run validator
         run: python3 tools/validate_markster_os.py
+
+      - name: Validate commit messages in pull requests
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git log --format=%s "${BASE_SHA}..${HEAD_SHA}" | while IFS= read -r subject; do
+            [ -z "$subject" ] && continue
+            python3 tools/validate_commit_message.py --message "$subject"
+          done

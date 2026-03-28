@@ -1,9 +1,10 @@
 # Markster OS
 
 [![Validation](https://img.shields.io/badge/validation-passing-brightgreen.svg)](validation/README.md)
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v1.1.0-blue.svg)](CHANGELOG.md)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PRs required](https://img.shields.io/badge/changes-PRs%20required-orange.svg)](CONTRIBUTING.md)
+[![Security policy](https://img.shields.io/badge/security-policy-lightgrey.svg)](SECURITY.md)
 [![Works with Claude](https://img.shields.io/badge/works%20with-Claude%20Code-blue.svg)](https://claude.ai/code)
 [![Works with Codex](https://img.shields.io/badge/works%20with-Codex-blue.svg)](https://openai.com/codex)
 [![Works with Gemini](https://img.shields.io/badge/works%20with-Gemini%20CLI-blue.svg)](https://ai.google.dev)
@@ -29,7 +30,7 @@ Each skill checks your prerequisites before it runs, executes the sequence step 
 
 The 7-day sprint in [QUICKSTART.md](QUICKSTART.md) gets you to first meeting. [AUTOPILOT.md](AUTOPILOT.md) keeps you there week over week.
 
-Release history lives in [CHANGELOG.md](CHANGELOG.md). Contribution rules live in [CONTRIBUTING.md](CONTRIBUTING.md).
+Release history lives in [CHANGELOG.md](CHANGELOG.md). Contribution rules live in [CONTRIBUTING.md](CONTRIBUTING.md). Security reporting lives in [SECURITY.md](SECURITY.md). Community expectations live in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ---
 
@@ -126,8 +127,9 @@ markster-os update
 markster-os upgrade-workspace [path]
 markster-os attach-remote <url>
 markster-os install-hooks
+markster-os validate-commit-message --message "docs(readme): clarify install flow"
 markster-os sync
-markster-os commit -m "message"
+markster-os commit -m "docs(context): update company context"
 markster-os push
 markster-os backup-workspace [path]
 markster-os export-workspace [path]
@@ -227,7 +229,7 @@ git push -u origin main
 
 **Step 4: Keep the validator hook installed**
 
-If you created the workspace with `--git`, Markster OS already installed pre-commit and pre-push hooks for you.
+If you created the workspace with `--git`, Markster OS already installed pre-commit, commit-msg, and pre-push hooks for you.
 
 You can reinstall it any time with:
 
@@ -235,10 +237,24 @@ You can reinstall it any time with:
 markster-os install-hooks
 ```
 
-Those hooks run:
+Those hooks enforce:
 
 ```bash
 markster-os validate .
+```
+
+and commit subjects in this format:
+
+```text
+type(scope): summary
+```
+
+Examples:
+
+```text
+docs(readme): clarify workspace setup
+feat(cli): add commit message validation
+fix(hooks): install commit-msg hook by default
 ```
 
 **Step 5: Run the scorecard**
@@ -281,7 +297,7 @@ Use these starting points:
 
 ```bash
 markster-os validate .
-markster-os commit -m "Update company context"
+markster-os commit -m "docs(context): update company context"
 markster-os push
 ```
 
@@ -464,6 +480,7 @@ Recommended team model:
 - raw inbox material stays out of Git by default
 - approved canon changes are committed and pushed
 - pre-commit and pre-push run `markster-os validate .` locally
+- commit-msg enforces `type(scope): summary`
 - use `markster-os sync` to fetch and pull --rebase before working
 - use `markster-os commit` and `markster-os push` if you want the CLI to handle the common Git steps
 
