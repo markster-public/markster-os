@@ -22,7 +22,7 @@ Lead Packs are curated, verified contact lists organized by vertical, company si
 ## Who it is for
 
 Use Lead Packs when:
-- You have F1 (ICP) and F3 (Message) complete but want to skip manual list building
+- You have F1 (ICP) and the messaging guide complete but want to skip manual list building
 - You need a list fast for a time-sensitive campaign
 - You want a baseline contact list for a new vertical you have not targeted before
 - You are testing a new sequence and need 200-300 contacts to generate statistically meaningful data

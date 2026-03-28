@@ -74,4 +74,4 @@ Revised one-liner hypothesis:
 [Draft a one-sentence positioning statement based on the white space]
 ```
 
-Feed findings into: F3 (Message) - the mechanism and proof sections. Also use to refine the problem statement so it lands in the white space.
+Feed findings into: the messaging guide (`methodology/foundation/messaging-guide.md`) - the mechanism and proof sections. Also use to refine the problem statement so it lands in the white space.

@@ -26,7 +26,7 @@ If you update canonical workspace files such as `company-context/` or promoted l
 
 Ask the user:
 1. Is F1 (ICP) complete? Content without ICP definition produces generic output.
-2. Is F3 (Message) complete? The message framework defines the problem language the content should use.
+2. Is the messaging guide complete? (`methodology/foundation/messaging-guide.md`) It defines the problem language the content should use.
 3. What platform do they primarily publish on? (LinkedIn, website, newsletter, X?)
 4. How much time per week can they dedicate to content? (30 min / 1 hour / 2+ hours)
 

@@ -1,6 +1,6 @@
 ---
 name: research
-description: 'Run structured B2B research prompts from the Markster OS library. 8 prompts covering competitive intelligence, buyer JTBD, buying signals, pricing perception, GTM channels, objection research, market positioning, and first 60 seconds.'
+description: 'Run structured B2B research prompts from the Markster OS library. 9 prompts covering competitive intelligence, buyer JTBD, buying signals, pricing perception, GTM channels, objection research, market positioning, mental category positioning, and first 60 seconds.'
 ---
 
 You are running the Markster OS research prompt library.
@@ -23,7 +23,7 @@ If you update canonical workspace files such as `company-context/` or promoted l
 
 ## What this skill does
 
-It helps the user run one or more of the 8 structured research prompts against their specific ICP and market. Each prompt is designed to surface specific intelligence that feeds into Foundation (F1-F4) and the active playbooks.
+It helps the user run one or more of the 9 structured research prompts against their specific ICP and market. Each prompt is designed to surface specific intelligence that feeds into Foundation (F1-F4) and the active playbooks.
 
 ## Before starting
 
@@ -32,7 +32,7 @@ Ask the user:
 2. Do they have an ICP defined? (Even partial F1 helps the prompts produce more relevant output)
 3. What information do they already have about their buyer and market?
 
-## The 8 research prompts
+## The 9 research prompts
 
 Present this menu and ask which they want to run:
 
@@ -50,7 +50,9 @@ Present this menu and ask which they want to run:
 
 7. **Market positioning** - How is your category perceived? What is the dominant narrative? Where is the white space?
 
-8. **First 60 seconds** - What should you say in the first 60 seconds of a conversation with your ICP to make them lean in rather than disengage?
+8. **Mental category positioning** - How do buyers categorize your type of solution? What do they compare you against and how do you win that comparison?
+
+9. **First 60 seconds** - What should you say in the first 60 seconds of a conversation with your ICP to make them lean in rather than disengage?
 
 ## Running a prompt
 
@@ -63,18 +65,19 @@ When the user selects a prompt:
 ## Output documentation
 
 Help the user save what they learn:
-- Buyer verbatims -> add to F3 message document
+- Buyer verbatims -> add to the messaging guide (`methodology/foundation/messaging-guide.md`)
 - Buying signals -> add to F1 ICP document (situational layer)
-- Objections -> save to their cold email follow-up preparation
-- Competitor claims -> inform their differentiation in F3
+- Objections -> save to their cold email follow-up preparation (`playbooks/biz-dev/sales/templates/objections.md`)
+- Competitor claims -> inform their differentiation in F1 (Positioning)
 
 ## Reference files
 
-- Competitive intelligence: `research/prompts/competitive-intelligence.md`
-- Buyer JTBD: `research/prompts/buyer-jtbd.md`
-- Buying signals: `research/prompts/buying-signals.md`
-- Pricing perception: `research/prompts/pricing-perception.md`
-- GTM channels: `research/prompts/gtm-channels.md`
-- Objection research: `research/prompts/objection-research.md`
+- Competitive intelligence: `research/prompts/competitive-intelligence-prompt.md`
+- Buyer JTBD: `research/prompts/buyer-jobs-to-be-done-prompt.md`
+- Buying signals: `research/prompts/buying-signals-trigger-events-prompt.md`
+- Pricing perception: `research/prompts/pricing-value-perception-prompt.md`
+- GTM channels: `research/prompts/gtm-channel-effectiveness-prompt.md`
+- Objection research: `research/prompts/ai-agency-objections-prompt.md`
 - Market positioning: `research/prompts/market-positioning.md`
-- First 60 seconds: `research/prompts/first-60-seconds.md`
+- Mental category positioning: `research/prompts/mental-category-positioning-prompt.md`
+- First 60 seconds: `research/prompts/first-60-seconds-messaging-prompt.md`

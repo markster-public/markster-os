@@ -1,4 +1,4 @@
-# F3: Message
+# Messaging Guide
 
 **The question:** How do you describe the problem in their words - and structure a message that earns the next step?
 
