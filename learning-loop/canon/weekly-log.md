@@ -1,3 +1,14 @@
+---
+id: weekly-constraint-log
+title: Weekly Constraint Log
+type: log
+status: active
+owner: company
+created: 2026-03-28
+updated: 2026-03-28
+tags: [weekly, constraint, log, autopilot]
+---
+
 # Weekly Constraint Log
 
 One entry per week. Append below. Do not edit past entries.

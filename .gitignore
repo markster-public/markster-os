@@ -43,3 +43,4 @@ exports/
 # Install artifacts
 .install-state
 STATE.md
+MASTER_LOG.md
