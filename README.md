@@ -1,7 +1,9 @@
 # Markster OS
 
 [![Validation](https://img.shields.io/badge/validation-passing-brightgreen.svg)](validation/README.md)
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](CHANGELOG.md)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![PRs required](https://img.shields.io/badge/changes-PRs%20required-orange.svg)](CONTRIBUTING.md)
 [![Works with Claude](https://img.shields.io/badge/works%20with-Claude%20Code-blue.svg)](https://claude.ai/code)
 [![Works with Codex](https://img.shields.io/badge/works%20with-Codex-blue.svg)](https://openai.com/codex)
 [![Works with Gemini](https://img.shields.io/badge/works%20with-Gemini%20CLI-blue.svg)](https://ai.google.dev)
@@ -26,6 +28,8 @@ Each skill checks your prerequisites before it runs, executes the sequence step 
 **After:** One constraint identified per week. One playbook executing. One metric tracked.
 
 The 7-day sprint in [QUICKSTART.md](QUICKSTART.md) gets you to first meeting. [AUTOPILOT.md](AUTOPILOT.md) keeps you there week over week.
+
+Release history lives in [CHANGELOG.md](CHANGELOG.md). Contribution rules live in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
