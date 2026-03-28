@@ -143,3 +143,84 @@ Five questions. Score each 1-10. Total out of 50.
 | | **F2 TOTAL** | **/50** |
 
 **Below 35:** Business model needs redesign before scaling.
+
+---
+
+## Unit Economics by Archetype
+
+The benchmarks above are defaults for B2B service businesses. Different business models have different unit economics and different definitions of health.
+
+### B2B SaaS
+
+| Metric | Definition | Healthy |
+|--------|-----------|---------|
+| MRR | Monthly recurring revenue | 10-20% MoM growth at Stage 1 |
+| ARR | Annual recurring revenue | Primary scale metric |
+| NRR (Net Revenue Retention) | MRR from existing customers this month / same customers last month, including expansion and churn | 100% = flat. 110%+ = healthy. 120%+ = excellent. |
+| Logo churn | % of customers canceling per month | Under 2% monthly |
+| LTV:CAC | Lifetime value divided by cost to acquire | 3x minimum. 5x healthy. |
+| CAC payback | Months to recover acquisition cost | Under 12 months acceptable. Under 6 months strong. |
+| Gross margin | Revenue minus COGS | 70-85% for SaaS |
+
+NRR is the survival metric for SaaS. A business with 90% NRR loses 10% of its revenue base every year from churn alone, regardless of new sales.
+
+---
+
+### Marketplace
+
+| Metric | Definition | Healthy |
+|--------|-----------|---------|
+| GMV (Gross Merchandise Value) | Total transaction volume through the platform | Primary growth metric |
+| Take rate | Revenue as % of GMV | 5-30% depending on category |
+| Net revenue | GMV x take rate | The actual business revenue |
+| Liquidity ratio | % of supply listings that result in a transaction per period | 20%+ |
+| Fill rate | % of demand requests matched | 70%+ to prevent abandonment |
+| Supply-side retention | % of active suppliers returning month-over-month | 60%+ |
+
+Marketplace unit economics differ because CAC applies to both sides. Calculate CAC separately for supply and demand, then model LTV on the take rate revenue from matched transactions.
+
+---
+
+### DTC and Consumer
+
+| Metric | Definition | Healthy |
+|--------|-----------|---------|
+| ROAS | Revenue per $1 of ad spend | 3x+ viable. 5x+ healthy. |
+| CAC (paid) | Cost to acquire via advertising | Must be below LTV/3 |
+| D30 retention | % of customers active or re-purchasing at 30 days | Apps: 20%+. DTC: 25%+ repurchase. |
+| D90 retention | % still active at 90 days | Leading indicator of long-term LTV |
+| Cohort LTV | Revenue from a customer cohort over 6-12 months | Must exceed 3x CAC |
+| AOV (Average Order Value) | Revenue per transaction | Higher AOV improves LTV:CAC |
+| Subscription attach rate | % of customers on recurring plans | Dramatically improves LTV |
+
+Consumer LTV is a forward projection until you have cohort data. Do not scale paid acquisition until you have D30 and D60 data from at least two cohorts.
+
+---
+
+### Professional Services and Agencies
+
+| Metric | Definition | Healthy |
+|--------|-----------|---------|
+| Monthly retainer revenue | Predictable recurring base | 50%+ of total revenue by Stage 2 |
+| Average retainer value | MRR per client | $5K-$25K+ depending on service type |
+| Utilization rate | Billable hours / total available hours | 70-80% |
+| Gross margin | Revenue minus direct delivery cost | 50-65% |
+| Client retention rate | % of clients renewing annually | 80%+ |
+| Revenue per FTE | Total revenue / headcount | $150K-$300K per FTE at healthy margin |
+
+The professional services business model caps out when the founder's time is the delivery. Gross margin improvement comes from: raising prices, systemizing delivery, and hiring people who can deliver without the founder.
+
+---
+
+### Trade and Local Services
+
+| Metric | Definition | Healthy |
+|--------|-----------|---------|
+| Average ticket size | Revenue per job | Depends on trade; higher = better margin per unit of time |
+| Job gross margin | Revenue minus labor and materials | HVAC/Pest/Cleaning: 50-70%. GC: 15-30%. |
+| Recurring revenue % | % of revenue from maintenance contracts | 30%+ changes valuation and cash flow significantly |
+| Cost per booked job | Acquisition cost | LSA: $168/job target |
+| Technician utilization | Billable hours / paid hours | 75-85% |
+| Review count and rating | Google ranking and conversion | 50+ reviews, 4.5+ stars |
+
+The single most impactful financial change for a trade business: moving from call-in only to recurring maintenance agreements. Businesses with 80%+ recurring revenue are valued 50-75% higher than identical businesses on job-only revenue.

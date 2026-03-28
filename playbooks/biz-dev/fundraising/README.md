@@ -180,6 +180,14 @@ Getting caught without these documents when an investor is moving fast loses dea
 
 ---
 
+## Reference files
+
+- [traction-by-archetype.md](traction-by-archetype.md) -- What traction means for each business type at each round
+- [round-sizing.md](round-sizing.md) -- How much to raise, SAFE vs. convertible note vs. priced round, dilution math
+- [funding-mechanisms.md](funding-mechanisms.md) -- Non-VC paths: RBF, SBA, equipment financing, PE roll-ups, crowdfunding
+
+---
+
 ## Benchmarks
 
 | Metric | Target |
