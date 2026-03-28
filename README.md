@@ -1,7 +1,7 @@
 # Markster OS
 
 [![Validation](https://img.shields.io/badge/validation-passing-brightgreen.svg)](validation/README.md)
-[![Version](https://img.shields.io/badge/version-v1.1.2-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v1.1.3-blue.svg)](CHANGELOG.md)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PRs required](https://img.shields.io/badge/changes-PRs%20required-orange.svg)](CONTRIBUTING.md)
 [![Security policy](https://img.shields.io/badge/security-policy-lightgrey.svg)](SECURITY.md)
@@ -122,6 +122,7 @@ Core commands:
 markster-os init <slug>
 markster-os list-skills
 markster-os install-skills
+markster-os install-skills --openclaw
 markster-os validate [path]
 markster-os update
 markster-os upgrade-workspace [path]
@@ -141,6 +142,12 @@ markster-os doctor
 If you want an AI tool to do the setup for you, see [setup-prompts/](setup-prompts/).
 
 If you want to use Markster OS through OpenClaw, start with [setup-prompts/openclaw.md](setup-prompts/openclaw.md).
+
+OpenClaw support:
+
+- shared local skills install to `~/.openclaw/skills`
+- `markster-os install-skills --openclaw` installs there explicitly
+- `markster-os install-skills --all` also includes OpenClaw automatically when `~/.openclaw` exists
 
 The skill name stays simple everywhere:
 
