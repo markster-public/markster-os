@@ -137,11 +137,20 @@ markster-os export-workspace [path]
 markster-os status
 markster-os start
 markster-os doctor
+markster-os paperclip plan --api-base http://localhost:3100 --company-id <company-id> --adapter codex
+markster-os paperclip bootstrap --api-base http://localhost:3100 --company-id <company-id> --adapter codex
 ```
 
 If you want an AI tool to do the setup for you, see [setup-prompts/](setup-prompts/).
 
 If you want to use Markster OS through OpenClaw, start with [setup-prompts/openclaw.md](setup-prompts/openclaw.md).
+
+If you want Paperclip to orchestrate a Markster OS company, use the `paperclip` commands against an existing Paperclip company:
+
+```bash
+markster-os paperclip plan --api-base http://localhost:3100 --company-id <company-id> --adapter codex
+markster-os paperclip bootstrap --api-base http://localhost:3100 --company-id <company-id> --adapter codex
+```
 
 OpenClaw support:
 

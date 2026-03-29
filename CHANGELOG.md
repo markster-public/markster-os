@@ -6,6 +6,9 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- added `markster-os paperclip plan` and `markster-os paperclip bootstrap` for creating or updating a default Markster OS agent org inside an existing Paperclip company
+
 ## [1.1.5] - 2026-03-28
 
 ### Fixed

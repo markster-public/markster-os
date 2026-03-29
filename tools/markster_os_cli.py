@@ -10,6 +10,8 @@ import subprocess
 import sys
 import tarfile
 from pathlib import Path
+from urllib import error as urlerror
+from urllib import request as urlrequest
 
 
 MARKSTER_HOME = Path.home() / ".markster-os"
@@ -21,6 +23,52 @@ OPENCLAW_HOME = Path.home() / ".openclaw"
 OPENCLAW_SKILLS_DIR = OPENCLAW_HOME / "skills"
 CORE_SKILLS = ["markster-os", "cold-email", "events", "content", "sales", "fundraising", "research"]
 IGNORE_NAMES = {".git", "__pycache__", ".DS_Store"}
+PAPERCLIP_AGENT_BLUEPRINTS = [
+    {
+        "slug": "ceo",
+        "name": "Markster CEO",
+        "role": "ceo",
+        "title": "Chief Executive Officer",
+        "capabilities": "Owns company direction, priorities, and final decisions for the Markster OS business system.",
+        "budgetMonthlyCents": 20000,
+    },
+    {
+        "slug": "gtm-lead",
+        "name": "Markster GTM Lead",
+        "role": "marketing",
+        "title": "GTM Lead",
+        "capabilities": "Runs overall go-to-market execution across positioning, channels, sequencing, and weekly operating cadence.",
+        "reportsTo": "ceo",
+        "budgetMonthlyCents": 12000,
+    },
+    {
+        "slug": "sdr",
+        "name": "Markster SDR",
+        "role": "sales",
+        "title": "Sales Development Representative",
+        "capabilities": "Executes outbound prospecting, follow-up, and meeting generation using approved Markster OS workflows.",
+        "reportsTo": "gtm-lead",
+        "budgetMonthlyCents": 8000,
+    },
+    {
+        "slug": "content-lead",
+        "name": "Markster Content Lead",
+        "role": "marketing",
+        "title": "Content Lead",
+        "capabilities": "Owns content themes, publishing cadence, repurposing, and channel execution inside the workspace.",
+        "reportsTo": "gtm-lead",
+        "budgetMonthlyCents": 9000,
+    },
+    {
+        "slug": "researcher",
+        "name": "Markster Researcher",
+        "role": "research",
+        "title": "Market Researcher",
+        "capabilities": "Runs competitive, ICP, objection, and signal research to support the active Markster OS playbook.",
+        "reportsTo": "gtm-lead",
+        "budgetMonthlyCents": 7000,
+    },
+]
 WORKSPACE_GITIGNORE = """# Markster OS workspace
 learning-loop/inbox/*
 !learning-loop/inbox/README.md
@@ -215,6 +263,188 @@ def resolve_skills_to_install(args: argparse.Namespace) -> list[str]:
     if args.extended:
         return [skill for skill in available if skill not in CORE_SKILLS]
     return [skill for skill in CORE_SKILLS if skill in available]
+
+
+def normalize_paperclip_api_base(api_base: str) -> str:
+    base = api_base.rstrip("/")
+    if not base.endswith("/api"):
+        base = f"{base}/api"
+    return base
+
+
+def paperclip_adapter_type(adapter: str) -> str:
+    mapping = {
+        "claude": "claude_local",
+        "codex": "codex_local",
+        "gemini": "gemini_local",
+        "openclaw": "openclaw_gateway",
+    }
+    return mapping[adapter]
+
+
+def build_paperclip_adapter_config(
+    adapter: str,
+    workspace: Path,
+    *,
+    model: str | None = None,
+    openclaw_url: str | None = None,
+) -> dict:
+    workspace_str = str(workspace.resolve())
+    if adapter == "openclaw":
+        if not openclaw_url:
+            raise ValueError("openclaw adapter requires --openclaw-url")
+        return {
+            "url": openclaw_url.rstrip("/"),
+            "sessionKeyStrategy": "issue",
+            "role": "operator",
+            "scopes": ["operator.admin"],
+        }
+
+    config = {
+        "cwd": workspace_str,
+        "timeoutSec": 0,
+        "graceSec": 15,
+    }
+    if model:
+        config["model"] = model
+    return config
+
+
+def build_paperclip_agent_blueprints(
+    adapter: str,
+    workspace: Path,
+    *,
+    model: str | None = None,
+    openclaw_url: str | None = None,
+) -> list[dict]:
+    adapter_type = paperclip_adapter_type(adapter)
+    adapter_config = build_paperclip_adapter_config(
+        adapter,
+        workspace,
+        model=model,
+        openclaw_url=openclaw_url,
+    )
+    blueprints: list[dict] = []
+    for spec in PAPERCLIP_AGENT_BLUEPRINTS:
+        blueprint = {
+            "slug": spec["slug"],
+            "name": spec["name"],
+            "role": spec["role"],
+            "title": spec["title"],
+            "capabilities": spec["capabilities"],
+            "budgetMonthlyCents": spec["budgetMonthlyCents"],
+            "adapterType": adapter_type,
+            "adapterConfig": dict(adapter_config),
+        }
+        if "reportsTo" in spec:
+            blueprint["reportsToSlug"] = spec["reportsTo"]
+        blueprints.append(blueprint)
+    return blueprints
+
+
+def plan_paperclip_bootstrap(existing_agents: list[dict], desired_agents: list[dict]) -> list[dict]:
+    existing_by_name = {agent.get("name"): agent for agent in existing_agents}
+    known_ids_by_slug: dict[str, str] = {}
+    operations: list[dict] = []
+
+    for desired in desired_agents:
+        payload = {
+            "name": desired["name"],
+            "role": desired["role"],
+            "title": desired["title"],
+            "capabilities": desired["capabilities"],
+            "adapterType": desired["adapterType"],
+            "adapterConfig": desired["adapterConfig"],
+            "budgetMonthlyCents": desired["budgetMonthlyCents"],
+        }
+        reports_to_slug = desired.get("reportsToSlug")
+        if reports_to_slug:
+            manager_id = known_ids_by_slug.get(reports_to_slug)
+            if not manager_id:
+                raise ValueError(f"missing manager id for slug `{reports_to_slug}` while planning Paperclip bootstrap")
+            payload["reportsTo"] = manager_id
+
+        existing = existing_by_name.get(desired["name"])
+        if existing:
+            agent_id = str(existing["id"])
+            known_ids_by_slug[desired["slug"]] = agent_id
+            operations.append(
+                {
+                    "action": "update",
+                    "agent_id": agent_id,
+                    "slug": desired["slug"],
+                    "payload": payload,
+                }
+            )
+        else:
+            synthetic_id = f"planned:{desired['slug']}"
+            known_ids_by_slug[desired["slug"]] = synthetic_id
+            operations.append(
+                {
+                    "action": "create",
+                    "slug": desired["slug"],
+                    "payload": payload,
+                }
+            )
+
+    return operations
+
+
+def paperclip_request(api_base: str, api_key: str, method: str, path: str, payload: dict | None = None) -> dict | list:
+    url = f"{normalize_paperclip_api_base(api_base)}{path}"
+    data = None
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Accept": "application/json",
+    }
+    if payload is not None:
+        data = json.dumps(payload).encode("utf-8")
+        headers["Content-Type"] = "application/json"
+
+    req = urlrequest.Request(url, data=data, headers=headers, method=method)
+    try:
+        with urlrequest.urlopen(req) as response:
+            body = response.read().decode("utf-8")
+    except urlerror.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace").strip()
+        die(f"Paperclip API {method} {path} failed: HTTP {exc.code} {detail}")
+    except urlerror.URLError as exc:
+        die(f"Paperclip API {method} {path} failed: {exc.reason}")
+
+    if not body:
+        return {}
+    return json.loads(body)
+
+
+def resolve_paperclip_api_key(args: argparse.Namespace) -> str:
+    api_key = args.api_key or os.environ.get("PAPERCLIP_API_KEY")
+    if not api_key:
+        die("Paperclip API key is required. Pass --api-key or set PAPERCLIP_API_KEY.")
+    return api_key
+
+
+def resolve_workspace_path(args: argparse.Namespace) -> Path:
+    workspace = Path(args.workspace).expanduser().resolve() if args.workspace else Path.cwd().resolve()
+    if not workspace.exists():
+        die(f"workspace does not exist: {workspace}")
+    return workspace
+
+
+def print_paperclip_plan(api_base: str, company_id: str, adapter: str, workspace: Path, operations: list[dict]) -> None:
+    print(heading("Paperclip Bootstrap Plan"))
+    print(kv("API base", normalize_paperclip_api_base(api_base)))
+    print(kv("Company ID", company_id))
+    print(kv("Adapter", adapter))
+    print(kv("Workspace", str(workspace)))
+    print("")
+    for op in operations:
+        target = op["payload"]["name"]
+        manager = op["payload"].get("reportsTo", "none")
+        action_label = color(op["action"], GREEN if op["action"] == "create" else CYAN)
+        print(f"{color('-', CYAN)} {action_label} {color(target, BOLD)}")
+        print(f"    {color('adapter:', BOLD)} {op['payload']['adapterType']}")
+        print(f"    {color('reportsTo:', BOLD)} {manager}")
+        print(f"    {color('budgetMonthlyCents:', BOLD)} {op['payload']['budgetMonthlyCents']}")
 
 
 def should_skip_export_path(path: Path, include_inbox: bool) -> bool:
@@ -977,6 +1207,90 @@ def cmd_start(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_paperclip_plan(args: argparse.Namespace) -> int:
+    workspace = resolve_workspace_path(args)
+    api_key = resolve_paperclip_api_key(args)
+    existing_agents = paperclip_request(
+        args.api_base,
+        api_key,
+        "GET",
+        f"/companies/{args.company_id}/agents",
+    )
+    desired_agents = build_paperclip_agent_blueprints(
+        args.adapter,
+        workspace,
+        model=args.model,
+        openclaw_url=args.openclaw_url,
+    )
+    operations = plan_paperclip_bootstrap(existing_agents, desired_agents)
+    print_paperclip_plan(args.api_base, args.company_id, args.adapter, workspace, operations)
+    return 0
+
+
+def cmd_paperclip_bootstrap(args: argparse.Namespace) -> int:
+    workspace = resolve_workspace_path(args)
+    api_key = resolve_paperclip_api_key(args)
+    existing_agents = paperclip_request(
+        args.api_base,
+        api_key,
+        "GET",
+        f"/companies/{args.company_id}/agents",
+    )
+    desired_agents = build_paperclip_agent_blueprints(
+        args.adapter,
+        workspace,
+        model=args.model,
+        openclaw_url=args.openclaw_url,
+    )
+    operations = plan_paperclip_bootstrap(existing_agents, desired_agents)
+
+    print_paperclip_plan(args.api_base, args.company_id, args.adapter, workspace, operations)
+    print("")
+    print(subheading("Applying"))
+    created = 0
+    updated = 0
+    created_ids_by_slug: dict[str, str] = {}
+    for op in operations:
+        payload = dict(op["payload"])
+        reports_to = payload.get("reportsTo")
+        if isinstance(reports_to, str) and reports_to.startswith("planned:"):
+            manager_slug = reports_to.split(":", 1)[1]
+            manager_id = created_ids_by_slug.get(manager_slug)
+            if not manager_id:
+                die(f"missing created Paperclip manager id for slug `{manager_slug}`")
+            payload["reportsTo"] = manager_id
+
+        if op["action"] == "create":
+            result = paperclip_request(
+                args.api_base,
+                api_key,
+                "POST",
+                f"/companies/{args.company_id}/agents",
+                payload,
+            )
+            created += 1
+            created_ids_by_slug[op["slug"]] = str(result["id"])
+            print(ok(f"created Paperclip agent {payload['name']}"))
+        else:
+            result = paperclip_request(
+                args.api_base,
+                api_key,
+                "PATCH",
+                f"/agents/{op['agent_id']}",
+                payload,
+            )
+            updated += 1
+            created_ids_by_slug[op["slug"]] = str(result.get("id", op["agent_id"]))
+            print(ok(f"updated Paperclip agent {payload['name']}"))
+
+    print("")
+    print(heading("Paperclip Bootstrap Complete"))
+    print(kv("Created", str(created)))
+    print(kv("Updated", str(updated)))
+    print(warn("install Markster OS skills in the selected runtime before expecting these agents to execute workspace playbooks"))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="markster-os")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -1071,6 +1385,26 @@ def build_parser() -> argparse.ArgumentParser:
     start_parser = sub.add_parser("start", help="Show the recommended next steps for a workspace")
     start_parser.add_argument("--path", help="Workspace path; defaults to current directory")
     start_parser.set_defaults(func=cmd_start)
+
+    paperclip_parser = sub.add_parser("paperclip", help="Plan or bootstrap Markster OS agents into an existing Paperclip company")
+    paperclip_sub = paperclip_parser.add_subparsers(dest="paperclip_command", required=True)
+
+    def add_paperclip_common_arguments(target: argparse.ArgumentParser) -> None:
+        target.add_argument("--api-base", required=True, help="Paperclip base URL, for example http://localhost:3100 or http://localhost:3100/api")
+        target.add_argument("--api-key", help="Paperclip API key; defaults to PAPERCLIP_API_KEY")
+        target.add_argument("--company-id", required=True, help="Existing Paperclip company ID")
+        target.add_argument("--adapter", choices=["claude", "codex", "gemini", "openclaw"], required=True, help="Execution adapter to assign to the Markster OS agents")
+        target.add_argument("--workspace", help="Markster OS workspace path; defaults to current directory")
+        target.add_argument("--model", help="Optional model override for local adapters")
+        target.add_argument("--openclaw-url", help="Required for --adapter openclaw; OpenClaw gateway base URL")
+
+    paperclip_plan_parser = paperclip_sub.add_parser("plan", help="Preview the Markster OS Paperclip bootstrap actions")
+    add_paperclip_common_arguments(paperclip_plan_parser)
+    paperclip_plan_parser.set_defaults(func=cmd_paperclip_plan)
+
+    paperclip_bootstrap_parser = paperclip_sub.add_parser("bootstrap", help="Create or update Markster OS agents in an existing Paperclip company")
+    add_paperclip_common_arguments(paperclip_bootstrap_parser)
+    paperclip_bootstrap_parser.set_defaults(func=cmd_paperclip_bootstrap)
 
     return parser
 
