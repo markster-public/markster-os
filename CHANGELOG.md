@@ -6,6 +6,16 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-04-04
+
+### Added
+- funnel playbook with 8 reference sections: funnel types and decision matrix, offer stack architecture, VSL architecture, input specification, affiliate mechanics, high-ticket backend, market landscape
+- funnel-sprint skill: quick single-ICP mini-funnel generator (landing page, lead magnet, 3-email nurture)
+- funnel-plan skill: full funnel architecture session with funnel type selection and offer stack design
+- funnel-build skill: asset writing workflow covering VSL script, landing page, OTO pages, and email sequence
+- funnel-review skill: scored funnel audit across 5 domains with prioritized fix list
+- CLAUDE.md: repo-level release process and CI rules for agent sessions
+
 ## [1.1.5] - 2026-03-28
 
 ### Fixed
