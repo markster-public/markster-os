@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "company_name": "Your Company",
-  "category": "Replace with your category",
-  "primary_audience": "Replace with your primary buyer",
-  "core_offer": "Replace with your main offer",
+  "company_name": "Markster",
+  "category": "Managed Revenue Operations",
+  "primary_audience": "Accounting firms and CPAs, 2-50 employees, US-based",
+  "core_offer": "The Growth Install: done-for-you sales and marketing system",
   "default_tone": "clear, direct, specific",
   "default_perspective": "first_person_plural",
   "reading_level": "7-9",
